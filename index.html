@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
+<html lang="es"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="JeiDiKei — Diseñador Gráfico, Fotógrafo y Creador Audiovisual en la Región de Atacama, Chile.">
@@ -11,8 +9,8 @@
 <title>JeiDiKei — Portfolio</title>
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&amp;family=Bebas+Neue&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet">
 <style>
 /* =============================================
    RESET & VARIABLES
@@ -670,11 +668,11 @@ footer {
 <body>
 
 <!-- CURSOR -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor" id="cursor" style="left: 611px; top: 205px;"></div>
+<div class="cursor-ring" id="cursorRing" style="left: 611px; top: 205px;"></div>
 
 <!-- NAV -->
-<nav id="navbar">
+<nav id="navbar" class="">
   <a href="#inicio" class="nav-logo">
     <img src="img/JDK_LOGO_PNG.png" alt="JeiDiKei Logo">
   </a>
@@ -741,7 +739,7 @@ footer {
 
 <!-- ========== ABOUT ========== -->
 <section class="about-section" id="sobre-mi">
-  <div class="about-img-wrap reveal">
+  <div class="about-img-wrap reveal visible">
     <div class="about-img-frame">
       <!-- REEMPLAZA src con tu foto real: <img src="img/perfil.jpg" alt="Darikson Araya"> -->
       <div class="about-img-placeholder"></div>
@@ -753,7 +751,7 @@ footer {
     </div>
   </div>
 
-  <div class="about-content reveal">
+  <div class="about-content reveal visible">
     <div class="section-eyebrow">Sobre mí</div>
     <h2 class="section-title">Darikson<br><em style="font-style:italic; color:var(--red)">Araya N.</em></h2>
     <p class="about-desc">
@@ -779,7 +777,7 @@ footer {
 
 <!-- ========== PORTFOLIO ========== -->
 <section class="portfolio-section" id="portfolio">
-  <div class="portfolio-header reveal">
+  <div class="portfolio-header reveal visible">
     <div>
       <div class="section-eyebrow">Trabajos</div>
       <h2 class="section-title">Mi Portfolio</h2>
@@ -795,7 +793,7 @@ footer {
   <div class="portfolio-grid" id="grid">
 
     <!-- PROYECTO 1 — Sandboard Championship -->
-    <div class="p-card xl reveal" data-cat="diseno">
+    <div class="p-card xl reveal visible" data-cat="diseno">
       <img class="card-img" src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2026.jpg" alt="Sandboard Championship 2026">
       <div class="card-overlay"></div>
       <span class="card-num">01</span>
@@ -806,7 +804,7 @@ footer {
     </div>
 
     <!-- PROYECTO 2 — DJ Blaxx -->
-    <div class="p-card sm reveal" data-cat="diseno">
+    <div class="p-card sm reveal visible" data-cat="diseno">
       <img class="card-img" src="img/diseno/POSTER-DJBLAXX-JDK.jpg" alt="DJ Blaxx Poster">
       <div class="card-overlay"></div>
       <span class="card-num">02</span>
@@ -817,7 +815,7 @@ footer {
     </div>
 
     <!-- PROYECTO 3 — Experiencias de un Kolla -->
-    <div class="p-card md reveal" data-cat="diseno">
+    <div class="p-card md reveal visible" data-cat="diseno">
       <img class="card-img" src="img/diseno/EXPERIENCIAS-DE-UN-KOLLA.jpg" alt="Experiencias de un Kolla">
       <div class="card-overlay"></div>
       <span class="card-num">03</span>
@@ -828,7 +826,7 @@ footer {
     </div>
 
     <!-- PROYECTO 4 — placeholder foto -->
-    <div class="p-card md reveal" data-cat="foto">
+    <div class="p-card md reveal visible" data-cat="foto">
       <div class="card-ph"><span class="card-ph-label">FOTO</span></div>
       <div class="card-overlay"></div>
       <span class="card-num">04</span>
@@ -839,7 +837,7 @@ footer {
     </div>
 
     <!-- PROYECTO 5 — placeholder video -->
-    <div class="p-card xs reveal" data-cat="video">
+    <div class="p-card xs reveal visible" data-cat="video">
       <div class="card-ph"><span class="card-ph-label">VIDEO</span></div>
       <div class="card-overlay"></div>
       <span class="card-num">05</span>
@@ -850,7 +848,7 @@ footer {
     </div>
 
     <!-- PROYECTO 6 — placeholder foto -->
-    <div class="p-card xs reveal" data-cat="foto">
+    <div class="p-card xs reveal visible" data-cat="foto">
       <div class="card-ph"><span class="card-ph-label">FOTO</span></div>
       <div class="card-overlay"></div>
       <span class="card-num">06</span>
@@ -861,7 +859,7 @@ footer {
     </div>
 
     <!-- PROYECTO 7 — placeholder video -->
-    <div class="p-card xs reveal" data-cat="video">
+    <div class="p-card xs reveal visible" data-cat="video">
       <div class="card-ph"><span class="card-ph-label">VIDEO</span></div>
       <div class="card-overlay"></div>
       <span class="card-num">07</span>
@@ -872,7 +870,7 @@ footer {
     </div>
 
     <!-- BOTÓN AGREGAR -->
-    <div class="add-card reveal" title="Agregar nuevo proyecto">
+    <div class="add-card reveal visible" title="Agregar nuevo proyecto">
       <div class="add-icon-wrap">+</div>
       <div class="add-text">Agregar proyecto</div>
     </div>
@@ -887,7 +885,7 @@ footer {
   <div class="mining-bg-glow"></div>
   <div class="mining-inner">
 
-    <div class="reveal">
+    <div class="reveal visible">
       <span class="mining-tag">Sector Minero · Atacama</span>
       <div class="section-eyebrow orange">Producción en Faena</div>
       <h2 class="section-title">Servicios para<br><em style="font-style:italic; color:var(--orange)">la Minería</em></h2>
@@ -915,7 +913,7 @@ footer {
       </div>
     </div>
 
-    <div class="services-grid reveal">
+    <div class="services-grid reveal visible">
       <div class="service-card">
         <span class="service-icon">🎬</span>
         <div class="service-title">Video Corporativo</div>
@@ -945,7 +943,7 @@ footer {
 
 <!-- ========== CONTACT ========== -->
 <section class="contact-section" id="contacto">
-  <div class="reveal">
+  <div class="reveal visible">
     <div class="section-eyebrow">Contacto</div>
     <h2 class="contact-title">
       Traba<span class="italic red">jemos</span><br>
@@ -979,21 +977,21 @@ footer {
     </div>
   </div>
 
-  <div class="contact-form-wrap reveal">
+  <div class="contact-form-wrap reveal visible">
     <p class="form-title">Envíame un mensaje</p>
     <form onsubmit="handleForm(event)">
       <div class="form-row">
         <label class="form-label" for="fname">Nombre</label>
-        <input type="text" id="fname" class="form-control" placeholder="Tu nombre completo" required>
+        <input type="text" id="fname" class="form-control" placeholder="Tu nombre completo" required="">
       </div>
       <div class="form-row">
         <label class="form-label" for="femail">Email</label>
-        <input type="email" id="femail" class="form-control" placeholder="tu@email.com" required>
+        <input type="email" id="femail" class="form-control" placeholder="tu@email.com" required="">
       </div>
       <div class="form-row">
         <label class="form-label" for="fservice">Servicio de interés</label>
         <select id="fservice" class="form-control" style="appearance:none; cursor:pointer">
-          <option value="" disabled selected>Selecciona un servicio</option>
+          <option value="" disabled="" selected="">Selecciona un servicio</option>
           <option>Diseño Gráfico</option>
           <option>Fotografía</option>
           <option>Producción de Video</option>
@@ -1004,7 +1002,7 @@ footer {
       </div>
       <div class="form-row">
         <label class="form-label" for="fmsg">Mensaje</label>
-        <textarea id="fmsg" class="form-control" placeholder="Cuéntame sobre tu proyecto..." required></textarea>
+        <textarea id="fmsg" class="form-control" placeholder="Cuéntame sobre tu proyecto..." required=""></textarea>
       </div>
       <button type="submit" class="form-submit">Enviar mensaje</button>
       <p class="form-note" id="formMsg"></p>
@@ -1017,7 +1015,7 @@ footer {
   <div class="footer-logo">
     <img src="img/JDK_LOGO_PNG.png" alt="JeiDiKei" style="height:28px; width:auto; opacity:0.3;">
   </div>
-  <div class="footer-copy">© 2025 JeiDiKei · Diseño & Audiovisual · Atacama, Chile</div>
+  <div class="footer-copy">© 2025 JeiDiKei · Diseño &amp; Audiovisual · Atacama, Chile</div>
   <a href="#inicio" class="footer-back">↑ Volver arriba</a>
 </footer>
 
@@ -1088,5 +1086,6 @@ function handleForm(e){
 }
 </script>
 
-</body>
-</html>
+
+
+</body></html>
