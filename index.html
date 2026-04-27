@@ -9,6 +9,7 @@
 <meta property="og:description" content="Visión creativa que transforma momentos en narrativas visuales que perduran.">
 <meta property="og:type" content="website">
 <title>JeiDiKei — Portfolio</title>
+<link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -101,12 +102,15 @@ nav.scrolled {
   border-bottom: 1px solid var(--border);
 }
 .nav-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem; letter-spacing: 0.3em;
-  color: var(--light); text-decoration: none;
-  display: flex; align-items: center; gap: 2px;
+  text-decoration: none;
+  display: flex; align-items: center;
 }
-.nav-logo span { color: var(--red); }
+.nav-logo img {
+  height: 38px; width: auto;
+  object-fit: contain;
+  transition: opacity 0.3s;
+}
+.nav-logo img:hover { opacity: 0.8; }
 .nav-links {
   display: flex; gap: 2.5rem; list-style: none;
 }
@@ -136,26 +140,27 @@ nav.scrolled {
    SIDE DOTS NAV
 ============================================= */
 .side-nav {
-  position: fixed; right: 2rem; top: 50%;
+  position: fixed; right: 0.5rem; top: 50%;
   transform: translateY(-50%);
   display: flex; flex-direction: column; gap: 0.8rem;
   z-index: 100;
 }
 .side-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: rgba(255,255,255,0.2);
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
   transition: all 0.3s; cursor: pointer;
   position: relative;
 }
 .side-dot::before {
   content: attr(data-label);
-  position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
-  font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
   color: var(--muted); white-space: nowrap; opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s; pointer-events: none;
+  background: rgba(10,10,10,0.8); padding: 2px 6px;
 }
 .side-dot:hover::before { opacity: 1; }
-.side-dot.active { background: var(--red); transform: scale(1.5); }
+.side-dot.active { background: var(--red); transform: scale(1.6); }
 .side-dot:hover { background: var(--red); }
 
 /* =============================================
@@ -377,38 +382,38 @@ nav.scrolled {
   color: var(--light); border-bottom-color: var(--red);
 }
 .portfolio-grid {
-  display: grid; grid-template-columns: repeat(12, 1fr);
-  gap: 1.2rem;
+  columns: 3;
+  column-gap: 1rem;
 }
 .p-card {
   position: relative; overflow: hidden;
   background: var(--dark3); cursor: pointer;
-  transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+  break-inside: avoid;
+  margin-bottom: 1rem;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
 }
 .p-card:hover { transform: scale(0.985); }
-.p-card.xl { grid-column: span 8; aspect-ratio: 16/9; }
-.p-card.sm { grid-column: span 4; aspect-ratio: 4/5; }
-.p-card.md { grid-column: span 6; aspect-ratio: 4/3; }
-.p-card.xs { grid-column: span 4; aspect-ratio: 1; }
+.p-card.xl, .p-card.sm, .p-card.md, .p-card.xs { grid-column: unset; aspect-ratio: unset; }
 .card-img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.6s ease;
+  width: 100%; height: auto;
   display: block;
+  transition: transform 0.6s ease;
 }
 .p-card:hover .card-img { transform: scale(1.04); }
 .card-ph {
-  width: 100%; height: 100%;
+  width: 100%;
+  aspect-ratio: 9/16;
   display: flex; align-items: center; justify-content: center;
   background: linear-gradient(135deg, var(--dark3) 0%, var(--dark2) 100%);
-  position: absolute; inset: 0;
 }
 .card-ph-label {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 4rem; color: rgba(255,255,255,0.04); letter-spacing: 0.1em;
+  font-size: 3rem; color: rgba(255,255,255,0.04); letter-spacing: 0.1em;
 }
 .card-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0) 55%);
+  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0) 50%);
   opacity: 0; transition: opacity 0.4s;
 }
 .p-card:hover .card-overlay { opacity: 1; }
@@ -434,13 +439,13 @@ nav.scrolled {
   font-size: 1.3rem; font-weight: 400; color: var(--light);
 }
 .add-card {
-  grid-column: span 4;
+  break-inside: avoid;
+  margin-bottom: 1rem;
   border: 1px dashed rgba(255,255,255,0.1);
   display: flex; align-items: center; justify-content: center;
   flex-direction: column; gap: 0.6rem;
-  aspect-ratio: 4/5; cursor: pointer;
-  transition: all 0.3s;
-  background: transparent;
+  padding: 4rem 1rem; cursor: pointer;
+  transition: all 0.3s; background: transparent;
 }
 .add-card:hover { border-color: var(--red); }
 .add-icon-wrap {
@@ -660,9 +665,8 @@ footer {
   }
   .portfolio-section { padding: 5rem 2rem; }
   .mining-section { padding: 5rem 2rem; }
-  .portfolio-grid { grid-template-columns: 1fr 1fr; }
-  .p-card.xl, .p-card.md, .p-card.sm, .p-card.xs { grid-column: span 2; }
-  .add-card { grid-column: span 2; aspect-ratio: 2/1; }
+  .portfolio-grid { columns: 2; }
+  .p-card.xl, .p-card.md, .p-card.sm, .p-card.xs { grid-column: unset; }
   .services-grid { grid-template-columns: 1fr; }
   footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.8rem; text-align: center; }
 }
@@ -676,7 +680,9 @@ footer {
 
 <!-- NAV -->
 <nav id="navbar">
-  <a href="#inicio" class="nav-logo">JDK<span>.</span></a>
+  <a href="#inicio" class="nav-logo">
+    <img src="img/JDK_LOGO_PNG.png" alt="JeiDiKei Logo">
+  </a>
   <ul class="nav-links">
     <li><a href="#portfolio">Trabajo</a></li>
     <li><a href="#mineria">Minería</a></li>
@@ -793,85 +799,85 @@ footer {
 
   <div class="portfolio-grid" id="grid">
 
-    <!-- PROYECTO 1 — reemplaza card-ph con <img class="card-img" src="img/proyecto1.jpg"> -->
-    <div class="p-card xl reveal" data-cat="video">
-      <div class="card-ph"><span class="card-ph-label">VIDEO</span></div>
+    <!-- PROYECTO 1 — Sandboard Championship -->
+    <div class="p-card xl reveal" data-cat="diseno">
+      <img class="card-img" src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2026.jpg" alt="Sandboard Championship 2026">
       <div class="card-overlay"></div>
       <span class="card-num">01</span>
       <div class="card-content">
-        <div class="card-cat">Video Corporativo</div>
-        <div class="card-title">Añade tu proyecto aquí</div>
+        <div class="card-cat">Diseño Gráfico · 2026</div>
+        <div class="card-title">Sandboard Championship</div>
       </div>
     </div>
 
-    <!-- PROYECTO 2 -->
-    <div class="p-card sm reveal" data-cat="foto">
-      <div class="card-ph"><span class="card-ph-label">FOTO</span></div>
+    <!-- PROYECTO 2 — DJ Blaxx -->
+    <div class="p-card sm reveal" data-cat="diseno">
+      <img class="card-img" src="img/diseno/POSTER-DJBLAXX-JDK.jpg" alt="DJ Blaxx Poster">
       <div class="card-overlay"></div>
       <span class="card-num">02</span>
       <div class="card-content">
-        <div class="card-cat">Fotografía</div>
-        <div class="card-title">Añade tu proyecto aquí</div>
+        <div class="card-cat">Diseño Gráfico · 2024</div>
+        <div class="card-title">DJ Blaxx Tour</div>
       </div>
     </div>
 
-    <!-- PROYECTO 3 -->
+    <!-- PROYECTO 3 — Experiencias de un Kolla -->
     <div class="p-card md reveal" data-cat="diseno">
-      <div class="card-ph"><span class="card-ph-label">DISEÑO</span></div>
+      <img class="card-img" src="img/diseno/EXPERIENCIAS-DE-UN-KOLLA.jpg" alt="Experiencias de un Kolla">
       <div class="card-overlay"></div>
       <span class="card-num">03</span>
       <div class="card-content">
-        <div class="card-cat">Diseño Gráfico</div>
-        <div class="card-title">Añade tu proyecto aquí</div>
+        <div class="card-cat">Diseño · Fotografía · 2024</div>
+        <div class="card-title">Experiencias de un Kolla</div>
       </div>
     </div>
 
-    <!-- PROYECTO 4 -->
+    <!-- PROYECTO 4 — placeholder foto -->
     <div class="p-card md reveal" data-cat="foto">
       <div class="card-ph"><span class="card-ph-label">FOTO</span></div>
       <div class="card-overlay"></div>
       <span class="card-num">04</span>
       <div class="card-content">
         <div class="card-cat">Fotografía</div>
-        <div class="card-title">Añade tu proyecto aquí</div>
+        <div class="card-title">Próximamente</div>
       </div>
     </div>
 
-    <!-- PROYECTO 5 -->
+    <!-- PROYECTO 5 — placeholder video -->
     <div class="p-card xs reveal" data-cat="video">
       <div class="card-ph"><span class="card-ph-label">VIDEO</span></div>
       <div class="card-overlay"></div>
       <span class="card-num">05</span>
       <div class="card-content">
         <div class="card-cat">Video</div>
-        <div class="card-title">Añade tu proyecto aquí</div>
+        <div class="card-title">Próximamente</div>
       </div>
     </div>
 
-    <!-- PROYECTO 6 -->
-    <div class="p-card xs reveal" data-cat="diseno">
-      <div class="card-ph"><span class="card-ph-label">DISEÑO</span></div>
-      <div class="card-overlay"></div>
-      <span class="card-num">06</span>
-      <div class="card-content">
-        <div class="card-cat">Diseño</div>
-        <div class="card-title">Añade tu proyecto aquí</div>
-      </div>
-    </div>
-
-    <!-- PROYECTO 7 -->
+    <!-- PROYECTO 6 — placeholder foto -->
     <div class="p-card xs reveal" data-cat="foto">
       <div class="card-ph"><span class="card-ph-label">FOTO</span></div>
       <div class="card-overlay"></div>
-      <span class="card-num">07</span>
+      <span class="card-num">06</span>
       <div class="card-content">
         <div class="card-cat">Fotografía</div>
-        <div class="card-title">Añade tu proyecto aquí</div>
+        <div class="card-title">Próximamente</div>
+      </div>
+    </div>
+
+    <!-- PROYECTO 7 — placeholder video -->
+    <div class="p-card xs reveal" data-cat="video">
+      <div class="card-ph"><span class="card-ph-label">VIDEO</span></div>
+      <div class="card-overlay"></div>
+      <span class="card-num">07</span>
+      <div class="card-content">
+        <div class="card-cat">Video</div>
+        <div class="card-title">Próximamente</div>
       </div>
     </div>
 
     <!-- BOTÓN AGREGAR -->
-    <div class="add-card reveal" title="Agregar nuevo proyecto — duplica una tarjeta en el código">
+    <div class="add-card reveal" title="Agregar nuevo proyecto">
       <div class="add-icon-wrap">+</div>
       <div class="add-text">Agregar proyecto</div>
     </div>
@@ -1013,7 +1019,9 @@ footer {
 
 <!-- ========== FOOTER ========== -->
 <footer>
-  <div class="footer-logo">JEIDIKEI</div>
+  <div class="footer-logo">
+    <img src="img/JDK_LOGO_PNG.png" alt="JeiDiKei" style="height:28px; width:auto; opacity:0.3;">
+  </div>
   <div class="footer-copy">© 2025 JeiDiKei · Diseño & Audiovisual · Atacama, Chile</div>
   <a href="#inicio" class="footer-back">↑ Volver arriba</a>
 </footer>
