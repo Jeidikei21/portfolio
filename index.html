@@ -407,11 +407,9 @@ nav.scrolled {
 }
 .portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 200px;
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.6rem;
 }
-/* Tamaños de tarjetas */
 .p-card {
   position: relative; overflow: hidden;
   background: var(--dark3); cursor: pointer;
@@ -419,27 +417,31 @@ nav.scrolled {
 }
 .p-card:hover { transform: scale(0.98); }
 
-/* Patrones de tamaño cíclicos para imágenes cargadas dinámicamente */
-.p-card:nth-child(4n+1) { grid-column: span 2; grid-row: span 2; }
-.p-card:nth-child(4n+2) { grid-column: span 1; grid-row: span 1; }
-.p-card:nth-child(4n+3) { grid-column: span 1; grid-row: span 2; }
-.p-card:nth-child(4n+4) { grid-column: span 2; grid-row: span 1; }
-
-/* Videos siempre en tamaño fijo */
-.p-card[data-cat="video"] { grid-column: span 2; grid-row: span 2; }
-.p-card[data-cat="video"].short { grid-column: span 1; grid-row: span 2; }
-
+/* Cada imagen muestra su proporción real */
 .card-img {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
+  width: 100%; height: auto;
+  display: block;
   transition: transform 0.6s ease;
 }
-.p-card:hover .card-img { transform: scale(1.05); }
+.p-card:hover .card-img { transform: scale(1.04); }
+
+/* Videos — proporción fija 16:9 horizontal, 9:16 vertical para shorts */
+.p-card[data-cat="video"] { grid-column: span 1; }
+.video-wrap {
+  position: relative; width: 100%; aspect-ratio: 16/9;
+}
+.video-wrap.video-vertical {
+  aspect-ratio: 9/16;
+}
+.video-wrap iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; border: none;
+}
+
 .card-ph {
-  width: 100%; height: 100%;
+  width: 100%; aspect-ratio: 4/3;
   display: flex; align-items: center; justify-content: center;
   background: linear-gradient(135deg, var(--dark3) 0%, var(--dark2) 100%);
-  position: absolute; inset: 0;
 }
 .card-ph-label {
   font-family: 'Bebas Neue', sans-serif;
@@ -472,15 +474,6 @@ nav.scrolled {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.1rem; font-weight: 400; color: var(--light);
 }
-.video-wrap {
-  width: 100%; height: 100%;
-  position: relative;
-}
-.video-wrap iframe {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%; border: none;
-}
-.video-wrap.video-vertical { aspect-ratio: unset; }
 }
 .add-card:hover .add-icon-wrap { border-color: var(--red); color: var(--red); }
 .add-text {
@@ -693,12 +686,8 @@ footer {
   }
   .portfolio-section { padding: 5rem 2rem; }
   .mining-section { padding: 5rem 2rem; }
-  .portfolio-grid { grid-template-columns: repeat(2,1fr); grid-auto-rows: 160px; }
-  .p-card:nth-child(4n+1),
-  .p-card:nth-child(4n+2),
-  .p-card:nth-child(4n+3),
-  .p-card:nth-child(4n+4) { grid-column: span 1; grid-row: span 1; }
-  .p-card[data-cat="video"] { grid-column: span 2; grid-row: span 1; }
+  .portfolio-grid { grid-template-columns: repeat(2,1fr); }
+  .p-card[data-cat="video"] { grid-column: span 1; }
   .services-grid { grid-template-columns: 1fr; }
   footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.8rem; text-align: center; }
 }
