@@ -382,87 +382,81 @@ nav.scrolled {
   color: var(--light); border-bottom-color: var(--red);
 }
 .portfolio-grid {
-  columns: 3;
-  column-gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 0.6rem;
 }
+/* Tamaños de tarjetas */
 .p-card {
   position: relative; overflow: hidden;
   background: var(--dark3); cursor: pointer;
-  break-inside: avoid;
-  margin-bottom: 1rem;
-  display: block;
   transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
 }
-.p-card:hover { transform: scale(0.985); }
-.p-card.xl, .p-card.sm, .p-card.md, .p-card.xs { grid-column: unset; aspect-ratio: unset; }
+.p-card:hover { transform: scale(0.98); }
+
+/* Patrones de tamaño cíclicos para imágenes cargadas dinámicamente */
+.p-card:nth-child(4n+1) { grid-column: span 2; grid-row: span 2; }
+.p-card:nth-child(4n+2) { grid-column: span 1; grid-row: span 1; }
+.p-card:nth-child(4n+3) { grid-column: span 1; grid-row: span 2; }
+.p-card:nth-child(4n+4) { grid-column: span 2; grid-row: span 1; }
+
+/* Videos siempre en tamaño fijo */
+.p-card[data-cat="video"] { grid-column: span 2; grid-row: span 2; }
+.p-card[data-cat="video"].short { grid-column: span 1; grid-row: span 2; }
+
 .card-img {
-  width: 100%; height: auto;
-  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
   transition: transform 0.6s ease;
 }
-.p-card:hover .card-img { transform: scale(1.04); }
+.p-card:hover .card-img { transform: scale(1.05); }
 .card-ph {
-  width: 100%;
-  aspect-ratio: 9/16;
+  width: 100%; height: 100%;
   display: flex; align-items: center; justify-content: center;
   background: linear-gradient(135deg, var(--dark3) 0%, var(--dark2) 100%);
+  position: absolute; inset: 0;
 }
 .card-ph-label {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 3rem; color: rgba(255,255,255,0.04); letter-spacing: 0.1em;
+  font-size: 2rem; color: rgba(255,255,255,0.04); letter-spacing: 0.1em;
 }
 .card-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0) 50%);
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%);
   opacity: 0; transition: opacity 0.4s;
 }
 .p-card:hover .card-overlay { opacity: 1; }
 .card-num {
-  position: absolute; top: 1rem; left: 1.2rem;
+  position: absolute; top: 0.8rem; left: 1rem;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.75rem; letter-spacing: 0.25em;
-  color: rgba(255,255,255,0.25);
+  font-size: 0.65rem; letter-spacing: 0.25em;
+  color: rgba(255,255,255,0.2);
 }
 .card-content {
   position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 1.5rem 1.5rem 1.8rem;
-  transform: translateY(8px); opacity: 0;
+  padding: 1rem 1.2rem 1.3rem;
+  transform: translateY(6px); opacity: 0;
   transition: all 0.4s;
 }
 .p-card:hover .card-content { opacity: 1; transform: translateY(0); }
 .card-cat {
-  font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--red); margin-bottom: 0.3rem;
+  font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 0.2rem;
 }
 .card-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem; font-weight: 400; color: var(--light);
-}
-.add-card {
-  break-inside: avoid;
-  margin-bottom: 1rem;
-  border: 1px dashed rgba(255,255,255,0.1);
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 0.6rem;
-  padding: 4rem 1rem; cursor: pointer;
-  transition: all 0.3s; background: transparent;
+  font-size: 1.1rem; font-weight: 400; color: var(--light);
 }
 .video-wrap {
-  position: relative; width: 100%; aspect-ratio: 16/9;
-}
-.video-wrap.video-vertical {
-  aspect-ratio: 9/16;
+  width: 100%; height: 100%;
+  position: relative;
 }
 .video-wrap iframe {
   position: absolute; inset: 0;
   width: 100%; height: 100%; border: none;
 }
-.add-card:hover { border-color: var(--red); }
-.add-icon-wrap {
-  width: 48px; height: 48px; border: 1px solid rgba(255,255,255,0.1);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem; color: rgba(255,255,255,0.2);
-  transition: all 0.3s;
+.video-wrap.video-vertical { aspect-ratio: unset; }
 }
 .add-card:hover .add-icon-wrap { border-color: var(--red); color: var(--red); }
 .add-text {
@@ -675,8 +669,12 @@ footer {
   }
   .portfolio-section { padding: 5rem 2rem; }
   .mining-section { padding: 5rem 2rem; }
-  .portfolio-grid { columns: 2; }
-  .p-card.xl, .p-card.md, .p-card.sm, .p-card.xs { grid-column: unset; }
+  .portfolio-grid { grid-template-columns: repeat(2,1fr); grid-auto-rows: 160px; }
+  .p-card:nth-child(4n+1),
+  .p-card:nth-child(4n+2),
+  .p-card:nth-child(4n+3),
+  .p-card:nth-child(4n+4) { grid-column: span 1; grid-row: span 1; }
+  .p-card[data-cat="video"] { grid-column: span 2; grid-row: span 1; }
   .services-grid { grid-template-columns: 1fr; }
   footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.8rem; text-align: center; }
 }
@@ -835,19 +833,19 @@ footer {
       <div class="video-wrap"><iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" title="Video 05" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
       <span class="card-num">V5</span>
     </div>
-    <div class="p-card reveal" data-cat="video">
+    <div class="p-card short reveal" data-cat="video">
       <div class="video-wrap video-vertical"><iframe src="https://www.youtube.com/embed/pUfppQMQ17E" title="Short 01" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
       <span class="card-num">S1</span>
     </div>
-    <div class="p-card reveal" data-cat="video">
+    <div class="p-card short reveal" data-cat="video">
       <div class="video-wrap video-vertical"><iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" title="Short 02" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
       <span class="card-num">S2</span>
     </div>
-    <div class="p-card reveal" data-cat="video">
+    <div class="p-card short reveal" data-cat="video">
       <div class="video-wrap video-vertical"><iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" title="Short 03" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
       <span class="card-num">S3</span>
     </div>
-    <div class="p-card reveal" data-cat="video">
+    <div class="p-card short reveal" data-cat="video">
       <div class="video-wrap video-vertical"><iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" title="Short 04" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
       <span class="card-num">S4</span>
     </div>
