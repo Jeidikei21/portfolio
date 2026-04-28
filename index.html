@@ -406,18 +406,20 @@ nav.scrolled {
   color: var(--light); border-bottom-color: var(--red);
 }
 .portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.6rem;
+  columns: 3;
+  column-gap: 0.5rem;
 }
 .p-card {
   position: relative; overflow: hidden;
   background: var(--dark3); cursor: pointer;
+  break-inside: avoid;
+  margin-bottom: 0.5rem;
+  display: block;
   transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
 }
-.p-card:hover { transform: scale(0.98); }
+.p-card:hover { transform: scale(0.99); }
 
-/* Cada imagen muestra su proporción real */
+/* Imagen respeta su proporción natural */
 .card-img {
   width: 100%; height: auto;
   display: block;
@@ -425,14 +427,11 @@ nav.scrolled {
 }
 .p-card:hover .card-img { transform: scale(1.04); }
 
-/* Videos — proporción fija 16:9 horizontal, 9:16 vertical para shorts */
-.p-card[data-cat="video"] { grid-column: span 1; }
+/* Videos con proporción fija */
 .video-wrap {
   position: relative; width: 100%; aspect-ratio: 16/9;
 }
-.video-wrap.video-vertical {
-  aspect-ratio: 9/16;
-}
+.video-wrap.video-vertical { aspect-ratio: 9/16; }
 .video-wrap iframe {
   position: absolute; inset: 0;
   width: 100%; height: 100%; border: none;
@@ -686,8 +685,8 @@ footer {
   }
   .portfolio-section { padding: 5rem 2rem; }
   .mining-section { padding: 5rem 2rem; }
-  .portfolio-grid { grid-template-columns: repeat(2,1fr); }
-  .p-card[data-cat="video"] { grid-column: span 1; }
+  .portfolio-grid { columns: 2; column-gap: 0.4rem; }
+  .p-card { margin-bottom: 0.4rem; }
   .services-grid { grid-template-columns: 1fr; }
   footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.8rem; text-align: center; }
 }
@@ -1340,7 +1339,13 @@ function filterCards(btn, cat){
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('.p-card').forEach(c => {
-    c.style.display = (cat==='all' || c.dataset.cat===cat) ? '' : 'none';
+    if(cat === 'all' || c.dataset.cat === cat) {
+      c.style.display = '';
+      c.style.marginBottom = '0.5rem';
+    } else {
+      c.style.display = 'none';
+      c.style.marginBottom = '0';
+    }
   });
 }
 
