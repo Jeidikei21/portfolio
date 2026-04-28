@@ -172,24 +172,45 @@ nav.scrolled {
   justify-content: center; padding: 0 5rem;
   position: relative; overflow: hidden;
 }
+.hero-video-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+}
+.hero-video-bg video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+}
+.hero-video-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(10,10,10,0.92) 0%,
+    rgba(10,10,10,0.6) 50%,
+    rgba(10,10,10,0.3) 100%
+  );
+  z-index: 1;
+}
 .hero-bg-glow {
   position: absolute; inset: 0;
   background: radial-gradient(ellipse at 65% 50%, rgba(192,57,43,0.09) 0%, transparent 65%);
-  pointer-events: none;
+  pointer-events: none; z-index: 1;
 }
 .hero-line-v {
   position: absolute; right: 30%; top: 0; bottom: 0;
-  width: 1px; background: rgba(255,255,255,0.03);
+  width: 1px; background: rgba(255,255,255,0.03); z-index: 1;
 }
 .hero-line-h {
   position: absolute; left: 0; right: 0; bottom: 35%;
-  height: 1px; background: rgba(255,255,255,0.03);
+  height: 1px; background: rgba(255,255,255,0.03); z-index: 1;
 }
 .hero-eyebrow {
   font-size: 0.68rem; letter-spacing: 0.45em; text-transform: uppercase;
   color: var(--red); margin-bottom: 1.8rem;
   display: flex; align-items: center; gap: 1rem;
   animation: fadeUp 0.8s 0.3s both;
+  position: relative; z-index: 2;
 }
 .hero-eyebrow::before {
   content: ''; width: 40px; height: 1px; background: var(--red);
@@ -201,6 +222,7 @@ nav.scrolled {
   letter-spacing: -0.02em;
   margin-bottom: 1.2rem;
   animation: fadeUp 0.8s 0.5s both;
+  position: relative; z-index: 2;
 }
 .hero-name .outline {
   color: transparent;
@@ -214,10 +236,12 @@ nav.scrolled {
   color: var(--muted); max-width: 480px;
   margin-bottom: 3rem; line-height: 1.6;
   animation: fadeUp 0.8s 0.7s both;
+  position: relative; z-index: 2;
 }
 .hero-actions {
   display: flex; gap: 2rem; align-items: center;
   animation: fadeUp 0.8s 0.9s both;
+  position: relative; z-index: 2;
 }
 .btn-primary {
   background: var(--red); color: var(--light);
@@ -710,6 +734,15 @@ footer {
 
 <!-- ========== HERO ========== -->
 <section class="hero" id="inicio">
+
+  <!-- VIDEO DE FONDO -->
+  <div class="hero-video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="img/portada/portada-jdk-render.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-video-overlay"></div>
+
   <div class="hero-bg-glow"></div>
   <div class="hero-line-v"></div>
   <div class="hero-line-h"></div>
