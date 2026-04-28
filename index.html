@@ -1,4 +1,6 @@
-<html lang="es"><head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="JeiDiKei — Diseñador Gráfico, Fotógrafo y Creador Audiovisual en la Región de Atacama, Chile.">
@@ -7,10 +9,10 @@
 <meta property="og:description" content="Visión creativa que transforma momentos en narrativas visuales que perduran.">
 <meta property="og:type" content="website">
 <title>JeiDiKei — Portfolio</title>
-<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="icon" type="image/png" href="img/logo/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&amp;family=Bebas+Neue&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 /* =============================================
    RESET & VARIABLES
@@ -137,6 +139,11 @@ nav.scrolled {
 /* =============================================
    SIDE DOTS NAV
 ============================================= */
+.side-nav {
+  position: fixed; right: 0.5rem; top: 50%;
+  transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 0.8rem;
+  z-index: 100;
 }
 .side-dot {
   width: 5px; height: 5px; border-radius: 50%;
@@ -440,6 +447,13 @@ nav.scrolled {
   padding: 4rem 1rem; cursor: pointer;
   transition: all 0.3s; background: transparent;
 }
+.video-wrap {
+  position: relative; width: 100%; aspect-ratio: 16/9;
+}
+.video-wrap iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; border: none;
+}
 .add-card:hover { border-color: var(--red); }
 .add-icon-wrap {
   width: 48px; height: 48px; border: 1px solid rgba(255,255,255,0.1);
@@ -668,13 +682,13 @@ footer {
 <body>
 
 <!-- CURSOR -->
-<div class="cursor" id="cursor" style="left: 611px; top: 205px;"></div>
-<div class="cursor-ring" id="cursorRing" style="left: 611px; top: 205px;"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
 <!-- NAV -->
-<nav id="navbar" class="">
+<nav id="navbar">
   <a href="#inicio" class="nav-logo">
-    <img src="img/JDK_LOGO_PNG.png" alt="JeiDiKei Logo">
+    <img src="img/logo/JDK_LOGO_PNG.png" alt="JeiDiKei Logo">
   </a>
   <ul class="nav-links">
     <li><a href="#portfolio">Trabajo</a></li>
@@ -739,7 +753,7 @@ footer {
 
 <!-- ========== ABOUT ========== -->
 <section class="about-section" id="sobre-mi">
-  <div class="about-img-wrap reveal visible">
+  <div class="about-img-wrap reveal">
     <div class="about-img-frame">
       <!-- REEMPLAZA src con tu foto real: <img src="img/perfil.jpg" alt="Darikson Araya"> -->
       <div class="about-img-placeholder"></div>
@@ -751,7 +765,7 @@ footer {
     </div>
   </div>
 
-  <div class="about-content reveal visible">
+  <div class="about-content reveal">
     <div class="section-eyebrow">Sobre mí</div>
     <h2 class="section-title">Darikson<br><em style="font-style:italic; color:var(--red)">Araya N.</em></h2>
     <p class="about-desc">
@@ -777,7 +791,7 @@ footer {
 
 <!-- ========== PORTFOLIO ========== -->
 <section class="portfolio-section" id="portfolio">
-  <div class="portfolio-header reveal visible">
+  <div class="portfolio-header reveal">
     <div>
       <div class="section-eyebrow">Trabajos</div>
       <h2 class="section-title">Mi Portfolio</h2>
@@ -792,8 +806,10 @@ footer {
 
   <div class="portfolio-grid" id="grid">
 
-    <!-- PROYECTO 1 — Sandboard Championship -->
-    <div class="p-card xl reveal visible" data-cat="diseno">
+    <!-- ======= DISEÑO ======= -->
+
+    <!-- DISEÑO 01 — Sandboard Championship -->
+    <div class="p-card reveal" data-cat="diseno">
       <img class="card-img" src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2026.jpg" alt="Sandboard Championship 2026">
       <div class="card-overlay"></div>
       <span class="card-num">01</span>
@@ -803,8 +819,8 @@ footer {
       </div>
     </div>
 
-    <!-- PROYECTO 2 — DJ Blaxx -->
-    <div class="p-card sm reveal visible" data-cat="diseno">
+    <!-- DISEÑO 02 — DJ Blaxx -->
+    <div class="p-card reveal" data-cat="diseno">
       <img class="card-img" src="img/diseno/POSTER-DJBLAXX-JDK.jpg" alt="DJ Blaxx Poster">
       <div class="card-overlay"></div>
       <span class="card-num">02</span>
@@ -814,8 +830,8 @@ footer {
       </div>
     </div>
 
-    <!-- PROYECTO 3 — Experiencias de un Kolla -->
-    <div class="p-card md reveal visible" data-cat="diseno">
+    <!-- DISEÑO 03 — Experiencias de un Kolla -->
+    <div class="p-card reveal" data-cat="diseno">
       <img class="card-img" src="img/diseno/EXPERIENCIAS-DE-UN-KOLLA.jpg" alt="Experiencias de un Kolla">
       <div class="card-overlay"></div>
       <span class="card-num">03</span>
@@ -825,55 +841,53 @@ footer {
       </div>
     </div>
 
-    <!-- PROYECTO 4 — placeholder foto -->
-    <div class="p-card md reveal visible" data-cat="foto">
-      <div class="card-ph"><span class="card-ph-label">FOTO</span></div>
+    <!-- ======= FOTOGRAFÍA ======= -->
+
+    <!-- FOTO 01 — Cascada Juncalito -->
+    <div class="p-card reveal" data-cat="foto">
+      <img class="card-img" src="img/fotografia/CASCADA JUNCALITO _1.jpg" alt="Cascada Juncalito">
       <div class="card-overlay"></div>
       <span class="card-num">04</span>
       <div class="card-content">
-        <div class="card-cat">Fotografía</div>
-        <div class="card-title">Próximamente</div>
+        <div class="card-cat">Fotografía · Naturaleza</div>
+        <div class="card-title">Cascada Juncalito</div>
       </div>
     </div>
 
-    <!-- PROYECTO 5 — placeholder video -->
-    <div class="p-card xs reveal visible" data-cat="video">
-      <div class="card-ph"><span class="card-ph-label">VIDEO</span></div>
+    <!-- FOTO 02 — agrega más fotos aquí duplicando el bloque de arriba -->
+    <!-- Ejemplo:
+    <div class="p-card reveal" data-cat="foto">
+      <img class="card-img" src="img/fotografia/NOMBRE-FOTO.jpg" alt="Descripción">
       <div class="card-overlay"></div>
       <span class="card-num">05</span>
       <div class="card-content">
-        <div class="card-cat">Video</div>
-        <div class="card-title">Próximamente</div>
+        <div class="card-cat">Fotografía · 2024</div>
+        <div class="card-title">Título de la foto</div>
       </div>
     </div>
+    -->
 
-    <!-- PROYECTO 6 — placeholder foto -->
-    <div class="p-card xs reveal visible" data-cat="foto">
-      <div class="card-ph"><span class="card-ph-label">FOTO</span></div>
-      <div class="card-overlay"></div>
-      <span class="card-num">06</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía</div>
-        <div class="card-title">Próximamente</div>
+    <!-- ======= VIDEO ======= -->
+
+    <!-- VIDEO 01 — pega aquí tu link de YouTube cuando tengas el video listo -->
+    <!-- Ejemplo:
+    <div class="p-card reveal" data-cat="video">
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/CODIGO_DEL_VIDEO"
+          title="Título del video"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <span class="card-num">05</span>
+      <div class="card-content" style="opacity:1; transform:none;">
+        <div class="card-cat">Video Corporativo · 2024</div>
+        <div class="card-title">Título del video</div>
       </div>
     </div>
-
-    <!-- PROYECTO 7 — placeholder video -->
-    <div class="p-card xs reveal visible" data-cat="video">
-      <div class="card-ph"><span class="card-ph-label">VIDEO</span></div>
-      <div class="card-overlay"></div>
-      <span class="card-num">07</span>
-      <div class="card-content">
-        <div class="card-cat">Video</div>
-        <div class="card-title">Próximamente</div>
-      </div>
-    </div>
-
-    <!-- BOTÓN AGREGAR -->
-    <div class="add-card reveal visible" title="Agregar nuevo proyecto">
-      <div class="add-icon-wrap">+</div>
-      <div class="add-text">Agregar proyecto</div>
-    </div>
+    -->
 
   </div>
 </section>
@@ -885,7 +899,7 @@ footer {
   <div class="mining-bg-glow"></div>
   <div class="mining-inner">
 
-    <div class="reveal visible">
+    <div class="reveal">
       <span class="mining-tag">Sector Minero · Atacama</span>
       <div class="section-eyebrow orange">Producción en Faena</div>
       <h2 class="section-title">Servicios para<br><em style="font-style:italic; color:var(--orange)">la Minería</em></h2>
@@ -913,7 +927,7 @@ footer {
       </div>
     </div>
 
-    <div class="services-grid reveal visible">
+    <div class="services-grid reveal">
       <div class="service-card">
         <span class="service-icon">🎬</span>
         <div class="service-title">Video Corporativo</div>
@@ -943,7 +957,7 @@ footer {
 
 <!-- ========== CONTACT ========== -->
 <section class="contact-section" id="contacto">
-  <div class="reveal visible">
+  <div class="reveal">
     <div class="section-eyebrow">Contacto</div>
     <h2 class="contact-title">
       Traba<span class="italic red">jemos</span><br>
@@ -977,21 +991,21 @@ footer {
     </div>
   </div>
 
-  <div class="contact-form-wrap reveal visible">
+  <div class="contact-form-wrap reveal">
     <p class="form-title">Envíame un mensaje</p>
     <form onsubmit="handleForm(event)">
       <div class="form-row">
         <label class="form-label" for="fname">Nombre</label>
-        <input type="text" id="fname" class="form-control" placeholder="Tu nombre completo" required="">
+        <input type="text" id="fname" class="form-control" placeholder="Tu nombre completo" required>
       </div>
       <div class="form-row">
         <label class="form-label" for="femail">Email</label>
-        <input type="email" id="femail" class="form-control" placeholder="tu@email.com" required="">
+        <input type="email" id="femail" class="form-control" placeholder="tu@email.com" required>
       </div>
       <div class="form-row">
         <label class="form-label" for="fservice">Servicio de interés</label>
         <select id="fservice" class="form-control" style="appearance:none; cursor:pointer">
-          <option value="" disabled="" selected="">Selecciona un servicio</option>
+          <option value="" disabled selected>Selecciona un servicio</option>
           <option>Diseño Gráfico</option>
           <option>Fotografía</option>
           <option>Producción de Video</option>
@@ -1002,7 +1016,7 @@ footer {
       </div>
       <div class="form-row">
         <label class="form-label" for="fmsg">Mensaje</label>
-        <textarea id="fmsg" class="form-control" placeholder="Cuéntame sobre tu proyecto..." required=""></textarea>
+        <textarea id="fmsg" class="form-control" placeholder="Cuéntame sobre tu proyecto..." required></textarea>
       </div>
       <button type="submit" class="form-submit">Enviar mensaje</button>
       <p class="form-note" id="formMsg"></p>
@@ -1013,9 +1027,9 @@ footer {
 <!-- ========== FOOTER ========== -->
 <footer>
   <div class="footer-logo">
-    <img src="img/JDK_LOGO_PNG.png" alt="JeiDiKei" style="height:28px; width:auto; opacity:0.3;">
+    <img src="img/logo/JDK_LOGO_PNG.png" alt="JeiDiKei" style="height:28px; width:auto; opacity:0.3;">
   </div>
-  <div class="footer-copy">© 2025 JeiDiKei · Diseño &amp; Audiovisual · Atacama, Chile</div>
+  <div class="footer-copy">© 2025 JeiDiKei · Diseño & Audiovisual · Atacama, Chile</div>
   <a href="#inicio" class="footer-back">↑ Volver arriba</a>
 </footer>
 
@@ -1086,6 +1100,5 @@ function handleForm(e){
 }
 </script>
 
-
-
-</body></html>
+</body>
+</html>
