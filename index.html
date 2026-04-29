@@ -452,8 +452,141 @@ nav.scrolled {
 }
 
 /* =============================================
-   MINING SECTION
+   SISTEMA DE ÁLBUMES
 ============================================= */
+.albums-wrapper {
+  column-span: all;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+.album-card {
+  position: relative; overflow: hidden;
+  cursor: pointer; aspect-ratio: 3/4;
+  background: var(--dark3);
+  transition: transform 0.4s ease;
+}
+.album-card:hover { transform: scale(0.97); }
+.album-card img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.6s ease;
+}
+.album-card:hover img { transform: scale(1.06); }
+.album-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+  transition: opacity 0.4s;
+}
+.album-info {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 1.2rem;
+}
+.album-cat {
+  font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 0.3rem;
+}
+.album-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 400; color: var(--light);
+  margin-bottom: 0.2rem;
+}
+.album-count {
+  font-size: 0.6rem; letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.4);
+}
+
+/* LIGHTBOX */
+.album-lightbox {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.97);
+  z-index: 800;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
+  overflow-y: auto;
+}
+.album-lightbox.open {
+  opacity: 1; pointer-events: all;
+}
+.lightbox-header {
+  position: sticky; top: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.5rem 3rem;
+  background: rgba(0,0,0,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  z-index: 10;
+}
+.lightbox-back {
+  background: none; border: none; color: var(--muted);
+  font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; transition: color 0.3s;
+}
+.lightbox-back:hover { color: var(--red); }
+.lightbox-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-weight: 300; color: var(--light);
+}
+.lightbox-close {
+  background: none; border: 1px solid var(--border);
+  color: var(--muted); width: 36px; height: 36px;
+  font-size: 1rem; cursor: pointer; transition: all 0.3s;
+}
+.lightbox-close:hover { border-color: var(--red); color: var(--red); }
+.lightbox-grid {
+  columns: 4; column-gap: 0.5rem;
+  padding: 2rem 3rem;
+}
+.lightbox-grid img {
+  width: 100%; height: auto; display: block;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.3s, opacity 0.3s;
+  break-inside: avoid;
+}
+.lightbox-grid img:hover { transform: scale(0.98); opacity: 0.85; }
+
+/* VISOR INDIVIDUAL */
+.photo-viewer {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.98);
+  z-index: 900;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.photo-viewer.open { opacity: 1; pointer-events: all; }
+.viewer-img {
+  max-width: 90vw; max-height: 90vh;
+  object-fit: contain;
+  animation: fadeUp 0.3s ease;
+}
+.viewer-prev, .viewer-next {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: none; border: 1px solid rgba(255,255,255,0.2);
+  color: var(--light); font-size: 2rem;
+  width: 50px; height: 50px;
+  cursor: pointer; transition: all 0.3s;
+}
+.viewer-prev { left: 2rem; }
+.viewer-next { right: 2rem; }
+.viewer-prev:hover, .viewer-next:hover {
+  border-color: var(--red); color: var(--red);
+}
+.viewer-close {
+  position: absolute; top: 1.5rem; right: 2rem;
+  background: none; border: 1px solid var(--border);
+  color: var(--muted); width: 40px; height: 40px;
+  font-size: 1rem; cursor: pointer; transition: all 0.3s;
+}
+.viewer-close:hover { border-color: var(--red); color: var(--red); }
+
+@media (max-width: 900px) {
+  .albums-wrapper { grid-template-columns: repeat(2,1fr); }
+  .lightbox-grid { columns: 2; padding: 1rem; }
+  .lightbox-header { padding: 1rem; }
+}
 .mining-section {
   padding: 9rem 5rem;
   background: var(--dark2);
@@ -813,144 +946,245 @@ footer {
       <span class="card-num">01</span>
       <div class="card-content">
         <div class="card-cat">Diseño Gráfico · 2026</div>
-        <div class="card-title">Sandboard Championship</div>
+        <div class="card-title">Sandboard Championship 2026</div>
       </div>
     </div>
-
+    <div class="p-card reveal" data-cat="diseno">
+      <img class="card-img" src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2025.jpg" alt="Sandboard Championship 2025" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">02</span>
+      <div class="card-content">
+        <div class="card-cat">Diseño Gráfico · 2025</div>
+        <div class="card-title">Sandboard Championship 2025</div>
+      </div>
+    </div>
     <div class="p-card reveal" data-cat="diseno">
       <img class="card-img" src="img/diseno/POSTER-DJBLAXX-JDK.jpg" alt="DJ Blaxx" loading="lazy">
       <div class="card-overlay"></div>
-      <span class="card-num">02</span>
+      <span class="card-num">03</span>
       <div class="card-content">
         <div class="card-cat">Diseño Gráfico · 2024</div>
         <div class="card-title">DJ Blaxx Tour</div>
       </div>
     </div>
-
     <div class="p-card reveal" data-cat="diseno">
       <img class="card-img" src="img/diseno/EXPERIENCIAS-DE-UN-KOLLA.jpg" alt="Experiencias de un Kolla" loading="lazy">
       <div class="card-overlay"></div>
-      <span class="card-num">03</span>
+      <span class="card-num">04</span>
       <div class="card-content">
         <div class="card-cat">Diseño · Fotografía · 2024</div>
         <div class="card-title">Experiencias de un Kolla</div>
       </div>
     </div>
-
-    <!-- ======= FOTOGRAFÍA ======= -->
-    <div class="p-card reveal" data-cat="foto">
-      <img class="card-img" src="img/fotografia/CASCADAJUNCALITO_1.jpg" alt="Cascada Juncalito" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">04</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía · Naturaleza</div>
-        <div class="card-title">Cascada Juncalito</div>
-      </div>
-    </div>
-
-    <div class="p-card reveal" data-cat="foto">
-      <img class="card-img" src="img/fotografia/CASCADAJUNCALITO.jpg" alt="Cascada Juncalito" loading="lazy">
+    <div class="p-card reveal" data-cat="diseno">
+      <img class="card-img" src="img/diseno/APPAREL CHNG HISTORY 4.jpg" alt="Apparel Chng History" loading="lazy">
       <div class="card-overlay"></div>
       <span class="card-num">05</span>
       <div class="card-content">
-        <div class="card-cat">Fotografía · Naturaleza</div>
-        <div class="card-title">Cascada Juncalito II</div>
+        <div class="card-cat">Diseño · Apparel</div>
+        <div class="card-title">Apparel Chng History</div>
       </div>
     </div>
-
-    <div class="p-card reveal" data-cat="foto">
-      <img class="card-img" src="img/fotografia/BURROSPOSADACERCAPEÑABLANCA_4.jpg" alt="Burros Peña Blanca" loading="lazy">
+    <div class="p-card reveal" data-cat="diseno">
+      <img class="card-img" src="img/diseno/CAUR-DESERTIKA-BEER (1).jpg" alt="Desertika Beer" loading="lazy">
       <div class="card-overlay"></div>
       <span class="card-num">06</span>
       <div class="card-content">
-        <div class="card-cat">Fotografía · Naturaleza</div>
-        <div class="card-title">Peña Blanca</div>
+        <div class="card-cat">Diseño · Branding</div>
+        <div class="card-title">Desertika Beer</div>
       </div>
     </div>
-
-    <div class="p-card reveal" data-cat="foto">
-      <img class="card-img" src="img/fotografia/BURROSPOSADACERCAPEÑABLANCA_6.jpg" alt="Burros Peña Blanca" loading="lazy">
+    <div class="p-card reveal" data-cat="diseno">
+      <img class="card-img" src="img/diseno/GREENSEEDLES REVISTA.jpg" alt="Greenseedles Revista" loading="lazy">
       <div class="card-overlay"></div>
       <span class="card-num">07</span>
       <div class="card-content">
-        <div class="card-cat">Fotografía · Naturaleza</div>
-        <div class="card-title">Peña Blanca II</div>
+        <div class="card-cat">Diseño Editorial</div>
+        <div class="card-title">Greenseedles Revista</div>
       </div>
     </div>
-
-    <div class="p-card reveal" data-cat="foto">
-      <img class="card-img" src="img/fotografia/BURROSPOSADACERCAPEÑABLANCA_7.jpg" alt="Burros Peña Blanca" loading="lazy">
+    <div class="p-card reveal" data-cat="diseno">
+      <img class="card-img" src="img/diseno/NEW FAUNA ATACAMA DESIGN DUNAS.jpg" alt="New Fauna Atacama" loading="lazy">
       <div class="card-overlay"></div>
       <span class="card-num">08</span>
       <div class="card-content">
-        <div class="card-cat">Fotografía · Naturaleza</div>
-        <div class="card-title">Peña Blanca III</div>
+        <div class="card-cat">Diseño · Naturaleza</div>
+        <div class="card-title">New Fauna Atacama</div>
       </div>
     </div>
-
-    <div class="p-card reveal" data-cat="foto">
-      <img class="card-img" src="img/fotografia/DISSVOL2CRISS-07.jpg" alt="Dissvol 2 Criss" loading="lazy">
+    <div class="p-card reveal" data-cat="diseno">
+      <img class="card-img" src="img/diseno/PEÑA BLANCA 2025 FLYER INVITACIÓN.jpg" alt="Peña Blanca 2025" loading="lazy">
       <div class="card-overlay"></div>
       <span class="card-num">09</span>
       <div class="card-content">
-        <div class="card-cat">Fotografía</div>
-        <div class="card-title">Dissvol 2 Criss</div>
+        <div class="card-cat">Diseño · Evento · 2025</div>
+        <div class="card-title">Peña Blanca 2025</div>
       </div>
     </div>
-
-    <div class="p-card reveal" data-cat="foto">
-      <img class="card-img" src="img/fotografia/DISSVOL2CRISS-09.jpg" alt="Dissvol 2 Criss" loading="lazy">
+    <div class="p-card reveal" data-cat="diseno">
+      <img class="card-img" src="img/diseno/POSTER FERRARI JDK 3.jpg" alt="Poster Ferrari" loading="lazy">
       <div class="card-overlay"></div>
       <span class="card-num">10</span>
       <div class="card-content">
-        <div class="card-cat">Fotografía</div>
-        <div class="card-title">Dissvol 2 Criss II</div>
+        <div class="card-cat">Diseño · Poster</div>
+        <div class="card-title">Poster Ferrari JDK</div>
       </div>
     </div>
-
-    <div class="p-card reveal" data-cat="foto">
-      <img class="card-img" src="img/fotografia/DISSVOL2CRISS-25.jpg" alt="Dissvol 2 Criss" loading="lazy">
+    <div class="p-card reveal" data-cat="diseno">
+      <img class="card-img" src="img/diseno/ZATURNO CHNG KAYA 20225.jpg" alt="Zaturno Chng Kaya" loading="lazy">
       <div class="card-overlay"></div>
       <span class="card-num">11</span>
       <div class="card-content">
-        <div class="card-cat">Fotografía</div>
-        <div class="card-title">Dissvol 2 Criss III</div>
+        <div class="card-cat">Diseño · 2025</div>
+        <div class="card-title">Zaturno Chng Kaya</div>
       </div>
     </div>
 
-    <div class="p-card reveal" data-cat="foto">
-      <img class="card-img" src="img/fotografia/DISSVOL2CRISS-43.jpg" alt="Dissvol 2 Criss" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">12</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía</div>
-        <div class="card-title">Dissvol 2 Criss IV</div>
+    <!-- ======= FOTOGRAFÍA — ÁLBUMES ======= -->
+    <div class="albums-wrapper" data-cat="foto">
+
+      <div class="album-card reveal" onclick="openAlbum('bts-4ever','BTS 4Ever',['P1010859.jpg','P1010880.jpg','P1020004.jpg','P1020016.jpg','P1020022.jpg','P1020049.jpg','P1020054.jpg','P1020058.jpg','P1020061.jpg','P1020062.jpg','P1020114.jpg'])">
+        <img src="img/fotografia/bts-4ever/P1010859.jpg" alt="BTS 4Ever" loading="lazy">
+        <div class="album-overlay"></div>
+        <div class="album-info">
+          <div class="album-cat">Fotografía · BTS</div>
+          <div class="album-title">BTS 4Ever</div>
+          <div class="album-count">11 fotos</div>
+        </div>
       </div>
+
+      <div class="album-card reveal" onclick="openAlbum('bts-enfocado','BTS Enfocado',['LUKY-KODEX_12.jpg','LUKY-KODEX_14.jpg','LUKY-KODEX_15.jpg','LUKY-KODEX_17.jpg','LUKY-KODEX_19.jpg'])">
+        <img src="img/fotografia/bts-enfocado/LUKY-KODEX_12.jpg" alt="BTS Enfocado" loading="lazy">
+        <div class="album-overlay"></div>
+        <div class="album-info">
+          <div class="album-cat">Fotografía · BTS</div>
+          <div class="album-title">BTS Enfocado</div>
+          <div class="album-count">5 fotos</div>
+        </div>
+      </div>
+
+      <div class="album-card reveal" onclick="openAlbum('bts-tu.bicha','BTS Tu Bicha',['CATALINA VF -16.jpg','CATALINA VF -17.jpg','CATALINA VF -21.jpg','CATALINA VF -23.jpg','CATALINA VF -26.jpg','CATALINA VF -31.jpg','CATALINA VF -32.jpg','CATALINA VF -33.jpg','CATALINA VF -35.jpg','CATALINA VF -36.jpg','CATALINA VF -40.jpg','CATALINA VF -41.jpg','CATALINA VF -42.jpg','CATALINA VF -47.jpg','CATALINA VF -50.jpg','CATALINA VF -51.jpg','CATALINA VF -56.jpg','CATALINA VF -59.jpg'])">
+        <img src="img/fotografia/bts-tu.bicha/CATALINA VF -16.jpg" alt="BTS Tu Bicha" loading="lazy">
+        <div class="album-overlay"></div>
+        <div class="album-info">
+          <div class="album-cat">Fotografía · BTS</div>
+          <div class="album-title">BTS Tu Bicha</div>
+          <div class="album-count">18 fotos</div>
+        </div>
+      </div>
+
+      <div class="album-card reveal" onclick="openAlbum('diss.vol2','Diss Vol 2',['DISS VOL2 CRISS-02.jpg','DISS VOL2 CRISS-03.jpg','DISS VOL2 CRISS-07.jpg','DISS VOL2 CRISS-25.jpg','DISS VOL2 CRISS-28.jpg','DISS VOL2 CRISS-43.jpg','DISS VOL2 CRISS-45.jpg','DISS VOL2 CRISS-50.jpg'])">
+        <img src="img/fotografia/diss.vol2/DISS VOL2 CRISS-02.jpg" alt="Diss Vol 2" loading="lazy">
+        <div class="album-overlay"></div>
+        <div class="album-info">
+          <div class="album-cat">Fotografía · Evento</div>
+          <div class="album-title">Diss Vol 2</div>
+          <div class="album-count">8 fotos</div>
+        </div>
+      </div>
+
+      <div class="album-card reveal" onclick="openAlbum('dune','Dune',['DJI_0993-Mejorado-NR.jpg','DUNE SS-01.jpg','DUNE SS-05.jpg','DUNE SS-08.jpg','DUNE SS-09.jpg','DUNE SS-13.jpg','DUNE SS-14.jpg','DUNE SS-15.jpg','DUNE SS-17.jpg'])">
+        <img src="img/fotografia/dune/DJI_0993-Mejorado-NR.jpg" alt="Dune" loading="lazy">
+        <div class="album-overlay"></div>
+        <div class="album-info">
+          <div class="album-cat">Fotografía · Naturaleza</div>
+          <div class="album-title">Dune</div>
+          <div class="album-count">9 fotos</div>
+        </div>
+      </div>
+
+
+      <div class="album-card reveal" onclick="openAlbum('glam','Glam',['GLAM XOXO JDK-01.jpg','GLAM XOXO JDK-02.jpg','GLAM XOXO JDK-10.jpg','GLAM XOXO JDK-14.jpg','GLAM XOXO JDK-17.jpg','GLAM XOXO JDK-20.jpg','GLAM XOXO JDK-29.jpg','GLAM XOXO JDK-35.jpg','GLAM XOXO JDK-53.jpg','HALLOWEEN GLAM PROMO-1.jpg','HALLOWEEN GLAM PROMO-3.jpg'])">
+        <img src="img/fotografia/glam/GLAM XOXO JDK-01.jpg" alt="Glam" loading="lazy">
+        <div class="album-overlay"></div>
+        <div class="album-info">
+          <div class="album-cat">Fotografía · Glam</div>
+          <div class="album-title">Glam</div>
+          <div class="album-count">11 fotos</div>
+        </div>
+      </div>
+
+      <div class="album-card reveal" onclick="openAlbum('kaukari','Kaukari',['DJI_0456.jpg','DJI_0457.jpg','DJI_0458.jpg','DJI_0460.jpg','IMG_0315.jpg','IMG_0317.jpg','IMG_0325.jpg','IMG_0326.jpg','IMG_0332.jpg','IMG_0346.jpg','IMG_0508.jpg'])">
+        <img src="img/fotografia/kaukari/DJI_0456.jpg" alt="Kaukari" loading="lazy">
+        <div class="album-overlay"></div>
+        <div class="album-info">
+          <div class="album-cat">Fotografía · Drone</div>
+          <div class="album-title">Kaukari</div>
+          <div class="album-count">11 fotos</div>
+        </div>
+      </div>
+
+      <div class="album-card reveal" onclick="openAlbum('llanos-del-challe','Llanos del Challe',['P1050254.jpg','P1050258.jpg','P1050260.jpg','P1050263.jpg','P1050269.jpg','P1050271.jpg','P1050275.jpg','P1050281.jpg','P1050284.jpg'])">
+        <img src="img/fotografia/llanos-del-challe/P1050254.jpg" alt="Llanos del Challe" loading="lazy">
+        <div class="album-overlay"></div>
+        <div class="album-info">
+          <div class="album-cat">Fotografía · Naturaleza</div>
+          <div class="album-title">Llanos del Challe</div>
+          <div class="album-count">9 fotos</div>
+        </div>
+      </div>
+
+      <div class="album-card reveal" onclick="openAlbum('mineria','Minería',['CAMARAS TRAMPA 1 RIO TINTO-01.jpg','CAMARAS TRAMPA 1 RIO TINTO-21.jpg','CAMARAS TRAMPA 1 RIO TINTO-32.jpg','CAMARAS TRAMPA 1 RIO TINTO-42.jpg','CAMARAS TRAMPA 1 RIO TINTO-47.jpg','CAMARAS TRAMPA 1 RIO TINTO-53.jpg','CAMARAS TRAMPA 1 RIO TINTO-55.jpg','CAMARAS TRAMPA 1 RIO TINTO-56.jpg','CAMARAS TRAMPA 1 RIO TINTO-65.jpg','CAMARAS TRAMPA 1 RIO TINTO-72.jpg','CT-NUEVO COBRE SONY -02.jpg','CT-NUEVO COBRE SONY -04.jpg','CT-NUEVO COBRE SONY -06.jpg','CT-NUEVO COBRE SONY -08.jpg','CT-NUEVO COBRE SONY -14.jpg','CT-NUEVO COBRE SONY -17.jpg','CT-NUEVO COBRE SONY -43.jpg','CT-NUEVO COBRE SONY -55.jpg'])">
+        <img src="img/fotografia/mineria/CAMARAS TRAMPA 1 RIO TINTO-01.jpg" alt="Minería" loading="lazy">
+        <div class="album-overlay"></div>
+        <div class="album-info">
+          <div class="album-cat">Fotografía · Industrial</div>
+          <div class="album-title">Minería</div>
+          <div class="album-count">18 fotos</div>
+        </div>
+      </div>
+
+      <div class="album-card reveal" onclick="openAlbum('museo-frafran','Museo Frafran',['STAGE MUSEO V FINAL_2.jpg','STAGE MUSEO V FINAL_8.jpg','STAGE MUSEO V FINAL_11.jpg','STAGE MUSEO V FINAL_15.jpg','STAGE MUSEO V FINAL_19.jpg','STAGE MUSEO V FINAL_24.jpg','STAGE MUSEO V FINAL_26.jpg','STAGE MUSEO V FINAL_30.jpg','STAGE MUSEO V FINAL_33.jpg','STAGE MUSEO V FINAL_36.jpg','STAGE MUSEO V FINAL_40.jpg','STAGE MUSEO V FINAL_54.jpg','STAGE MUSEO V FINAL_58.jpg','STAGE MUSEO V FINAL_60.jpg','STAGE MUSEO V FINAL_63.jpg'])">
+        <img src="img/fotografia/museo-frafran/STAGE MUSEO V FINAL_2.jpg" alt="Museo Frafran" loading="lazy">
+        <div class="album-overlay"></div>
+        <div class="album-info">
+          <div class="album-cat">Fotografía · Evento</div>
+          <div class="album-title">Museo Frafran</div>
+          <div class="album-count">15 fotos</div>
+        </div>
+      </div>
+
+      <div class="album-card reveal" onclick="openAlbum('nippon-rest','Nippon Rest',['NIPPON PHOTO JDK-01.jpg','NIPPON PHOTO JDK-04.jpg','NIPPON PHOTO JDK-08.jpg','NIPPON PHOTO JDK-12.jpg','NIPPON PHOTO JDK-14.jpg','NIPPON PHOTO JDK-16.jpg','NIPPON PHOTO JDK-19.jpg','NIPPON PHOTO JDK-26.jpg','NIPPON PHOTO JDK-29.jpg','NIPPON PHOTO JDK-42.jpg','NIPPON PHOTO JDK-45.jpg','NIPPON PHOTO JDK-59.jpg'])">
+        <img src="img/fotografia/nippon-rest/NIPPON PHOTO JDK-01.jpg" alt="Nippon Rest" loading="lazy">
+        <div class="album-overlay"></div>
+        <div class="album-info">
+          <div class="album-cat">Fotografía · Evento</div>
+          <div class="album-title">Nippon Rest</div>
+          <div class="album-count">12 fotos</div>
+        </div>
+      </div>
+
+      <div class="album-card reveal" onclick="openAlbum('veranada-koya','Veranada Koya',['BURROS POSADA CERCA PEÑA BLANCA_4.jpg','BURROS POSADA CERCA PEÑA BLANCA_6.jpg','BURROS POSADA CERCA PEÑA BLANCA_7.jpg','CASCADA JUNCALITO .jpg','CASCADA JUNCALITO _1.jpg','PEÑA BLANCA ALREDEDORES.jpg','PEÑA BLANCA ALREDEDORES_1.jpg','PEÑA BLANCA ALREDEDORES_3.jpg','PEÑA BLANCA ALREDEDORES_5.jpg','RECORRIDO EN BUSCA DE LOS OBJETOS ESCONDIDOS_3.jpg','RECORRIDO EN BUSCA DE LOS OBJETOS ESCONDIDOS_6.jpg','RECORRIDO EN BUSCA DE LOS OBJETOS ESCONDIDOS_7.jpg','RECORRIDO EN BUSCA DE LOS OBJETOS ESCONDIDOS_8.jpg'])">
+        <img src="img/fotografia/veranada-koya/CASCADA JUNCALITO _1.jpg" alt="Veranada Koya" loading="lazy">
+        <div class="album-overlay"></div>
+        <div class="album-info">
+          <div class="album-cat">Fotografía · Naturaleza</div>
+          <div class="album-title">Veranada Koya</div>
+          <div class="album-count">13 fotos</div>
+        </div>
+      </div>
+
     </div>
 
-    <div class="p-card reveal" data-cat="foto">
-      <img class="card-img" src="img/fotografia/DISSVOL2CRISS-45.jpg" alt="Dissvol 2 Criss" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">13</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía</div>
-        <div class="card-title">Dissvol 2 Criss V</div>
+    <!-- LIGHTBOX -->
+    <div class="album-lightbox" id="albumLightbox">
+      <div class="lightbox-header">
+        <button class="lightbox-back" onclick="closeAlbum()">← Volver a álbumes</button>
+        <h3 class="lightbox-title" id="lightboxTitle"></h3>
+        <button class="lightbox-close" onclick="closeAlbum()">✕</button>
       </div>
+      <div class="lightbox-grid" id="lightboxGrid"></div>
     </div>
 
-    <div class="p-card reveal" data-cat="foto">
-      <img class="card-img" src="img/fotografia/DJI_0993-Mejorado-NR.jpg" alt="Aerial" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">14</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía · Drone</div>
-        <div class="card-title">Vista Aérea</div>
-      </div>
+    <!-- VISOR INDIVIDUAL -->
+    <div class="photo-viewer" id="photoViewer" onclick="closeViewer()">
+      <button class="viewer-prev" onclick="event.stopPropagation();changePhoto(-1)">‹</button>
+      <img class="viewer-img" id="viewerImg" src="" alt="">
+      <button class="viewer-next" onclick="event.stopPropagation();changePhoto(1)">›</button>
+      <button class="viewer-close" onclick="closeViewer()">✕</button>
     </div>
 
-    <!-- Agrega más fotos aquí — duplica cualquier bloque de arriba -->
-
-    <!-- ======= VIDEO ======= -->
+        <!-- ======= VIDEO ======= -->
     <div class="p-card reveal" data-cat="video">
       <div class="video-wrap"><iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" title="Video 01" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
       <span class="card-num">V1</span>
@@ -1196,7 +1430,64 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.12 });
 reveals.forEach(r => observer.observe(r));
 
-/* CLOUDINARY — desactivado, usando GitHub */
+/* SISTEMA DE ÁLBUMES */
+let currentAlbumFolder = '';
+let currentPhotos = [];
+let currentPhotoIndex = 0;
+
+function openAlbum(folder, title, photos) {
+  currentAlbumFolder = folder;
+  currentPhotos = photos;
+  const lb = document.getElementById('albumLightbox');
+  const grid = document.getElementById('lightboxGrid');
+  document.getElementById('lightboxTitle').textContent = title;
+  grid.innerHTML = '';
+  photos.forEach((file, i) => {
+    const img = document.createElement('img');
+    img.src = `img/fotografia/${folder}/${encodeURIComponent(file)}`;
+    img.alt = file;
+    img.loading = 'lazy';
+    img.onclick = () => openViewer(i);
+    grid.appendChild(img);
+  });
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAlbum() {
+  document.getElementById('albumLightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function openViewer(index) {
+  currentPhotoIndex = index;
+  const viewer = document.getElementById('photoViewer');
+  const img = document.getElementById('viewerImg');
+  img.src = `img/fotografia/${currentAlbumFolder}/${encodeURIComponent(currentPhotos[index])}`;
+  viewer.classList.add('open');
+}
+
+function closeViewer() {
+  document.getElementById('photoViewer').classList.remove('open');
+}
+
+function changePhoto(dir) {
+  currentPhotoIndex = (currentPhotoIndex + dir + currentPhotos.length) % currentPhotos.length;
+  document.getElementById('viewerImg').src =
+    `img/fotografia/${currentAlbumFolder}/${encodeURIComponent(currentPhotos[currentPhotoIndex])}`;
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (document.getElementById('photoViewer').classList.contains('open')) {
+    if (e.key === 'ArrowLeft') changePhoto(-1);
+    if (e.key === 'ArrowRight') changePhoto(1);
+    if (e.key === 'Escape') closeViewer();
+  } else if (document.getElementById('albumLightbox').classList.contains('open')) {
+    if (e.key === 'Escape') closeAlbum();
+  }
+});
+
 
 
 /* FORM */
