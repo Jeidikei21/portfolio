@@ -1711,6 +1711,105 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.12 });
 reveals.forEach(r => observer.observe(r));
 
+
+/* =============================================
+   CARRUSEL 3D DE ÁLBUMES
+============================================= */
+const ALBUMS = [
+  { folder:'bts-4ever', title:'BTS 4Ever', cat:'Fotografía · BTS', count:'11 fotos', cover:'P1010859.jpg', photos:['P1010859.jpg','P1010880.jpg','P1020004.jpg','P1020016.jpg','P1020022.jpg','P1020049.jpg','P1020054.jpg','P1020058.jpg','P1020061.jpg','P1020062.jpg','P1020114.jpg'] },
+  { folder:'bts-enfocado', title:'BTS Enfocado', cat:'Fotografía · BTS', count:'5 fotos', cover:'LUKY-KODEX_12.jpg', photos:['LUKY-KODEX_12.jpg','LUKY-KODEX_14.jpg','LUKY-KODEX_15.jpg','LUKY-KODEX_17.jpg','LUKY-KODEX_19.jpg'] },
+  { folder:'bts-tu.bicha', title:'BTS Tu Bicha', cat:'Fotografía · BTS', count:'18 fotos', cover:'CATALINA VF -16.jpg', photos:['CATALINA VF -16.jpg','CATALINA VF -17.jpg','CATALINA VF -21.jpg','CATALINA VF -23.jpg','CATALINA VF -26.jpg','CATALINA VF -31.jpg','CATALINA VF -32.jpg','CATALINA VF -33.jpg','CATALINA VF -35.jpg','CATALINA VF -36.jpg','CATALINA VF -40.jpg','CATALINA VF -41.jpg','CATALINA VF -42.jpg','CATALINA VF -47.jpg','CATALINA VF -50.jpg','CATALINA VF -51.jpg','CATALINA VF -56.jpg','CATALINA VF -59.jpg'] },
+  { folder:'diss.vol2', title:'Diss Vol 2', cat:'Fotografía · Evento', count:'8 fotos', cover:'DISS VOL2 CRISS-02.jpg', photos:['DISS VOL2 CRISS-02.jpg','DISS VOL2 CRISS-03.jpg','DISS VOL2 CRISS-07.jpg','DISS VOL2 CRISS-25.jpg','DISS VOL2 CRISS-28.jpg','DISS VOL2 CRISS-43.jpg','DISS VOL2 CRISS-45.jpg','DISS VOL2 CRISS-50.jpg'] },
+  { folder:'dune', title:'Dune', cat:'Fotografía · Naturaleza', count:'9 fotos', cover:'DJI_0993-Mejorado-NR.jpg', photos:['DJI_0993-Mejorado-NR.jpg','DUNE SS-01.jpg','DUNE SS-05.jpg','DUNE SS-08.jpg','DUNE SS-09.jpg','DUNE SS-13.jpg','DUNE SS-14.jpg','DUNE SS-15.jpg','DUNE SS-17.jpg'] },
+  { folder:'glam', title:'Glam', cat:'Fotografía · Glam', count:'11 fotos', cover:'GLAM XOXO JDK-01.jpg', photos:['GLAM XOXO JDK-01.jpg','GLAM XOXO JDK-02.jpg','GLAM XOXO JDK-10.jpg','GLAM XOXO JDK-14.jpg','GLAM XOXO JDK-17.jpg','GLAM XOXO JDK-20.jpg','GLAM XOXO JDK-29.jpg','GLAM XOXO JDK-35.jpg','GLAM XOXO JDK-53.jpg','HALLOWEEN GLAM PROMO-1.jpg','HALLOWEEN GLAM PROMO-3.jpg'] },
+  { folder:'kaukari', title:'Kaukari', cat:'Fotografía · Drone', count:'11 fotos', cover:'DJI_0456.jpg', photos:['DJI_0456.jpg','DJI_0457.jpg','DJI_0458.jpg','DJI_0460.jpg','IMG_0315.jpg','IMG_0317.jpg','IMG_0325.jpg','IMG_0326.jpg','IMG_0332.jpg','IMG_0346.jpg','IMG_0508.jpg'] },
+  { folder:'llanos-del-challe', title:'Llanos del Challe', cat:'Fotografía · Naturaleza', count:'9 fotos', cover:'P1050254.jpg', photos:['P1050254.jpg','P1050258.jpg','P1050260.jpg','P1050263.jpg','P1050269.jpg','P1050271.jpg','P1050275.jpg','P1050281.jpg','P1050284.jpg'] },
+  { folder:'mineria', title:'Minería', cat:'Fotografía · Industrial', count:'18 fotos', cover:'CAMARAS TRAMPA 1 RIO TINTO-01.jpg', photos:['CAMARAS TRAMPA 1 RIO TINTO-01.jpg','CAMARAS TRAMPA 1 RIO TINTO-21.jpg','CAMARAS TRAMPA 1 RIO TINTO-32.jpg','CAMARAS TRAMPA 1 RIO TINTO-42.jpg','CAMARAS TRAMPA 1 RIO TINTO-47.jpg','CAMARAS TRAMPA 1 RIO TINTO-53.jpg','CAMARAS TRAMPA 1 RIO TINTO-55.jpg','CAMARAS TRAMPA 1 RIO TINTO-56.jpg','CAMARAS TRAMPA 1 RIO TINTO-65.jpg','CAMARAS TRAMPA 1 RIO TINTO-72.jpg','CT-NUEVO COBRE SONY -02.jpg','CT-NUEVO COBRE SONY -04.jpg','CT-NUEVO COBRE SONY -06.jpg','CT-NUEVO COBRE SONY -08.jpg','CT-NUEVO COBRE SONY -14.jpg','CT-NUEVO COBRE SONY -17.jpg','CT-NUEVO COBRE SONY -43.jpg','CT-NUEVO COBRE SONY -55.jpg'] },
+  { folder:'museo-frafran', title:'Museo Frafran', cat:'Fotografía · Evento', count:'15 fotos', cover:'STAGE MUSEO V FINAL_2.jpg', photos:['STAGE MUSEO V FINAL_2.jpg','STAGE MUSEO V FINAL_8.jpg','STAGE MUSEO V FINAL_11.jpg','STAGE MUSEO V FINAL_15.jpg','STAGE MUSEO V FINAL_19.jpg','STAGE MUSEO V FINAL_24.jpg','STAGE MUSEO V FINAL_26.jpg','STAGE MUSEO V FINAL_30.jpg','STAGE MUSEO V FINAL_33.jpg','STAGE MUSEO V FINAL_36.jpg','STAGE MUSEO V FINAL_40.jpg','STAGE MUSEO V FINAL_54.jpg','STAGE MUSEO V FINAL_58.jpg','STAGE MUSEO V FINAL_60.jpg','STAGE MUSEO V FINAL_63.jpg'] },
+  { folder:'nippon-rest', title:'Nippon Rest', cat:'Fotografía · Evento', count:'12 fotos', cover:'NIPPON PHOTO JDK-01.jpg', photos:['NIPPON PHOTO JDK-01.jpg','NIPPON PHOTO JDK-04.jpg','NIPPON PHOTO JDK-08.jpg','NIPPON PHOTO JDK-12.jpg','NIPPON PHOTO JDK-14.jpg','NIPPON PHOTO JDK-16.jpg','NIPPON PHOTO JDK-19.jpg','NIPPON PHOTO JDK-26.jpg','NIPPON PHOTO JDK-29.jpg','NIPPON PHOTO JDK-42.jpg','NIPPON PHOTO JDK-45.jpg','NIPPON PHOTO JDK-59.jpg'] },
+  { folder:'veranada-koya', title:'Veranada Koya', cat:'Fotografía · Naturaleza', count:'13 fotos', cover:'CASCADA JUNCALITO _1.jpg', photos:['BURROS POSADA CERCA PEÑA BLANCA_4.jpg','BURROS POSADA CERCA PEÑA BLANCA_6.jpg','BURROS POSADA CERCA PEÑA BLANCA_7.jpg','CASCADA JUNCALITO .jpg','CASCADA JUNCALITO _1.jpg','PEÑA BLANCA ALREDEDORES.jpg','PEÑA BLANCA ALREDEDORES_1.jpg','PEÑA BLANCA ALREDEDORES_3.jpg','PEÑA BLANCA ALREDEDORES_5.jpg','RECORRIDO EN BUSCA DE LOS OBJETOS ESCONDIDOS_3.jpg','RECORRIDO EN BUSCA DE LOS OBJETOS ESCONDIDOS_6.jpg','RECORRIDO EN BUSCA DE LOS OBJETOS ESCONDIDOS_7.jpg','RECORRIDO EN BUSCA DE LOS OBJETOS ESCONDIDOS_8.jpg'] },
+];
+
+let carouselIndex = 0;
+
+function buildCarousel() {
+  const stage = document.getElementById('carouselStage');
+  const dotsEl = document.getElementById('carouselDots');
+  if (!stage || !dotsEl) return;
+
+  stage.innerHTML = '';
+  dotsEl.innerHTML = '';
+
+  ALBUMS.forEach((album, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'album-slide';
+    slide.dataset.index = i;
+    slide.innerHTML = `
+      <img src="img/fotografia/${album.folder}/${encodeURIComponent(album.cover)}" alt="${album.title}" loading="lazy">
+      <div class="album-slide-info">
+        <div class="album-slide-cat">${album.cat}</div>
+        <div class="album-slide-title">${album.title}</div>
+        <div class="album-slide-count">${album.count}</div>
+      </div>
+    `;
+    slide.addEventListener('click', () => {
+      if (i === carouselIndex) {
+        openAlbum(album.folder, album.title, album.photos);
+      } else {
+        carouselIndex = i;
+        updateCarousel();
+      }
+    });
+    stage.appendChild(slide);
+
+    const dot = document.createElement('div');
+    dot.className = 'carousel-dot';
+    dot.addEventListener('click', () => { carouselIndex = i; updateCarousel(); });
+    dotsEl.appendChild(dot);
+  });
+
+  updateCarousel();
+}
+
+function updateCarousel() {
+  const slides = document.querySelectorAll('.album-slide');
+  const dots = document.querySelectorAll('.carousel-dot');
+
+  slides.forEach((slide, i) => {
+    const offset = i - carouselIndex;
+    const abs = Math.abs(offset);
+    const tx = offset * 160;
+    const scale = abs === 0 ? 1 : abs === 1 ? 0.78 : abs === 2 ? 0.62 : 0.5;
+    const tz = abs === 0 ? 0 : abs === 1 ? -80 : -150;
+    const rotY = offset * 12;
+    const opacity = abs > 3 ? 0 : abs === 3 ? 0.3 : 1;
+    const brightness = abs === 0 ? 1 : 0.5;
+
+    slide.style.transform = `translate(-50%,-50%) translateX(${tx}px) translateZ(${tz}px) rotateY(${rotY}deg) scale(${scale})`;
+    slide.style.opacity = opacity;
+    slide.style.zIndex = 10 - abs;
+    slide.style.filter = `brightness(${brightness})`;
+    slide.classList.toggle('active', i === carouselIndex);
+  });
+
+  dots.forEach((dot, i) => dot.classList.toggle('active', i === carouselIndex));
+}
+
+function carouselMove(dir) {
+  carouselIndex = (carouselIndex + dir + ALBUMS.length) % ALBUMS.length;
+  updateCarousel();
+}
+
+// Touch swipe
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+document.addEventListener('touchend', e => {
+  const wrapper = document.querySelector('.albums-wrapper');
+  if (!wrapper || wrapper.style.display === 'none' || wrapper.style.display === '') return;
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 40) carouselMove(diff > 0 ? 1 : -1);
+});
+
 /* SISTEMA DE ÁLBUMES */
 let currentAlbumFolder = '';
 let currentPhotos = [];
@@ -1807,6 +1906,18 @@ document.getElementById('contactForm').addEventListener('submit', async function
   btn.disabled = false;
   btn.style.opacity = '1';
 });
+
+/* INIT */
+(function(){
+  // Mostrar solo mix al cargar
+  document.querySelectorAll('.p-card').forEach(c => {
+    c.style.display = c.dataset.mix === 'true' ? '' : 'none';
+  });
+  const albumWrapper = document.querySelector('.albums-wrapper');
+  if(albumWrapper) albumWrapper.style.display = 'none';
+  // Build carousel
+  buildCarousel();
+})();
 </script>
 
 </body>
