@@ -775,24 +775,180 @@ footer {
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* =============================================
-   RESPONSIVE (básico)
-============================================= */
+/* HAMBURGER & MOBILE MENU */
+.nav-hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer;
+  padding: 4px;
+}
+.nav-hamburger span {
+  display: block; width: 24px; height: 1.5px;
+  background: var(--light); transition: all 0.3s;
+}
 @media (max-width: 900px) {
+  .nav-hamburger { display: flex; }
+}
+.mobile-menu {
+  position: fixed; inset: 0;
+  background: rgba(10,10,10,0.98);
+  backdrop-filter: blur(10px);
+  z-index: 600;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.mobile-menu.open { opacity: 1; pointer-events: all; }
+.mobile-menu-close {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  background: none; border: 1px solid var(--border);
+  color: var(--muted); width: 40px; height: 40px;
+  font-size: 1rem; cursor: pointer; transition: all 0.3s;
+}
+.mobile-menu-close:hover { border-color: var(--red); color: var(--red); }
+.mobile-links {
+  list-style: none; text-align: center;
+  display: flex; flex-direction: column; gap: 2.5rem;
+}
+.mobile-links a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: 300; color: var(--light);
+  text-decoration: none; letter-spacing: 0.05em;
+  transition: color 0.3s;
+}
+.mobile-links a:hover { color: var(--red); }
+.mobile-cta {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase;
+  color: var(--red) !important;
+  border: 1px solid var(--red);
+  padding: 0.7rem 2rem;
+}
+
+/* TABLET — 900px */
+@media (max-width: 900px) {
+  /* Cursor personalizado — desactivar en touch */
+  .cursor, .cursor-ring { display: none; }
+  body { cursor: auto; }
+  a, button { cursor: pointer; }
+
+  /* Nav */
   nav { padding: 1.2rem 2rem; }
-  nav.scrolled { padding: 0.8rem 2rem; }
+  nav.scrolled { padding: 0.9rem 2rem; }
   .nav-links { display: none; }
-  .hero { padding: 0 2rem; }
+  .nav-cta { font-size: 0.65rem; padding: 0.5rem 1.2rem; }
+
+  /* Hero */
+  .hero { padding: 0 2rem; min-height: 100svh; }
+  .hero-name { font-size: clamp(3rem, 15vw, 6rem); }
+  .hero-tagline { font-size: 1rem; }
   .hero-stats { display: none; }
-  .about-section, .contact-section, .mining-inner {
-    grid-template-columns: 1fr; gap: 3rem; padding: 5rem 2rem;
+  .hero-scroll { display: none; }
+
+  /* About */
+  .about-section {
+    grid-template-columns: 1fr;
+    gap: 3rem; padding: 5rem 2rem;
   }
+  .about-img-frame { width: 60%; margin: 0 auto; }
+  .about-badge { bottom: -1rem; right: 0; width: 90px; height: 90px; }
+  .badge-num { font-size: 2rem; }
+
+  /* Portfolio */
   .portfolio-section { padding: 5rem 2rem; }
-  .mining-section { padding: 5rem 2rem; }
+  .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
   .portfolio-grid { columns: 2; column-gap: 0.4rem; }
   .p-card { margin-bottom: 0.4rem; }
-  .services-grid { grid-template-columns: 1fr; }
+  .albums-wrapper { grid-template-columns: repeat(2,1fr); }
+  .lightbox-grid { columns: 2; padding: 1rem; }
+  .lightbox-header { padding: 1rem 1.5rem; }
+  .lightbox-title { font-size: 1.1rem; }
+  .viewer-prev { left: 0.5rem; }
+  .viewer-next { right: 0.5rem; }
+
+  /* Minería */
+  .mining-section { padding: 5rem 2rem; }
+  .mining-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Contacto */
+  .contact-section {
+    grid-template-columns: 1fr;
+    gap: 3rem; padding: 5rem 2rem;
+  }
+
+  /* Footer */
   footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.8rem; text-align: center; }
+}
+
+/* MÓVIL — 600px */
+@media (max-width: 600px) {
+  /* Nav */
+  nav { padding: 1rem 1.2rem; }
+  .nav-logo img { height: 28px; }
+  .nav-cta { display: none; }
+
+  /* Hero */
+  .hero { padding: 0 1.2rem; justify-content: flex-end; padding-bottom: 5rem; }
+  .hero-eyebrow { font-size: 0.6rem; letter-spacing: 0.2em; margin-bottom: 1rem; }
+  .hero-name { font-size: clamp(2.8rem, 18vw, 5rem); margin-bottom: 0.8rem; }
+  .hero-tagline { font-size: 0.88rem; margin-bottom: 2rem; }
+  .hero-actions { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .btn-primary { padding: 0.8rem 2rem; font-size: 0.68rem; }
+  .hero-video-overlay {
+    background:
+      linear-gradient(to right, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.7) 100%),
+      linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, transparent 30%, transparent 55%, rgba(10,10,10,1) 100%);
+  }
+
+  /* About */
+  .about-section { padding: 4rem 1.2rem; gap: 2.5rem; }
+  .about-img-frame { width: 75%; }
+  .section-title { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+  .about-desc { font-size: 0.88rem; }
+  .skills-grid { gap: 0.4rem; }
+  .skill-tag { font-size: 0.6rem; padding: 0.25rem 0.7rem; }
+
+  /* Portfolio */
+  .portfolio-section { padding: 4rem 1.2rem; }
+  .filters { flex-wrap: wrap; gap: 0.3rem; }
+  .filter-btn { font-size: 0.62rem; padding: 0.35rem 0.8rem; }
+  .portfolio-grid { columns: 1; }
+  .albums-wrapper { grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+  .album-title { font-size: 0.9rem; }
+  .album-count { display: none; }
+  .lightbox-grid { columns: 1; }
+  .lightbox-header { flex-wrap: wrap; gap: 0.5rem; padding: 0.8rem 1rem; }
+  .lightbox-title { font-size: 1rem; width: 100%; }
+  .viewer-img { max-width: 95vw; max-height: 80vh; }
+
+  /* Minería */
+  .mining-section { padding: 4rem 1.2rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card { padding: 1.2rem; }
+  .mining-companies { margin-top: 2rem; }
+  .companies-list { gap: 0.4rem; }
+
+  /* Contacto */
+  .contact-section { padding: 4rem 1.2rem; gap: 2.5rem; }
+  .contact-title { font-size: clamp(2.5rem, 12vw, 4rem); }
+  .contact-sub { font-size: 0.85rem; }
+  .social-handle { font-size: 0.78rem; }
+  .social-platform { min-width: 70px; font-size: 0.58rem; }
+
+  /* Footer */
+  footer { padding: 1.2rem; font-size: 0.65rem; }
+  .footer-copy { font-size: 0.6rem; }
+}
+
+/* MÓVIL PEQUEÑO — 380px */
+@media (max-width: 380px) {
+  .hero-name { font-size: clamp(2.2rem, 20vw, 3.5rem); }
+  .albums-wrapper { grid-template-columns: 1fr; }
+  .contact-title { font-size: 2.2rem; }
 }
 </style>
 </head>
@@ -814,7 +970,22 @@ footer {
     <li><a href="#contacto">Contacto</a></li>
   </ul>
   <a href="https://wa.me/56937444482" target="_blank" class="nav-cta">Contrátame</a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MENÚ MÓVIL -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileClose">✕</button>
+  <ul class="mobile-links">
+    <li><a href="#portfolio" onclick="closeMobileMenu()">Trabajo</a></li>
+    <li><a href="#mineria" onclick="closeMobileMenu()">Minería</a></li>
+    <li><a href="#sobre-mi" onclick="closeMobileMenu()">Sobre mí</a></li>
+    <li><a href="#contacto" onclick="closeMobileMenu()">Contacto</a></li>
+    <li><a href="https://wa.me/56937444482" target="_blank" class="mobile-cta">Contrátame →</a></li>
+  </ul>
+</div>
 
 <!-- SIDE DOTS -->
 <nav class="side-nav" aria-label="Secciones">
@@ -1617,7 +1788,22 @@ hoverEls.forEach(el => {
   requestAnimationFrame(animRing);
 })();
 
-/* NAV SCROLL */
+/* MENÚ MÓVIL */
+const hamburger = document.getElementById('navHamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+
+hamburger.addEventListener('click', () => {
+  mobileMenu.classList.add('open');
+  document.body.style.overflow = 'hidden';
+});
+mobileClose.addEventListener('click', closeMobileMenu);
+function closeMobileMenu() {
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 60);
