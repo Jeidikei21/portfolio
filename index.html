@@ -417,33 +417,9 @@ nav.scrolled {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2rem; color: rgba(255,255,255,0.04); letter-spacing: 0.1em;
 }
-.card-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%);
-  opacity: 0; transition: opacity 0.4s;
-}
-.p-card:hover .card-overlay { opacity: 1; }
-.card-num {
-  position: absolute; top: 0.8rem; left: 1rem;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.65rem; letter-spacing: 0.25em;
-  color: rgba(255,255,255,0.2);
-}
-.card-content {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 1rem 1.2rem 1.3rem;
-  transform: translateY(6px); opacity: 0;
-  transition: all 0.4s;
-}
-.p-card:hover .card-content { opacity: 1; transform: translateY(0); }
-.card-cat {
-  font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--red); margin-bottom: 0.2rem;
-}
-.card-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem; font-weight: 400; color: var(--light);
-}
+.card-overlay { display: none; }
+.card-num { display: none; }
+.card-content { display: none; }
 }
 .add-card:hover .add-icon-wrap { border-color: var(--red); color: var(--red); }
 .add-text {
@@ -452,50 +428,80 @@ nav.scrolled {
 }
 
 /* =============================================
-   SISTEMA DE ÁLBUMES
+   CARRUSEL 3D DE ÁLBUMES
 ============================================= */
 .albums-wrapper {
   column-span: all;
+  width: 100%;
+  padding: 2rem 0 3rem;
+  position: relative;
   display: none;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.6rem;
   margin-bottom: 0.5rem;
 }
-.album-card {
-  position: relative; overflow: hidden;
-  cursor: pointer; aspect-ratio: 3/4;
-  background: var(--dark3);
-  transition: transform 0.4s ease;
+.carousel-title {
+  font-size: 0.68rem; letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--muted); text-align: center; margin-bottom: 2.5rem;
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
 }
-.album-card:hover { transform: scale(0.97); }
-.album-card img {
+.carousel-title::before, .carousel-title::after {
+  content: ''; flex: 1; max-width: 80px; height: 1px; background: var(--border);
+}
+.carousel-stage {
+  position: relative; height: 420px;
+  display: flex; align-items: center; justify-content: center;
+  perspective: 1200px; overflow: hidden;
+}
+.album-slide {
+  position: absolute;
+  width: 220px; height: 320px;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+  border-radius: 6px; overflow: hidden;
+  user-select: none;
+}
+.album-slide img {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
-  transition: transform 0.6s ease;
+  pointer-events: none;
 }
-.album-card:hover img { transform: scale(1.06); }
-.album-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
-  transition: opacity 0.4s;
-}
-.album-info {
+.album-slide-info {
   position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 1.2rem;
+  padding: 1.2rem 1rem 1rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 100%);
+  opacity: 0; transition: opacity 0.4s;
 }
-.album-cat {
-  font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--red); margin-bottom: 0.3rem;
+.album-slide.active .album-slide-info { opacity: 1; }
+.album-slide-cat {
+  font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 0.25rem;
 }
-.album-title {
+.album-slide-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem; font-weight: 400; color: var(--light);
-  margin-bottom: 0.2rem;
+  font-size: 1.15rem; font-weight: 400; color: var(--light); line-height: 1.2;
 }
-.album-count {
-  font-size: 0.6rem; letter-spacing: 0.15em;
-  color: rgba(255,255,255,0.4);
+.album-slide-count {
+  font-size: 0.58rem; letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.4); margin-top: 0.2rem;
 }
+.carousel-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(10,10,10,0.8); border: 1px solid var(--border);
+  color: var(--light); width: 42px; height: 42px;
+  font-size: 1.3rem; cursor: pointer; z-index: 20;
+  transition: all 0.3s; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.carousel-btn:hover { border-color: var(--red); color: var(--red); }
+.carousel-prev { left: 1.5rem; }
+.carousel-next { right: 1.5rem; }
+.carousel-dots {
+  display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.5rem;
+}
+.carousel-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s;
+}
+.carousel-dot.active { background: var(--red); transform: scale(1.4); }
 
 /* LIGHTBOX */
 .album-lightbox {
@@ -1427,127 +1433,16 @@ footer {
 
     <!-- ======= ÁLBUMES COMPLETOS — solo visibles en filtro FOTOGRAFÍA ======= -->
     <div class="albums-wrapper" data-cat="foto">
+      <div class="carousel-title">Álbumes de Fotografía</div>
 
-      <div class="album-card reveal" onclick="openAlbum('bts-4ever','BTS 4Ever',['P1010859.jpg','P1010880.jpg','P1020004.jpg','P1020016.jpg','P1020022.jpg','P1020049.jpg','P1020054.jpg','P1020058.jpg','P1020061.jpg','P1020062.jpg','P1020114.jpg'])">
-        <img src="img/fotografia/bts-4ever/P1010859.jpg" alt="BTS 4Ever" loading="lazy">
-        <div class="album-overlay"></div>
-        <div class="album-info">
-          <div class="album-cat">Fotografía · BTS</div>
-          <div class="album-title">BTS 4Ever</div>
-          <div class="album-count">11 fotos</div>
-        </div>
+      <div class="carousel-stage" id="carouselStage">
+        <!-- slides generados por JS -->
       </div>
 
-      <div class="album-card reveal" onclick="openAlbum('bts-enfocado','BTS Enfocado',['LUKY-KODEX_12.jpg','LUKY-KODEX_14.jpg','LUKY-KODEX_15.jpg','LUKY-KODEX_17.jpg','LUKY-KODEX_19.jpg'])">
-        <img src="img/fotografia/bts-enfocado/LUKY-KODEX_12.jpg" alt="BTS Enfocado" loading="lazy">
-        <div class="album-overlay"></div>
-        <div class="album-info">
-          <div class="album-cat">Fotografía · BTS</div>
-          <div class="album-title">BTS Enfocado</div>
-          <div class="album-count">5 fotos</div>
-        </div>
-      </div>
+      <button class="carousel-btn carousel-prev" onclick="carouselMove(-1)">‹</button>
+      <button class="carousel-btn carousel-next" onclick="carouselMove(1)">›</button>
 
-      <div class="album-card reveal" onclick="openAlbum('bts-tu.bicha','BTS Tu Bicha',['CATALINA VF -16.jpg','CATALINA VF -17.jpg','CATALINA VF -21.jpg','CATALINA VF -23.jpg','CATALINA VF -26.jpg','CATALINA VF -31.jpg','CATALINA VF -32.jpg','CATALINA VF -33.jpg','CATALINA VF -35.jpg','CATALINA VF -36.jpg','CATALINA VF -40.jpg','CATALINA VF -41.jpg','CATALINA VF -42.jpg','CATALINA VF -47.jpg','CATALINA VF -50.jpg','CATALINA VF -51.jpg','CATALINA VF -56.jpg','CATALINA VF -59.jpg'])">
-        <img src="img/fotografia/bts-tu.bicha/CATALINA VF -16.jpg" alt="BTS Tu Bicha" loading="lazy">
-        <div class="album-overlay"></div>
-        <div class="album-info">
-          <div class="album-cat">Fotografía · BTS</div>
-          <div class="album-title">BTS Tu Bicha</div>
-          <div class="album-count">18 fotos</div>
-        </div>
-      </div>
-
-      <div class="album-card reveal" onclick="openAlbum('diss.vol2','Diss Vol 2',['DISS VOL2 CRISS-02.jpg','DISS VOL2 CRISS-03.jpg','DISS VOL2 CRISS-07.jpg','DISS VOL2 CRISS-25.jpg','DISS VOL2 CRISS-28.jpg','DISS VOL2 CRISS-43.jpg','DISS VOL2 CRISS-45.jpg','DISS VOL2 CRISS-50.jpg'])">
-        <img src="img/fotografia/diss.vol2/DISS VOL2 CRISS-02.jpg" alt="Diss Vol 2" loading="lazy">
-        <div class="album-overlay"></div>
-        <div class="album-info">
-          <div class="album-cat">Fotografía · Evento</div>
-          <div class="album-title">Diss Vol 2</div>
-          <div class="album-count">8 fotos</div>
-        </div>
-      </div>
-
-      <div class="album-card reveal" onclick="openAlbum('dune','Dune',['DJI_0993-Mejorado-NR.jpg','DUNE SS-01.jpg','DUNE SS-05.jpg','DUNE SS-08.jpg','DUNE SS-09.jpg','DUNE SS-13.jpg','DUNE SS-14.jpg','DUNE SS-15.jpg','DUNE SS-17.jpg'])">
-        <img src="img/fotografia/dune/DJI_0993-Mejorado-NR.jpg" alt="Dune" loading="lazy">
-        <div class="album-overlay"></div>
-        <div class="album-info">
-          <div class="album-cat">Fotografía · Naturaleza</div>
-          <div class="album-title">Dune</div>
-          <div class="album-count">9 fotos</div>
-        </div>
-      </div>
-
-      <div class="album-card reveal" onclick="openAlbum('glam','Glam',['GLAM XOXO JDK-01.jpg','GLAM XOXO JDK-02.jpg','GLAM XOXO JDK-10.jpg','GLAM XOXO JDK-14.jpg','GLAM XOXO JDK-17.jpg','GLAM XOXO JDK-20.jpg','GLAM XOXO JDK-29.jpg','GLAM XOXO JDK-35.jpg','GLAM XOXO JDK-53.jpg','HALLOWEEN GLAM PROMO-1.jpg','HALLOWEEN GLAM PROMO-3.jpg'])">
-        <img src="img/fotografia/glam/GLAM XOXO JDK-01.jpg" alt="Glam" loading="lazy">
-        <div class="album-overlay"></div>
-        <div class="album-info">
-          <div class="album-cat">Fotografía · Glam</div>
-          <div class="album-title">Glam</div>
-          <div class="album-count">11 fotos</div>
-        </div>
-      </div>
-
-      <div class="album-card reveal" onclick="openAlbum('kaukari','Kaukari',['DJI_0456.jpg','DJI_0457.jpg','DJI_0458.jpg','DJI_0460.jpg','IMG_0315.jpg','IMG_0317.jpg','IMG_0325.jpg','IMG_0326.jpg','IMG_0332.jpg','IMG_0346.jpg','IMG_0508.jpg'])">
-        <img src="img/fotografia/kaukari/DJI_0456.jpg" alt="Kaukari" loading="lazy">
-        <div class="album-overlay"></div>
-        <div class="album-info">
-          <div class="album-cat">Fotografía · Drone</div>
-          <div class="album-title">Kaukari</div>
-          <div class="album-count">11 fotos</div>
-        </div>
-      </div>
-
-      <div class="album-card reveal" onclick="openAlbum('llanos-del-challe','Llanos del Challe',['P1050254.jpg','P1050258.jpg','P1050260.jpg','P1050263.jpg','P1050269.jpg','P1050271.jpg','P1050275.jpg','P1050281.jpg','P1050284.jpg'])">
-        <img src="img/fotografia/llanos-del-challe/P1050254.jpg" alt="Llanos del Challe" loading="lazy">
-        <div class="album-overlay"></div>
-        <div class="album-info">
-          <div class="album-cat">Fotografía · Naturaleza</div>
-          <div class="album-title">Llanos del Challe</div>
-          <div class="album-count">9 fotos</div>
-        </div>
-      </div>
-
-      <div class="album-card reveal" onclick="openAlbum('mineria','Minería',['CAMARAS TRAMPA 1 RIO TINTO-01.jpg','CAMARAS TRAMPA 1 RIO TINTO-21.jpg','CAMARAS TRAMPA 1 RIO TINTO-32.jpg','CAMARAS TRAMPA 1 RIO TINTO-42.jpg','CAMARAS TRAMPA 1 RIO TINTO-47.jpg','CAMARAS TRAMPA 1 RIO TINTO-53.jpg','CAMARAS TRAMPA 1 RIO TINTO-55.jpg','CAMARAS TRAMPA 1 RIO TINTO-56.jpg','CAMARAS TRAMPA 1 RIO TINTO-65.jpg','CAMARAS TRAMPA 1 RIO TINTO-72.jpg','CT-NUEVO COBRE SONY -02.jpg','CT-NUEVO COBRE SONY -04.jpg','CT-NUEVO COBRE SONY -06.jpg','CT-NUEVO COBRE SONY -08.jpg','CT-NUEVO COBRE SONY -14.jpg','CT-NUEVO COBRE SONY -17.jpg','CT-NUEVO COBRE SONY -43.jpg','CT-NUEVO COBRE SONY -55.jpg'])">
-        <img src="img/fotografia/mineria/CAMARAS TRAMPA 1 RIO TINTO-01.jpg" alt="Minería" loading="lazy">
-        <div class="album-overlay"></div>
-        <div class="album-info">
-          <div class="album-cat">Fotografía · Industrial</div>
-          <div class="album-title">Minería</div>
-          <div class="album-count">18 fotos</div>
-        </div>
-      </div>
-
-      <div class="album-card reveal" onclick="openAlbum('museo-frafran','Museo Frafran',['STAGE MUSEO V FINAL_2.jpg','STAGE MUSEO V FINAL_8.jpg','STAGE MUSEO V FINAL_11.jpg','STAGE MUSEO V FINAL_15.jpg','STAGE MUSEO V FINAL_19.jpg','STAGE MUSEO V FINAL_24.jpg','STAGE MUSEO V FINAL_26.jpg','STAGE MUSEO V FINAL_30.jpg','STAGE MUSEO V FINAL_33.jpg','STAGE MUSEO V FINAL_36.jpg','STAGE MUSEO V FINAL_40.jpg','STAGE MUSEO V FINAL_54.jpg','STAGE MUSEO V FINAL_58.jpg','STAGE MUSEO V FINAL_60.jpg','STAGE MUSEO V FINAL_63.jpg'])">
-        <img src="img/fotografia/museo-frafran/STAGE MUSEO V FINAL_2.jpg" alt="Museo Frafran" loading="lazy">
-        <div class="album-overlay"></div>
-        <div class="album-info">
-          <div class="album-cat">Fotografía · Evento</div>
-          <div class="album-title">Museo Frafran</div>
-          <div class="album-count">15 fotos</div>
-        </div>
-      </div>
-
-      <div class="album-card reveal" onclick="openAlbum('nippon-rest','Nippon Rest',['NIPPON PHOTO JDK-01.jpg','NIPPON PHOTO JDK-04.jpg','NIPPON PHOTO JDK-08.jpg','NIPPON PHOTO JDK-12.jpg','NIPPON PHOTO JDK-14.jpg','NIPPON PHOTO JDK-16.jpg','NIPPON PHOTO JDK-19.jpg','NIPPON PHOTO JDK-26.jpg','NIPPON PHOTO JDK-29.jpg','NIPPON PHOTO JDK-42.jpg','NIPPON PHOTO JDK-45.jpg','NIPPON PHOTO JDK-59.jpg'])">
-        <img src="img/fotografia/nippon-rest/NIPPON PHOTO JDK-01.jpg" alt="Nippon Rest" loading="lazy">
-        <div class="album-overlay"></div>
-        <div class="album-info">
-          <div class="album-cat">Fotografía · Evento</div>
-          <div class="album-title">Nippon Rest</div>
-          <div class="album-count">12 fotos</div>
-        </div>
-      </div>
-
-      <div class="album-card reveal" onclick="openAlbum('veranada-koya','Veranada Koya',['BURROS POSADA CERCA PEÑA BLANCA_4.jpg','BURROS POSADA CERCA PEÑA BLANCA_6.jpg','BURROS POSADA CERCA PEÑA BLANCA_7.jpg','CASCADA JUNCALITO .jpg','CASCADA JUNCALITO _1.jpg','PEÑA BLANCA ALREDEDORES.jpg','PEÑA BLANCA ALREDEDORES_1.jpg','PEÑA BLANCA ALREDEDORES_3.jpg','PEÑA BLANCA ALREDEDORES_5.jpg','RECORRIDO EN BUSCA DE LOS OBJETOS ESCONDIDOS_3.jpg','RECORRIDO EN BUSCA DE LOS OBJETOS ESCONDIDOS_6.jpg','RECORRIDO EN BUSCA DE LOS OBJETOS ESCONDIDOS_7.jpg','RECORRIDO EN BUSCA DE LOS OBJETOS ESCONDIDOS_8.jpg'])">
-        <img src="img/fotografia/veranada-koya/CASCADA JUNCALITO _1.jpg" alt="Veranada Koya" loading="lazy">
-        <div class="album-overlay"></div>
-        <div class="album-info">
-          <div class="album-cat">Fotografía · Naturaleza</div>
-          <div class="album-title">Veranada Koya</div>
-          <div class="album-count">13 fotos</div>
-        </div>
-      </div>
-
+      <div class="carousel-dots" id="carouselDots"></div>
     </div>
 
         <!-- LIGHTBOX -->
