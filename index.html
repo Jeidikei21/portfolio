@@ -1539,18 +1539,34 @@ footer {
 
   <div class="contact-form-wrap reveal">
     <p class="form-title">Envíame un mensaje</p>
-    <form onsubmit="handleForm(event)">
+
+    <!-- Formulario real con Web3Forms -->
+    <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+
+      <!-- Clave de acceso Web3Forms -->
+      <input type="hidden" name="access_key" value="66799987-3dc0-4f92-b9d3-6e41b87d2e43">
+
+      <!-- Asunto del email que recibirás -->
+      <input type="hidden" name="subject" value="Nueva consulta desde tu Portfolio JeiDiKei">
+
+      <!-- Redirigir a la misma página tras envío -->
+      <input type="hidden" name="redirect" value="false">
+
       <div class="form-row">
         <label class="form-label" for="fname">Nombre</label>
-        <input type="text" id="fname" class="form-control" placeholder="Tu nombre completo" required>
+        <input type="text" id="fname" name="name" class="form-control" placeholder="Tu nombre completo" required>
       </div>
       <div class="form-row">
         <label class="form-label" for="femail">Email</label>
-        <input type="email" id="femail" class="form-control" placeholder="tu@email.com" required>
+        <input type="email" id="femail" name="email" class="form-control" placeholder="tu@email.com" required>
+      </div>
+      <div class="form-row">
+        <label class="form-label" for="fphone">WhatsApp / Teléfono</label>
+        <input type="text" id="fphone" name="telefono" class="form-control" placeholder="+56 9 XXXX XXXX">
       </div>
       <div class="form-row">
         <label class="form-label" for="fservice">Servicio de interés</label>
-        <select id="fservice" class="form-control" style="appearance:none; cursor:pointer">
+        <select id="fservice" name="servicio" class="form-control" style="appearance:none; cursor:pointer" required>
           <option value="" disabled selected>Selecciona un servicio</option>
           <option>Diseño Gráfico</option>
           <option>Fotografía</option>
@@ -1562,9 +1578,10 @@ footer {
       </div>
       <div class="form-row">
         <label class="form-label" for="fmsg">Mensaje</label>
-        <textarea id="fmsg" class="form-control" placeholder="Cuéntame sobre tu proyecto..." required></textarea>
+        <textarea id="fmsg" name="message" class="form-control" placeholder="Cuéntame sobre tu proyecto..." required></textarea>
       </div>
-      <button type="submit" class="form-submit">Enviar mensaje</button>
+
+      <button type="submit" class="form-submit" id="submitBtn">Enviar mensaje</button>
       <p class="form-note" id="formMsg"></p>
     </form>
   </div>
@@ -1711,14 +1728,42 @@ document.addEventListener('keydown', e => {
 
 
 
-/* FORM */
-function handleForm(e){
+/* FORM — Web3Forms */
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
+  const btn = document.getElementById('submitBtn');
   const msg = document.getElementById('formMsg');
-  msg.textContent = '✓ Mensaje enviado. Te responderé pronto.';
-  msg.style.color = '#E67E22';
-  e.target.reset();
-}
+
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+  btn.style.opacity = '0.6';
+
+  const formData = new FormData(this);
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    });
+    const data = await res.json();
+
+    if(data.success) {
+      msg.textContent = '✓ Mensaje enviado. Te responderé a la brevedad.';
+      msg.style.color = '#E67E22';
+      this.reset();
+    } else {
+      msg.textContent = '✗ Hubo un error. Intenta nuevamente o contáctame por WhatsApp.';
+      msg.style.color = '#C0392B';
+    }
+  } catch(err) {
+    msg.textContent = '✗ Error de conexión. Contáctame directamente por WhatsApp.';
+    msg.style.color = '#C0392B';
+  }
+
+  btn.textContent = 'Enviar mensaje';
+  btn.disabled = false;
+  btn.style.opacity = '1';
+});
 </script>
 
 </body>
