@@ -456,7 +456,7 @@ nav.scrolled {
 ============================================= */
 .albums-wrapper {
   column-span: all;
-  display: grid;
+  display: none;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.6rem;
   margin-bottom: 0.5rem;
@@ -939,108 +939,321 @@ footer {
 
   <div class="portfolio-grid" id="grid">
 
-    <!-- ======= DISEÑO ======= -->
-    <div class="p-card reveal" data-cat="diseno">
+    <!-- ============================================================
+         CADA TARJETA TIENE:
+         data-cat="diseno|foto|video" — para el filtro
+         data-mix="true" — aparece en la vista TODO
+         Las fotos con data-mix="true" son 1-2 representativas por álbum
+    ============================================================ -->
+
+    <!-- DISEÑO 01 -->
+    <div class="p-card reveal" data-cat="diseno" data-mix="true">
       <img class="card-img" src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2026.jpg" alt="Sandboard Championship 2026" loading="lazy">
       <div class="card-overlay"></div>
-      <span class="card-num">01</span>
+      <span class="card-num">D1</span>
       <div class="card-content">
         <div class="card-cat">Diseño Gráfico · 2026</div>
         <div class="card-title">Sandboard Championship 2026</div>
       </div>
     </div>
-    <div class="p-card reveal" data-cat="diseno">
-      <img class="card-img" src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2025.jpg" alt="Sandboard Championship 2025" loading="lazy">
+
+    <!-- FOTO representativa: Dune -->
+    <div class="p-card reveal" data-cat="foto" data-mix="true">
+      <img class="card-img" src="img/fotografia/dune/DJI_0993-Mejorado-NR.jpg" alt="Dune" loading="lazy">
       <div class="card-overlay"></div>
-      <span class="card-num">02</span>
+      <span class="card-num">F1</span>
       <div class="card-content">
-        <div class="card-cat">Diseño Gráfico · 2025</div>
-        <div class="card-title">Sandboard Championship 2025</div>
+        <div class="card-cat">Fotografía · Naturaleza</div>
+        <div class="card-title">Dune</div>
       </div>
     </div>
-    <div class="p-card reveal" data-cat="diseno">
+
+    <!-- VIDEO 01 -->
+    <div class="p-card reveal" data-cat="video" data-mix="true">
+      <div class="video-wrap"><iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" title="Video 01" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <span class="card-num">V1</span>
+    </div>
+
+    <!-- DISEÑO 02 -->
+    <div class="p-card reveal" data-cat="diseno" data-mix="true">
       <img class="card-img" src="img/diseno/POSTER-DJBLAXX-JDK.jpg" alt="DJ Blaxx" loading="lazy">
       <div class="card-overlay"></div>
-      <span class="card-num">03</span>
+      <span class="card-num">D2</span>
       <div class="card-content">
         <div class="card-cat">Diseño Gráfico · 2024</div>
         <div class="card-title">DJ Blaxx Tour</div>
       </div>
     </div>
-    <div class="p-card reveal" data-cat="diseno">
+
+    <!-- FOTO representativa: Glam -->
+    <div class="p-card reveal" data-cat="foto" data-mix="true">
+      <img class="card-img" src="img/fotografia/glam/GLAM XOXO JDK-01.jpg" alt="Glam" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">F2</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía · Glam</div>
+        <div class="card-title">Glam XOXO</div>
+      </div>
+    </div>
+
+    <!-- SHORT 01 -->
+    <div class="p-card short reveal" data-cat="video" data-mix="true">
+      <div class="video-wrap video-vertical"><iframe src="https://www.youtube.com/embed/pUfppQMQ17E" title="Short 01" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <span class="card-num">S1</span>
+    </div>
+
+    <!-- DISEÑO 03 -->
+    <div class="p-card reveal" data-cat="diseno" data-mix="true">
       <img class="card-img" src="img/diseno/EXPERIENCIAS-DE-UN-KOLLA.jpg" alt="Experiencias de un Kolla" loading="lazy">
       <div class="card-overlay"></div>
-      <span class="card-num">04</span>
+      <span class="card-num">D3</span>
       <div class="card-content">
         <div class="card-cat">Diseño · Fotografía · 2024</div>
         <div class="card-title">Experiencias de un Kolla</div>
       </div>
     </div>
-    <div class="p-card reveal" data-cat="diseno">
-      <img class="card-img" src="img/diseno/APPAREL CHNG HISTORY 4.jpg" alt="Apparel Chng History" loading="lazy">
+
+    <!-- FOTO representativa: Nippon Rest -->
+    <div class="p-card reveal" data-cat="foto" data-mix="true">
+      <img class="card-img" src="img/fotografia/nippon-rest/NIPPON PHOTO JDK-01.jpg" alt="Nippon Rest" loading="lazy">
       <div class="card-overlay"></div>
-      <span class="card-num">05</span>
+      <span class="card-num">F3</span>
       <div class="card-content">
-        <div class="card-cat">Diseño · Apparel</div>
-        <div class="card-title">Apparel Chng History</div>
+        <div class="card-cat">Fotografía · Evento</div>
+        <div class="card-title">Nippon Rest</div>
       </div>
     </div>
-    <div class="p-card reveal" data-cat="diseno">
+
+    <!-- VIDEO 02 -->
+    <div class="p-card reveal" data-cat="video" data-mix="true">
+      <div class="video-wrap"><iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" title="Video 02" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <span class="card-num">V2</span>
+    </div>
+
+    <!-- DISEÑO 04 -->
+    <div class="p-card reveal" data-cat="diseno" data-mix="true">
       <img class="card-img" src="img/diseno/CAUR-DESERTIKA-BEER (1).jpg" alt="Desertika Beer" loading="lazy">
       <div class="card-overlay"></div>
-      <span class="card-num">06</span>
+      <span class="card-num">D4</span>
       <div class="card-content">
         <div class="card-cat">Diseño · Branding</div>
         <div class="card-title">Desertika Beer</div>
       </div>
     </div>
-    <div class="p-card reveal" data-cat="diseno">
-      <img class="card-img" src="img/diseno/GREENSEEDLES REVISTA.jpg" alt="Greenseedles Revista" loading="lazy">
+
+    <!-- FOTO representativa: BTS Tu Bicha -->
+    <div class="p-card reveal" data-cat="foto" data-mix="true">
+      <img class="card-img" src="img/fotografia/bts-tu.bicha/CATALINA VF -16.jpg" alt="BTS Tu Bicha" loading="lazy">
       <div class="card-overlay"></div>
-      <span class="card-num">07</span>
+      <span class="card-num">F4</span>
       <div class="card-content">
-        <div class="card-cat">Diseño Editorial</div>
-        <div class="card-title">Greenseedles Revista</div>
+        <div class="card-cat">Fotografía · BTS</div>
+        <div class="card-title">BTS Tu Bicha</div>
       </div>
     </div>
-    <div class="p-card reveal" data-cat="diseno">
+
+    <!-- SHORT 02 -->
+    <div class="p-card short reveal" data-cat="video" data-mix="true">
+      <div class="video-wrap video-vertical"><iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" title="Short 02" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <span class="card-num">S2</span>
+    </div>
+
+    <!-- DISEÑO 05 -->
+    <div class="p-card reveal" data-cat="diseno" data-mix="true">
       <img class="card-img" src="img/diseno/NEW FAUNA ATACAMA DESIGN DUNAS.jpg" alt="New Fauna Atacama" loading="lazy">
       <div class="card-overlay"></div>
-      <span class="card-num">08</span>
+      <span class="card-num">D5</span>
       <div class="card-content">
         <div class="card-cat">Diseño · Naturaleza</div>
         <div class="card-title">New Fauna Atacama</div>
       </div>
     </div>
-    <div class="p-card reveal" data-cat="diseno">
-      <img class="card-img" src="img/diseno/PEÑA BLANCA 2025 FLYER INVITACIÓN.jpg" alt="Peña Blanca 2025" loading="lazy">
+
+    <!-- FOTO representativa: Veranada Koya -->
+    <div class="p-card reveal" data-cat="foto" data-mix="true">
+      <img class="card-img" src="img/fotografia/veranada-koya/CASCADA JUNCALITO _1.jpg" alt="Veranada Koya" loading="lazy">
       <div class="card-overlay"></div>
-      <span class="card-num">09</span>
+      <span class="card-num">F5</span>
       <div class="card-content">
-        <div class="card-cat">Diseño · Evento · 2025</div>
-        <div class="card-title">Peña Blanca 2025</div>
+        <div class="card-cat">Fotografía · Naturaleza</div>
+        <div class="card-title">Veranada Koya</div>
       </div>
     </div>
-    <div class="p-card reveal" data-cat="diseno">
+
+    <!-- VIDEO 03 -->
+    <div class="p-card reveal" data-cat="video" data-mix="true">
+      <div class="video-wrap"><iframe src="https://www.youtube.com/embed/LsNpwRzKikc" title="Video 03" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <span class="card-num">V3</span>
+    </div>
+
+    <!-- DISEÑO 06 -->
+    <div class="p-card reveal" data-cat="diseno" data-mix="true">
       <img class="card-img" src="img/diseno/POSTER FERRARI JDK 3.jpg" alt="Poster Ferrari" loading="lazy">
       <div class="card-overlay"></div>
-      <span class="card-num">10</span>
+      <span class="card-num">D6</span>
       <div class="card-content">
         <div class="card-cat">Diseño · Poster</div>
         <div class="card-title">Poster Ferrari JDK</div>
       </div>
     </div>
-    <div class="p-card reveal" data-cat="diseno">
-      <img class="card-img" src="img/diseno/ZATURNO CHNG KAYA 20225.jpg" alt="Zaturno Chng Kaya" loading="lazy">
+
+    <!-- FOTO representativa: Museo Frafran -->
+    <div class="p-card reveal" data-cat="foto" data-mix="true">
+      <img class="card-img" src="img/fotografia/museo-frafran/STAGE MUSEO V FINAL_2.jpg" alt="Museo Frafran" loading="lazy">
       <div class="card-overlay"></div>
-      <span class="card-num">11</span>
+      <span class="card-num">F6</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía · Evento</div>
+        <div class="card-title">Museo Frafran</div>
+      </div>
+    </div>
+
+    <!-- SHORT 03 -->
+    <div class="p-card short reveal" data-cat="video" data-mix="true">
+      <div class="video-wrap video-vertical"><iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" title="Short 03" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <span class="card-num">S3</span>
+    </div>
+
+    <!-- DISEÑO 07 -->
+    <div class="p-card reveal" data-cat="diseno" data-mix="true">
+      <img class="card-img" src="img/diseno/GREENSEEDLES REVISTA.jpg" alt="Greenseedles" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">D7</span>
+      <div class="card-content">
+        <div class="card-cat">Diseño Editorial</div>
+        <div class="card-title">Greenseedles Revista</div>
+      </div>
+    </div>
+
+    <!-- FOTO representativa: Kaukari -->
+    <div class="p-card reveal" data-cat="foto" data-mix="true">
+      <img class="card-img" src="img/fotografia/kaukari/DJI_0456.jpg" alt="Kaukari" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">F7</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía · Drone</div>
+        <div class="card-title">Kaukari</div>
+      </div>
+    </div>
+
+    <!-- VIDEO 04 -->
+    <div class="p-card reveal" data-cat="video" data-mix="true">
+      <div class="video-wrap"><iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" title="Video 04" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <span class="card-num">V4</span>
+    </div>
+
+    <!-- DISEÑO 08 -->
+    <div class="p-card reveal" data-cat="diseno" data-mix="true">
+      <img class="card-img" src="img/diseno/APPAREL CHNG HISTORY 4.jpg" alt="Apparel Chng" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">D8</span>
+      <div class="card-content">
+        <div class="card-cat">Diseño · Apparel</div>
+        <div class="card-title">Apparel Chng History</div>
+      </div>
+    </div>
+
+    <!-- FOTO representativa: Diss Vol 2 -->
+    <div class="p-card reveal" data-cat="foto" data-mix="true">
+      <img class="card-img" src="img/fotografia/diss.vol2/DISS VOL2 CRISS-02.jpg" alt="Diss Vol 2" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">F8</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía · Evento</div>
+        <div class="card-title">Diss Vol 2</div>
+      </div>
+    </div>
+
+    <!-- SHORT 04 -->
+    <div class="p-card short reveal" data-cat="video" data-mix="true">
+      <div class="video-wrap video-vertical"><iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" title="Short 04" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <span class="card-num">S4</span>
+    </div>
+
+    <!-- DISEÑO 09 -->
+    <div class="p-card reveal" data-cat="diseno" data-mix="true">
+      <img class="card-img" src="img/diseno/PEÑA BLANCA 2025 FLYER INVITACIÓN.jpg" alt="Peña Blanca 2025" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">D9</span>
+      <div class="card-content">
+        <div class="card-cat">Diseño · Evento · 2025</div>
+        <div class="card-title">Peña Blanca 2025</div>
+      </div>
+    </div>
+
+    <!-- FOTO representativa: BTS 4Ever -->
+    <div class="p-card reveal" data-cat="foto" data-mix="true">
+      <img class="card-img" src="img/fotografia/bts-4ever/P1010859.jpg" alt="BTS 4Ever" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">F9</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía · BTS</div>
+        <div class="card-title">BTS 4Ever</div>
+      </div>
+    </div>
+
+    <!-- VIDEO 05 -->
+    <div class="p-card reveal" data-cat="video" data-mix="true">
+      <div class="video-wrap"><iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" title="Video 05" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <span class="card-num">V5</span>
+    </div>
+
+    <!-- DISEÑO 10 -->
+    <div class="p-card reveal" data-cat="diseno" data-mix="true">
+      <img class="card-img" src="img/diseno/ZATURNO CHNG KAYA 20225.jpg" alt="Zaturno" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">D10</span>
       <div class="card-content">
         <div class="card-cat">Diseño · 2025</div>
         <div class="card-title">Zaturno Chng Kaya</div>
       </div>
     </div>
 
-    <!-- ======= FOTOGRAFÍA — ÁLBUMES ======= -->
+    <!-- FOTO representativa: Llanos del Challe -->
+    <div class="p-card reveal" data-cat="foto" data-mix="true">
+      <img class="card-img" src="img/fotografia/llanos-del-challe/P1050254.jpg" alt="Llanos del Challe" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">F10</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía · Naturaleza</div>
+        <div class="card-title">Llanos del Challe</div>
+      </div>
+    </div>
+
+    <!-- DISEÑO 11 -->
+    <div class="p-card reveal" data-cat="diseno" data-mix="true">
+      <img class="card-img" src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2025.jpg" alt="Sandboard 2025" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">D11</span>
+      <div class="card-content">
+        <div class="card-cat">Diseño Gráfico · 2025</div>
+        <div class="card-title">Sandboard Championship 2025</div>
+      </div>
+    </div>
+
+    <!-- FOTO representativa: Minería -->
+    <div class="p-card reveal" data-cat="foto" data-mix="true">
+      <img class="card-img" src="img/fotografia/mineria/CAMARAS TRAMPA 1 RIO TINTO-01.jpg" alt="Minería" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">F11</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía · Industrial</div>
+        <div class="card-title">Minería</div>
+      </div>
+    </div>
+
+    <!-- FOTO representativa: BTS Enfocado -->
+    <div class="p-card reveal" data-cat="foto" data-mix="true">
+      <img class="card-img" src="img/fotografia/bts-enfocado/LUKY-KODEX_12.jpg" alt="BTS Enfocado" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">F12</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía · BTS</div>
+        <div class="card-title">BTS Enfocado</div>
+      </div>
+    </div>
+
+    <!-- ======= ÁLBUMES COMPLETOS — solo visibles en filtro FOTOGRAFÍA ======= -->
     <div class="albums-wrapper" data-cat="foto">
 
       <div class="album-card reveal" onclick="openAlbum('bts-4ever','BTS 4Ever',['P1010859.jpg','P1010880.jpg','P1020004.jpg','P1020016.jpg','P1020022.jpg','P1020049.jpg','P1020054.jpg','P1020058.jpg','P1020061.jpg','P1020062.jpg','P1020114.jpg'])">
@@ -1092,7 +1305,6 @@ footer {
           <div class="album-count">9 fotos</div>
         </div>
       </div>
-
 
       <div class="album-card reveal" onclick="openAlbum('glam','Glam',['GLAM XOXO JDK-01.jpg','GLAM XOXO JDK-02.jpg','GLAM XOXO JDK-10.jpg','GLAM XOXO JDK-14.jpg','GLAM XOXO JDK-17.jpg','GLAM XOXO JDK-20.jpg','GLAM XOXO JDK-29.jpg','GLAM XOXO JDK-35.jpg','GLAM XOXO JDK-53.jpg','HALLOWEEN GLAM PROMO-1.jpg','HALLOWEEN GLAM PROMO-3.jpg'])">
         <img src="img/fotografia/glam/GLAM XOXO JDK-01.jpg" alt="Glam" loading="lazy">
@@ -1166,7 +1378,7 @@ footer {
 
     </div>
 
-    <!-- LIGHTBOX -->
+        <!-- LIGHTBOX -->
     <div class="album-lightbox" id="albumLightbox">
       <div class="lightbox-header">
         <button class="lightbox-back" onclick="closeAlbum()">← Volver a álbumes</button>
@@ -1412,15 +1624,24 @@ function updateDots(){
 function filterCards(btn, cat){
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('.p-card').forEach(c => {
-    if(cat === 'all' || c.dataset.cat === cat) {
-      c.style.display = '';
-      c.style.marginBottom = '0.5rem';
-    } else {
-      c.style.display = 'none';
-      c.style.marginBottom = '0';
-    }
-  });
+
+  const allCards = document.querySelectorAll('.p-card');
+  const albumWrapper = document.querySelector('.albums-wrapper');
+
+  if(cat === 'all'){
+    allCards.forEach(c => {
+      c.style.display = c.dataset.mix === 'true' ? '' : 'none';
+    });
+    if(albumWrapper) albumWrapper.style.display = 'none';
+  } else if(cat === 'foto'){
+    allCards.forEach(c => { c.style.display = 'none'; });
+    if(albumWrapper) albumWrapper.style.display = 'grid';
+  } else {
+    allCards.forEach(c => {
+      c.style.display = (c.dataset.cat === cat) ? '' : 'none';
+    });
+    if(albumWrapper) albumWrapper.style.display = 'none';
+  }
 }
 
 /* REVEAL ON SCROLL */
