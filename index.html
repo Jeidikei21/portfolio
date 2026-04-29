@@ -376,9 +376,113 @@ nav.scrolled {
 .filter-btn.active, .filter-btn:hover {
   color: var(--light); border-bottom-color: var(--red);
 }
-.portfolio-grid {
-  columns: 4;
-  column-gap: 0.4rem;
+/* =============================================
+   MESA DE TRABAJO HORIZONTAL
+============================================= */
+.portfolio-section {
+  padding: 4rem 5rem 0;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+.portfolio-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 2.5rem; flex-shrink: 0;
+}
+.work-table-wrap {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+.work-table {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  height: calc(100vh - 220px);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding: 1rem 5rem 1rem 0;
+  /* Hide default scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+}
+.work-table::-webkit-scrollbar { display: none; }
+.work-table.grabbing { cursor: grabbing; }
+
+/* Cada pieza */
+.wt-item {
+  flex-shrink: 0;
+  width: var(--w);
+  height: var(--h);
+  position: relative;
+  overflow: hidden;
+  background: var(--dark3);
+  transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+              box-shadow 0.35s ease;
+  transform-origin: center center;
+}
+.wt-item:hover {
+  transform: scale(1.06);
+  z-index: 10;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+}
+.wt-item img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  pointer-events: none;
+}
+.wt-item.wt-video iframe {
+  width: 100%; height: 100%;
+  display: block; border: none;
+  pointer-events: all;
+}
+
+/* FLECHAS */
+.wt-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(10,10,10,0.85);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--light); font-size: 1.5rem;
+  cursor: pointer; z-index: 50;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+}
+.wt-arrow:hover { border-color: var(--red); color: var(--red); }
+.wt-arrow-left { left: 0.5rem; }
+.wt-arrow-right { right: 0.5rem; }
+.wt-arrow.hidden { opacity: 0; pointer-events: none; }
+
+/* BARRA DE SCROLL */
+.wt-scrollbar {
+  padding: 0.8rem 5rem 0;
+}
+.wt-scrollbar-track {
+  width: 100%; height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 1px;
+  position: relative;
+}
+.wt-scrollbar-thumb {
+  position: absolute; top: 0; left: 0;
+  height: 2px; width: 20%;
+  background: var(--red);
+  border-radius: 1px;
+  transition: left 0.1s linear;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .portfolio-section { padding: 3rem 1.5rem 0; }
+  .work-table { height: calc(100vh - 200px); padding-right: 1.5rem; }
+  .wt-scrollbar { padding: 0.8rem 1.5rem 0; }
+}
+@media (max-width: 600px) {
+  .portfolio-section { padding: 3rem 1rem 0; }
+  .work-table { height: calc(100vh - 180px); }
+  .wt-arrow { width: 38px; height: 38px; font-size: 1.2rem; }
 }
 .p-card {
   position: relative; overflow: hidden;
@@ -1116,6 +1220,8 @@ footer {
 
 <!-- ========== PORTFOLIO ========== -->
 <section class="portfolio-section" id="portfolio">
+
+  <!-- HEADER fijo -->
   <div class="portfolio-header reveal">
     <div>
       <div class="section-eyebrow">Trabajos</div>
@@ -1129,358 +1235,154 @@ footer {
     </div>
   </div>
 
-  <div class="portfolio-grid" id="grid">
+  <!-- MESA DE TRABAJO HORIZONTAL -->
+  <div class="work-table-wrap" id="workTableWrap">
+    <div class="work-table" id="workTable">
 
-    <!-- ============================================================
-         CADA TARJETA TIENE:
-         data-cat="diseno|foto|video" — para el filtro
-         data-mix="true" — aparece en la vista TODO
-         Las fotos con data-mix="true" son 1-2 representativas por álbum
-    ============================================================ -->
-
-    <!-- DISEÑO 01 -->
-    <div class="p-card reveal" data-cat="diseno" data-mix="true">
-      <img class="card-img" src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2026.jpg" alt="Sandboard Championship 2026" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">D1</span>
-      <div class="card-content">
-        <div class="card-cat">Diseño Gráfico · 2026</div>
-        <div class="card-title">Sandboard Championship 2026</div>
+      <!-- DISEÑO -->
+      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:180px; --h:320px">
+        <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2026.jpg" loading="lazy" alt="">
       </div>
-    </div>
-
-    <!-- FOTO representativa: Dune -->
-    <div class="p-card reveal" data-cat="foto" data-mix="true">
-      <img class="card-img" src="img/fotografia/dune/DJI_0993-Mejorado-NR.jpg" alt="Dune" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">F1</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía · Naturaleza</div>
-        <div class="card-title">Dune</div>
+      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:240px; --h:135px">
+        <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2025.jpg" loading="lazy" alt="">
       </div>
-    </div>
-
-    <!-- VIDEO 01 -->
-    <div class="p-card reveal" data-cat="video" data-mix="true">
-      <div class="video-wrap"><iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" title="Video 01" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-      <span class="card-num">V1</span>
-    </div>
-
-    <!-- DISEÑO 02 -->
-    <div class="p-card reveal" data-cat="diseno" data-mix="true">
-      <img class="card-img" src="img/diseno/POSTER-DJBLAXX-JDK.jpg" alt="DJ Blaxx" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">D2</span>
-      <div class="card-content">
-        <div class="card-cat">Diseño Gráfico · 2024</div>
-        <div class="card-title">DJ Blaxx Tour</div>
+      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:180px; --h:320px">
+        <img src="img/diseno/POSTER-DJBLAXX-JDK.jpg" loading="lazy" alt="">
       </div>
-    </div>
-
-    <!-- FOTO representativa: Glam -->
-    <div class="p-card reveal" data-cat="foto" data-mix="true">
-      <img class="card-img" src="img/fotografia/glam/GLAM XOXO JDK-01.jpg" alt="Glam" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">F2</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía · Glam</div>
-        <div class="card-title">Glam XOXO</div>
+      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:300px; --h:220px">
+        <img src="img/diseno/EXPERIENCIAS-DE-UN-KOLLA.jpg" loading="lazy" alt="">
       </div>
-    </div>
-
-    <!-- SHORT 01 -->
-    <div class="p-card short reveal" data-cat="video" data-mix="true">
-      <div class="video-wrap video-vertical"><iframe src="https://www.youtube.com/embed/pUfppQMQ17E" title="Short 01" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-      <span class="card-num">S1</span>
-    </div>
-
-    <!-- DISEÑO 03 -->
-    <div class="p-card reveal" data-cat="diseno" data-mix="true">
-      <img class="card-img" src="img/diseno/EXPERIENCIAS-DE-UN-KOLLA.jpg" alt="Experiencias de un Kolla" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">D3</span>
-      <div class="card-content">
-        <div class="card-cat">Diseño · Fotografía · 2024</div>
-        <div class="card-title">Experiencias de un Kolla</div>
+      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:240px; --h:135px">
+        <img src="img/diseno/APPAREL CHNG HISTORY 4.jpg" loading="lazy" alt="">
       </div>
-    </div>
-
-    <!-- FOTO representativa: Nippon Rest -->
-    <div class="p-card reveal" data-cat="foto" data-mix="true">
-      <img class="card-img" src="img/fotografia/nippon-rest/NIPPON PHOTO JDK-01.jpg" alt="Nippon Rest" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">F3</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía · Evento</div>
-        <div class="card-title">Nippon Rest</div>
+      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:180px; --h:180px">
+        <img src="img/diseno/CAUR-DESERTIKA-BEER (1).jpg" loading="lazy" alt="">
       </div>
-    </div>
-
-    <!-- VIDEO 02 -->
-    <div class="p-card reveal" data-cat="video" data-mix="true">
-      <div class="video-wrap"><iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" title="Video 02" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-      <span class="card-num">V2</span>
-    </div>
-
-    <!-- DISEÑO 04 -->
-    <div class="p-card reveal" data-cat="diseno" data-mix="true">
-      <img class="card-img" src="img/diseno/CAUR-DESERTIKA-BEER (1).jpg" alt="Desertika Beer" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">D4</span>
-      <div class="card-content">
-        <div class="card-cat">Diseño · Branding</div>
-        <div class="card-title">Desertika Beer</div>
+      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:240px; --h:320px">
+        <img src="img/diseno/GREENSEEDLES REVISTA.jpg" loading="lazy" alt="">
       </div>
-    </div>
-
-    <!-- FOTO representativa: BTS Tu Bicha -->
-    <div class="p-card reveal" data-cat="foto" data-mix="true">
-      <img class="card-img" src="img/fotografia/bts-tu.bicha/CATALINA VF -16.jpg" alt="BTS Tu Bicha" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">F4</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía · BTS</div>
-        <div class="card-title">BTS Tu Bicha</div>
+      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:300px; --h:220px">
+        <img src="img/diseno/NEW FAUNA ATACAMA DESIGN DUNAS.jpg" loading="lazy" alt="">
       </div>
-    </div>
-
-    <!-- SHORT 02 -->
-    <div class="p-card short reveal" data-cat="video" data-mix="true">
-      <div class="video-wrap video-vertical"><iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" title="Short 02" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-      <span class="card-num">S2</span>
-    </div>
-
-    <!-- DISEÑO 05 -->
-    <div class="p-card reveal" data-cat="diseno" data-mix="true">
-      <img class="card-img" src="img/diseno/NEW FAUNA ATACAMA DESIGN DUNAS.jpg" alt="New Fauna Atacama" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">D5</span>
-      <div class="card-content">
-        <div class="card-cat">Diseño · Naturaleza</div>
-        <div class="card-title">New Fauna Atacama</div>
+      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:180px; --h:320px">
+        <img src="img/diseno/PEÑA BLANCA 2025 FLYER INVITACIÓN.jpg" loading="lazy" alt="">
       </div>
-    </div>
-
-    <!-- FOTO representativa: Veranada Koya -->
-    <div class="p-card reveal" data-cat="foto" data-mix="true">
-      <img class="card-img" src="img/fotografia/veranada-koya/CASCADA JUNCALITO _1.jpg" alt="Veranada Koya" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">F5</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía · Naturaleza</div>
-        <div class="card-title">Veranada Koya</div>
+      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:240px; --h:135px">
+        <img src="img/diseno/POSTER FERRARI JDK 3.jpg" loading="lazy" alt="">
       </div>
-    </div>
-
-    <!-- VIDEO 03 -->
-    <div class="p-card reveal" data-cat="video" data-mix="true">
-      <div class="video-wrap"><iframe src="https://www.youtube.com/embed/LsNpwRzKikc" title="Video 03" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-      <span class="card-num">V3</span>
-    </div>
-
-    <!-- DISEÑO 06 -->
-    <div class="p-card reveal" data-cat="diseno" data-mix="true">
-      <img class="card-img" src="img/diseno/POSTER FERRARI JDK 3.jpg" alt="Poster Ferrari" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">D6</span>
-      <div class="card-content">
-        <div class="card-cat">Diseño · Poster</div>
-        <div class="card-title">Poster Ferrari JDK</div>
-      </div>
-    </div>
-
-    <!-- FOTO representativa: Museo Frafran -->
-    <div class="p-card reveal" data-cat="foto" data-mix="true">
-      <img class="card-img" src="img/fotografia/museo-frafran/STAGE MUSEO V FINAL_2.jpg" alt="Museo Frafran" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">F6</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía · Evento</div>
-        <div class="card-title">Museo Frafran</div>
-      </div>
-    </div>
-
-    <!-- SHORT 03 -->
-    <div class="p-card short reveal" data-cat="video" data-mix="true">
-      <div class="video-wrap video-vertical"><iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" title="Short 03" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-      <span class="card-num">S3</span>
-    </div>
-
-    <!-- DISEÑO 07 -->
-    <div class="p-card reveal" data-cat="diseno" data-mix="true">
-      <img class="card-img" src="img/diseno/GREENSEEDLES REVISTA.jpg" alt="Greenseedles" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">D7</span>
-      <div class="card-content">
-        <div class="card-cat">Diseño Editorial</div>
-        <div class="card-title">Greenseedles Revista</div>
-      </div>
-    </div>
-
-    <!-- FOTO representativa: Kaukari -->
-    <div class="p-card reveal" data-cat="foto" data-mix="true">
-      <img class="card-img" src="img/fotografia/kaukari/DJI_0456.jpg" alt="Kaukari" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">F7</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía · Drone</div>
-        <div class="card-title">Kaukari</div>
-      </div>
-    </div>
-
-    <!-- VIDEO 04 -->
-    <div class="p-card reveal" data-cat="video" data-mix="true">
-      <div class="video-wrap"><iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" title="Video 04" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-      <span class="card-num">V4</span>
-    </div>
-
-    <!-- DISEÑO 08 -->
-    <div class="p-card reveal" data-cat="diseno" data-mix="true">
-      <img class="card-img" src="img/diseno/APPAREL CHNG HISTORY 4.jpg" alt="Apparel Chng" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">D8</span>
-      <div class="card-content">
-        <div class="card-cat">Diseño · Apparel</div>
-        <div class="card-title">Apparel Chng History</div>
-      </div>
-    </div>
-
-    <!-- FOTO representativa: Diss Vol 2 -->
-    <div class="p-card reveal" data-cat="foto" data-mix="true">
-      <img class="card-img" src="img/fotografia/diss.vol2/DISS VOL2 CRISS-02.jpg" alt="Diss Vol 2" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">F8</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía · Evento</div>
-        <div class="card-title">Diss Vol 2</div>
-      </div>
-    </div>
-
-    <!-- SHORT 04 -->
-    <div class="p-card short reveal" data-cat="video" data-mix="true">
-      <div class="video-wrap video-vertical"><iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" title="Short 04" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-      <span class="card-num">S4</span>
-    </div>
-
-    <!-- DISEÑO 09 -->
-    <div class="p-card reveal" data-cat="diseno" data-mix="true">
-      <img class="card-img" src="img/diseno/PEÑA BLANCA 2025 FLYER INVITACIÓN.jpg" alt="Peña Blanca 2025" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">D9</span>
-      <div class="card-content">
-        <div class="card-cat">Diseño · Evento · 2025</div>
-        <div class="card-title">Peña Blanca 2025</div>
-      </div>
-    </div>
-
-    <!-- FOTO representativa: BTS 4Ever -->
-    <div class="p-card reveal" data-cat="foto" data-mix="true">
-      <img class="card-img" src="img/fotografia/bts-4ever/P1010859.jpg" alt="BTS 4Ever" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">F9</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía · BTS</div>
-        <div class="card-title">BTS 4Ever</div>
-      </div>
-    </div>
-
-    <!-- VIDEO 05 -->
-    <div class="p-card reveal" data-cat="video" data-mix="true">
-      <div class="video-wrap"><iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" title="Video 05" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-      <span class="card-num">V5</span>
-    </div>
-
-    <!-- DISEÑO 10 -->
-    <div class="p-card reveal" data-cat="diseno" data-mix="true">
-      <img class="card-img" src="img/diseno/ZATURNO CHNG KAYA 20225.jpg" alt="Zaturno" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">D10</span>
-      <div class="card-content">
-        <div class="card-cat">Diseño · 2025</div>
-        <div class="card-title">Zaturno Chng Kaya</div>
-      </div>
-    </div>
-
-    <!-- FOTO representativa: Llanos del Challe -->
-    <div class="p-card reveal" data-cat="foto" data-mix="true">
-      <img class="card-img" src="img/fotografia/llanos-del-challe/P1050254.jpg" alt="Llanos del Challe" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">F10</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía · Naturaleza</div>
-        <div class="card-title">Llanos del Challe</div>
-      </div>
-    </div>
-
-    <!-- DISEÑO 11 -->
-    <div class="p-card reveal" data-cat="diseno" data-mix="true">
-      <img class="card-img" src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2025.jpg" alt="Sandboard 2025" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">D11</span>
-      <div class="card-content">
-        <div class="card-cat">Diseño Gráfico · 2025</div>
-        <div class="card-title">Sandboard Championship 2025</div>
-      </div>
-    </div>
-
-    <!-- FOTO representativa: Minería -->
-    <div class="p-card reveal" data-cat="foto" data-mix="true">
-      <img class="card-img" src="img/fotografia/mineria/CAMARAS TRAMPA 1 RIO TINTO-01.jpg" alt="Minería" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">F11</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía · Industrial</div>
-        <div class="card-title">Minería</div>
-      </div>
-    </div>
-
-    <!-- FOTO representativa: BTS Enfocado -->
-    <div class="p-card reveal" data-cat="foto" data-mix="true">
-      <img class="card-img" src="img/fotografia/bts-enfocado/LUKY-KODEX_12.jpg" alt="BTS Enfocado" loading="lazy">
-      <div class="card-overlay"></div>
-      <span class="card-num">F12</span>
-      <div class="card-content">
-        <div class="card-cat">Fotografía · BTS</div>
-        <div class="card-title">BTS Enfocado</div>
-      </div>
-    </div>
-
-    <!-- ======= ÁLBUMES COMPLETOS — solo visibles en filtro FOTOGRAFÍA ======= -->
-    <div class="albums-wrapper" data-cat="foto">
-      <div class="carousel-title">Álbumes de Fotografía</div>
-
-      <div class="carousel-stage" id="carouselStage">
-        <!-- slides generados por JS -->
+      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:180px; --h:320px">
+        <img src="img/diseno/ZATURNO CHNG KAYA 20225.jpg" loading="lazy" alt="">
       </div>
 
-      <button class="carousel-btn carousel-prev" onclick="carouselMove(-1)">‹</button>
-      <button class="carousel-btn carousel-next" onclick="carouselMove(1)">›</button>
-
-      <div class="carousel-dots" id="carouselDots"></div>
-    </div>
-
-        <!-- LIGHTBOX -->
-    <div class="album-lightbox" id="albumLightbox">
-      <div class="lightbox-header">
-        <button class="lightbox-back" onclick="closeAlbum()">← Volver a álbumes</button>
-        <h3 class="lightbox-title" id="lightboxTitle"></h3>
-        <button class="lightbox-close" onclick="closeAlbum()">✕</button>
+      <!-- FOTOGRAFÍA — 1 representativa por álbum -->
+      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:240px; --h:320px">
+        <img src="img/fotografia/dune/DJI_0993-Mejorado-NR.jpg" loading="lazy" alt="">
       </div>
-      <div class="lightbox-grid" id="lightboxGrid"></div>
-    </div>
+      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:300px; --h:200px">
+        <img src="img/fotografia/glam/GLAM XOXO JDK-01.jpg" loading="lazy" alt="">
+      </div>
+      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:180px; --h:270px">
+        <img src="img/fotografia/nippon-rest/NIPPON PHOTO JDK-01.jpg" loading="lazy" alt="">
+      </div>
+      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:300px; --h:200px">
+        <img src="img/fotografia/bts-tu.bicha/CATALINA VF -16.jpg" loading="lazy" alt="">
+      </div>
+      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:240px; --h:320px">
+        <img src="img/fotografia/veranada-koya/CASCADA JUNCALITO _1.jpg" loading="lazy" alt="">
+      </div>
+      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:300px; --h:200px">
+        <img src="img/fotografia/museo-frafran/STAGE MUSEO V FINAL_2.jpg" loading="lazy" alt="">
+      </div>
+      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:180px; --h:270px">
+        <img src="img/fotografia/kaukari/DJI_0456.jpg" loading="lazy" alt="">
+      </div>
+      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:300px; --h:200px">
+        <img src="img/fotografia/diss.vol2/DISS VOL2 CRISS-02.jpg" loading="lazy" alt="">
+      </div>
+      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:240px; --h:320px">
+        <img src="img/fotografia/bts-4ever/P1010859.jpg" loading="lazy" alt="">
+      </div>
+      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:300px; --h:200px">
+        <img src="img/fotografia/llanos-del-challe/P1050254.jpg" loading="lazy" alt="">
+      </div>
+      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:180px; --h:270px">
+        <img src="img/fotografia/mineria/CAMARAS TRAMPA 1 RIO TINTO-01.jpg" loading="lazy" alt="">
+      </div>
+      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:240px; --h:160px">
+        <img src="img/fotografia/bts-enfocado/LUKY-KODEX_12.jpg" loading="lazy" alt="">
+      </div>
 
-    <!-- VISOR INDIVIDUAL -->
-    <div class="photo-viewer" id="photoViewer" onclick="closeViewer()">
-      <button class="viewer-prev" onclick="event.stopPropagation();changePhoto(-1)">‹</button>
-      <img class="viewer-img" id="viewerImg" src="" alt="">
-      <button class="viewer-next" onclick="event.stopPropagation();changePhoto(1)">›</button>
-      <button class="viewer-close" onclick="closeViewer()">✕</button>
-    </div>
+      <!-- VIDEO -->
+      <div class="wt-item wt-video" data-cat="video" data-mix="true" style="--w:480px; --h:270px">
+        <iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="wt-item wt-video wt-short" data-cat="video" data-mix="true" style="--w:152px; --h:270px">
+        <iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="wt-item wt-video" data-cat="video" data-mix="true" style="--w:480px; --h:270px">
+        <iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="wt-item wt-video wt-short" data-cat="video" data-mix="true" style="--w:152px; --h:270px">
+        <iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="wt-item wt-video" data-cat="video" data-mix="true" style="--w:480px; --h:270px">
+        <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="wt-item wt-video wt-short" data-cat="video" data-mix="true" style="--w:152px; --h:270px">
+        <iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="wt-item wt-video" data-cat="video" data-mix="true" style="--w:480px; --h:270px">
+        <iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="wt-item wt-video wt-short" data-cat="video" data-mix="true" style="--w:152px; --h:270px">
+        <iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="wt-item wt-video" data-cat="video" data-mix="true" style="--w:480px; --h:270px">
+        <iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
 
+    </div><!-- end work-table -->
+
+    <!-- FLECHAS DE NAVEGACIÓN -->
+    <button class="wt-arrow wt-arrow-left" id="wtLeft" onclick="scrollTable(-1)">‹</button>
+    <button class="wt-arrow wt-arrow-right" id="wtRight" onclick="scrollTable(1)">›</button>
+
+    <!-- BARRA DE SCROLL VISUAL -->
+    <div class="wt-scrollbar">
+      <div class="wt-scrollbar-track">
+        <div class="wt-scrollbar-thumb" id="wtThumb"></div>
+      </div>
+    </div>
+  </div><!-- end work-table-wrap -->
+
+  <!-- CARRUSEL DE ÁLBUMES (vista fotografía) -->
+  <div class="albums-wrapper" data-cat="foto">
+    <div class="carousel-title">Álbumes de Fotografía</div>
+    <div class="carousel-stage" id="carouselStage"></div>
+    <button class="carousel-btn carousel-prev" onclick="carouselMove(-1)">‹</button>
+    <button class="carousel-btn carousel-next" onclick="carouselMove(1)">›</button>
+    <div class="carousel-dots" id="carouselDots"></div>
   </div>
-</section>
 
-<div class="divider"></div>
+  <!-- LIGHTBOX -->
+  <div class="album-lightbox" id="albumLightbox">
+    <div class="lightbox-header">
+      <button class="lightbox-back" onclick="closeAlbum()">← Volver a álbumes</button>
+      <h3 class="lightbox-title" id="lightboxTitle"></h3>
+      <button class="lightbox-close" onclick="closeAlbum()">✕</button>
+    </div>
+    <div class="lightbox-grid" id="lightboxGrid"></div>
+  </div>
+
+  <!-- VISOR INDIVIDUAL -->
+  <div class="photo-viewer" id="photoViewer" onclick="closeViewer()">
+    <button class="viewer-prev" onclick="event.stopPropagation();changePhoto(-1)">‹</button>
+    <img class="viewer-img" id="viewerImg" src="" alt="">
+    <button class="viewer-next" onclick="event.stopPropagation();changePhoto(1)">›</button>
+    <button class="viewer-close" onclick="closeViewer()">✕</button>
+  </div>
+
+</section>
 
 <!-- ========== MINERÍA ========== -->
 <section class="mining-section" id="mineria">
@@ -1659,7 +1561,67 @@ hoverEls.forEach(el => {
   requestAnimationFrame(animRing);
 })();
 
-/* MENÚ MÓVIL */
+/* MESA DE TRABAJO — scroll horizontal */
+(function(){
+  const table = document.getElementById('workTable');
+  if (!table) return;
+
+  // Drag to scroll
+  let isDown = false, startX, scrollLeft;
+  table.addEventListener('mousedown', e => {
+    if(e.target.closest('iframe')) return;
+    isDown = true;
+    table.classList.add('grabbing');
+    startX = e.pageX - table.offsetLeft;
+    scrollLeft = table.scrollLeft;
+  });
+  document.addEventListener('mouseup', () => { isDown = false; table.classList.remove('grabbing'); });
+  table.addEventListener('mousemove', e => {
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - table.offsetLeft;
+    table.scrollLeft = scrollLeft - (x - startX) * 1.2;
+    updateScrollUI();
+  });
+
+  // Scroll arrows
+  window.scrollTable = function(dir) {
+    table.scrollLeft += dir * 400;
+    setTimeout(updateScrollUI, 350);
+  };
+
+  // Scrollbar thumb
+  function updateScrollUI() {
+    const thumb = document.getElementById('wtThumb');
+    const leftBtn = document.getElementById('wtLeft');
+    const rightBtn = document.getElementById('wtRight');
+    if (!thumb) return;
+    const max = table.scrollWidth - table.clientWidth;
+    const pct = max > 0 ? table.scrollLeft / max : 0;
+    const trackW = thumb.parentElement.offsetWidth;
+    const thumbW = Math.max(40, trackW * (table.clientWidth / table.scrollWidth));
+    thumb.style.width = thumbW + 'px';
+    thumb.style.left = (pct * (trackW - thumbW)) + 'px';
+    if(leftBtn) leftBtn.classList.toggle('hidden', table.scrollLeft <= 0);
+    if(rightBtn) rightBtn.classList.toggle('hidden', table.scrollLeft >= max - 2);
+  }
+
+  table.addEventListener('scroll', updateScrollUI);
+  setTimeout(updateScrollUI, 300);
+
+  // Shuffle items randomly on load
+  function shuffle() {
+    const items = [...table.children];
+    for(let i = items.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      table.appendChild(items[j]);
+    }
+  }
+  shuffle();
+  setTimeout(updateScrollUI, 100);
+})();
+
+
 const hamburger = document.getElementById('navHamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 const mobileClose = document.getElementById('mobileClose');
@@ -1699,23 +1661,32 @@ function filterCards(btn, cat){
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 
-  const allCards = document.querySelectorAll('.p-card');
+  const table = document.getElementById('workTable');
+  const tableWrap = document.getElementById('workTableWrap');
   const albumWrapper = document.querySelector('.albums-wrapper');
 
-  if(cat === 'all'){
-    allCards.forEach(c => {
-      c.style.display = c.dataset.mix === 'true' ? '' : 'none';
-    });
-    if(albumWrapper) albumWrapper.style.display = 'none';
-  } else if(cat === 'foto'){
-    allCards.forEach(c => { c.style.display = 'none'; });
-    if(albumWrapper) albumWrapper.style.display = 'grid';
+  if(cat === 'foto'){
+    // Mostrar carrusel, ocultar mesa
+    if(tableWrap) tableWrap.style.display = 'none';
+    if(albumWrapper) { albumWrapper.style.display = 'block'; buildCarousel(); }
   } else {
-    allCards.forEach(c => {
-      c.style.display = (c.dataset.cat === cat) ? '' : 'none';
-    });
+    // Mostrar mesa, ocultar carrusel
+    if(tableWrap) tableWrap.style.display = '';
     if(albumWrapper) albumWrapper.style.display = 'none';
+    // Filtrar items en la mesa
+    if(table) {
+      [...table.children].forEach(item => {
+        item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+      });
+    }
   }
+
+  // Reset scroll
+  if(table) table.scrollLeft = 0;
+  setTimeout(() => {
+    const thumb = document.getElementById('wtThumb');
+    if(thumb) { thumb.style.left = '0'; }
+  }, 100);
 }
 
 /* REVEAL ON SCROLL */
@@ -1924,13 +1895,8 @@ document.getElementById('contactForm').addEventListener('submit', async function
 
 /* INIT */
 (function(){
-  // Mostrar solo mix al cargar
-  document.querySelectorAll('.p-card').forEach(c => {
-    c.style.display = c.dataset.mix === 'true' ? '' : 'none';
-  });
   const albumWrapper = document.querySelector('.albums-wrapper');
   if(albumWrapper) albumWrapper.style.display = 'none';
-  // Build carousel
   buildCarousel();
 })();
 </script>
