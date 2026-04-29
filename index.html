@@ -137,29 +137,6 @@ nav.scrolled {
 .nav-cta:hover { background: var(--red); color: var(--light); }
 
 /* =============================================
-   SIDE DOTS NAV
-============================================= */
-
-}
-.side-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  transition: all 0.3s; cursor: pointer;
-  position: relative;
-}
-.side-dot::before {
-  content: attr(data-label);
-  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
-  font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--muted); white-space: nowrap; opacity: 0;
-  transition: opacity 0.3s; pointer-events: none;
-  background: rgba(10,10,10,0.8); padding: 2px 6px;
-}
-.side-dot:hover::before { opacity: 1; }
-.side-dot.active { background: var(--red); transform: scale(1.6); }
-.side-dot:hover { background: var(--red); }
-
-/* =============================================
    HERO
 ============================================= */
 .hero {
@@ -1006,7 +983,137 @@ footer {
       <span class="card-num">S4</span>
     </div>
 
-    <!-- Las fotos de diseño y fotografía se cargan automáticamente desde Cloudinary -->
+    <!-- ======= DISEÑO ======= -->
+    <div class="p-card reveal" data-cat="diseno">
+      <img class="card-img" src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2026.jpg" alt="Sandboard Championship 2026" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">01</span>
+      <div class="card-content">
+        <div class="card-cat">Diseño Gráfico · 2026</div>
+        <div class="card-title">Sandboard Championship</div>
+      </div>
+    </div>
+    <div class="p-card reveal" data-cat="diseno">
+      <img class="card-img" src="img/diseno/POSTER-DJBLAXX-JDK.jpg" alt="DJ Blaxx" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">02</span>
+      <div class="card-content">
+        <div class="card-cat">Diseño Gráfico · 2024</div>
+        <div class="card-title">DJ Blaxx Tour</div>
+      </div>
+    </div>
+    <div class="p-card reveal" data-cat="diseno">
+      <img class="card-img" src="img/diseno/EXPERIENCIAS-DE-UN-KOLLA.jpg" alt="Experiencias de un Kolla" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">03</span>
+      <div class="card-content">
+        <div class="card-cat">Diseño · Fotografía · 2024</div>
+        <div class="card-title">Experiencias de un Kolla</div>
+      </div>
+    </div>
+
+    <!-- ======= FOTOGRAFÍA ======= -->
+    <div class="p-card reveal" data-cat="foto">
+      <img class="card-img" src="img/fotografia/CASCADAJUNCALITO_1.jpg" alt="Cascada Juncalito" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">04</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía · Naturaleza</div>
+        <div class="card-title">Cascada Juncalito</div>
+      </div>
+    </div>
+    <div class="p-card reveal" data-cat="foto">
+      <img class="card-img" src="img/fotografia/CASCADAJUNCALITO.jpg" alt="Cascada Juncalito" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">05</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía · Naturaleza</div>
+        <div class="card-title">Cascada Juncalito II</div>
+      </div>
+    </div>
+    <div class="p-card reveal" data-cat="foto">
+      <img class="card-img" src="img/fotografia/BURROSPOSADACERCAPEÑABLANCA_4.jpg" alt="Peña Blanca" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">06</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía · Naturaleza</div>
+        <div class="card-title">Peña Blanca</div>
+      </div>
+    </div>
+    <div class="p-card reveal" data-cat="foto">
+      <img class="card-img" src="img/fotografia/BURROSPOSADACERCAPEÑABLANCA_6.jpg" alt="Peña Blanca" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">07</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía · Naturaleza</div>
+        <div class="card-title">Peña Blanca II</div>
+      </div>
+    </div>
+    <div class="p-card reveal" data-cat="foto">
+      <img class="card-img" src="img/fotografia/BURROSPOSADACERCAPEÑABLANCA_7.jpg" alt="Peña Blanca" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">08</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía · Naturaleza</div>
+        <div class="card-title">Peña Blanca III</div>
+      </div>
+    </div>
+    <div class="p-card reveal" data-cat="foto">
+      <img class="card-img" src="img/fotografia/DISSVOL2CRISS-07.jpg" alt="Dissvol 2 Criss" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">09</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía</div>
+        <div class="card-title">Dissvol 2 Criss</div>
+      </div>
+    </div>
+    <div class="p-card reveal" data-cat="foto">
+      <img class="card-img" src="img/fotografia/DISSVOL2CRISS-09.jpg" alt="Dissvol 2 Criss" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">10</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía</div>
+        <div class="card-title">Dissvol 2 Criss II</div>
+      </div>
+    </div>
+    <div class="p-card reveal" data-cat="foto">
+      <img class="card-img" src="img/fotografia/DISSVOL2CRISS-25.jpg" alt="Dissvol 2 Criss" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">11</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía</div>
+        <div class="card-title">Dissvol 2 Criss III</div>
+      </div>
+    </div>
+    <div class="p-card reveal" data-cat="foto">
+      <img class="card-img" src="img/fotografia/DISSVOL2CRISS-43.jpg" alt="Dissvol 2 Criss" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">12</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía</div>
+        <div class="card-title">Dissvol 2 Criss IV</div>
+      </div>
+    </div>
+    <div class="p-card reveal" data-cat="foto">
+      <img class="card-img" src="img/fotografia/DISSVOL2CRISS-45.jpg" alt="Dissvol 2 Criss" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">13</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía</div>
+        <div class="card-title">Dissvol 2 Criss V</div>
+      </div>
+    </div>
+    <div class="p-card reveal" data-cat="foto">
+      <img class="card-img" src="img/fotografia/DJI_0993-Mejorado-NR.jpg" alt="Vista Aérea" loading="lazy">
+      <div class="card-overlay"></div>
+      <span class="card-num">14</span>
+      <div class="card-content">
+        <div class="card-cat">Fotografía · Drone</div>
+        <div class="card-title">Vista Aérea</div>
+      </div>
+    </div>
+
+    <!-- ======= VIDEO ======= -->
 
   </div>
 </section>
