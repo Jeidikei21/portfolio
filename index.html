@@ -377,8 +377,8 @@ nav.scrolled {
   color: var(--light); border-bottom-color: var(--red);
 }
 .portfolio-grid {
-  columns: 3;
-  column-gap: 0.5rem;
+  columns: 4;
+  column-gap: 0.4rem;
 }
 .p-card {
   position: relative; overflow: hidden;
@@ -860,9 +860,9 @@ footer {
   /* Portfolio */
   .portfolio-section { padding: 5rem 2rem; }
   .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-  .portfolio-grid { columns: 2; column-gap: 0.4rem; }
-  .p-card { margin-bottom: 0.4rem; }
-  .albums-wrapper { grid-template-columns: repeat(2,1fr); }
+  .portfolio-grid { columns: 3; column-gap: 0.3rem; }
+  .p-card { margin-bottom: 0.3rem; }
+  .albums-wrapper { grid-template-columns: repeat(3,1fr); gap: 0.3rem; }
   .lightbox-grid { columns: 2; padding: 1rem; }
   .lightbox-header { padding: 1rem 1.5rem; }
   .lightbox-title { font-size: 1.1rem; }
@@ -916,8 +916,9 @@ footer {
   .portfolio-section { padding: 4rem 1.2rem; }
   .filters { flex-wrap: wrap; gap: 0.3rem; }
   .filter-btn { font-size: 0.62rem; padding: 0.35rem 0.8rem; }
-  .portfolio-grid { columns: 1; }
-  .albums-wrapper { grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+  .portfolio-grid { columns: 3; column-gap: 0.25rem; }
+  .p-card { margin-bottom: 0.25rem; }
+  .albums-wrapper { grid-template-columns: repeat(3, 1fr); gap: 0.3rem; }
   .album-title { font-size: 0.9rem; }
   .album-count { display: none; }
   .lightbox-grid { columns: 1; }
@@ -947,7 +948,7 @@ footer {
 /* MÓVIL PEQUEÑO — 380px */
 @media (max-width: 380px) {
   .hero-name { font-size: clamp(2.2rem, 20vw, 3.5rem); }
-  .albums-wrapper { grid-template-columns: 1fr; }
+  .albums-wrapper { grid-template-columns: repeat(2, 1fr); }
   .contact-title { font-size: 2.2rem; }
 }
 </style>
