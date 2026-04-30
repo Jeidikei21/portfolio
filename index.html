@@ -14,6 +14,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-black.otf') format('opentype'); font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-extrabold.otf') format('opentype'); font-weight: 800; font-display: swap; }
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-bold.otf') format('opentype'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-semibold.otf') format('opentype'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-medium.otf') format('opentype'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-regular.otf') format('opentype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-light.otf') format('opentype'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-extralight.otf') format('opentype'); font-weight: 200; font-display: swap; }
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-thin.otf') format('opentype'); font-weight: 100; font-display: swap; }
+</style>
+<style>
 /* =============================================
    RESET & VARIABLES
 ============================================= */
@@ -476,9 +487,9 @@ nav.scrolled {
 /* 1:1 cuadrado */
 .h-11   { aspect-ratio: 1/1;  height: 100%; width: auto; flex-shrink: 0; }
 
-/* FLECHA */
+/* FLECHAS izquierda y derecha */
 .h-arrow {
-  position: absolute; right: 6px; top: 50%;
+  position: absolute; top: 50%;
   transform: translateY(-50%);
   width: 48px; height: 48px; border-radius: 50%;
   background: rgba(10,10,10,0.9);
@@ -489,6 +500,8 @@ nav.scrolled {
   transition: all 0.3s;
 }
 .h-arrow:hover { border-color: var(--red); color: var(--red); }
+.h-arrow-left { left: 6px; }
+.h-arrow-right { right: 6px; }
 
 /* SCROLLBAR */
 .h-scrollbar {
@@ -1024,8 +1037,70 @@ footer {
 .footer-back:hover { color: var(--red); }
 
 /* =============================================
-   ANIMATIONS
+   DELIGHT FONT — aplicada globalmente
 ============================================= */
+/* Títulos principales */
+.hero-name, .section-title, .contact-title,
+.pf-port, .pf-folio, .lightbox-title,
+.album-slide-title, .service-title, .form-title {
+  font-family: 'Delight', 'Cormorant Garamond', serif;
+}
+/* Navegación y botones */
+.nav-links a, .nav-cta, .filter-btn, .pf-btn,
+.mining-cta, .btn-primary, .btn-ghost,
+.mobile-links a, .footer-back, .form-submit {
+  font-family: 'Delight', 'Inter', sans-serif;
+  font-weight: 300;
+}
+/* Labels y eyebrows */
+.section-eyebrow, .hero-eyebrow, .card-cat,
+.album-cat, .album-slide-cat, .badge-label,
+.social-platform, .form-label, .companies-label,
+.mining-tag, .footer-copy {
+  font-family: 'Delight', 'Inter', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.3em;
+}
+/* Textos descriptivos */
+.about-desc, .mining-desc, .contact-sub,
+.service-desc, .hero-tagline {
+  font-family: 'Delight', 'Inter', sans-serif;
+  font-weight: 300;
+}
+/* Hero name — negro/black */
+.hero-name {
+  font-weight: 900;
+}
+/* Section titles — semibold */
+.section-title, .contact-title {
+  font-weight: 700;
+}
+/* About badges — bold */
+.badge-num {
+  font-family: 'Delight', sans-serif;
+  font-weight: 900;
+}
+/* Social handles */
+.social-handle {
+  font-family: 'Delight', sans-serif;
+  font-weight: 300;
+}
+/* Carrusel más grande */
+.carousel-stage {
+  height: 680px;
+}
+.album-slide {
+  width: 320px;
+  height: 427px; /* 3:4 ratio */
+}
+@media (max-width: 900px) {
+  .carousel-stage { height: 520px; }
+  .album-slide { width: 240px; height: 320px; }
+}
+@media (max-width: 600px) {
+  .carousel-stage { height: 400px; }
+  .album-slide { width: 190px; height: 253px; }
+}
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(28px); }
   to { opacity: 1; transform: translateY(0); }
@@ -1371,22 +1446,13 @@ footer {
     </div>
   </div>
 
-  <!-- CONTENEDOR HORIZONTAL -->
   <div class="h-slide-wrap" id="hSlideWrap">
     <div class="h-slide-track" id="hTrack">
 
-      <!-- =====================================================
-           PATRÓN: [9:16 vertical] + [columna: 16:9 / 16:9]
-           Los diseños 9:16 son SIEMPRE verticales
-           Los videos 16:9 son SIEMPRE horizontales apilados
-      ===================================================== -->
-
-      <!-- GRUPO 1 -->
-      <!-- 9:16 vertical diseño -->
+      <!-- GRUPO 1: diseño 9:16 + 2x video 16:9 apilados -->
       <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2026.jpg" loading="lazy" alt="">
       </div>
-      <!-- columna: 2x 16:9 apilados -->
       <div class="h-col" data-cat="video">
         <div class="h-item h-169-half">
           <iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" frameborder="0" allowfullscreen></iframe>
@@ -1396,152 +1462,96 @@ footer {
         </div>
       </div>
 
-      <!-- GRUPO 2 -->
-      <!-- 9:16 vertical diseño -->
+      <!-- GRUPO 2: diseño 9:16 + 2x short 9:16 apilados -->
       <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/POSTER-DJBLAXX-JDK.jpg" loading="lazy" alt="">
       </div>
-      <!-- columna: 2x 16:9 apilados -->
       <div class="h-col" data-cat="video">
-        <div class="h-item h-169-half">
-          <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allowfullscreen></iframe>
+        <div class="h-item h-916-half">
+          <iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allowfullscreen></iframe>
         </div>
-        <div class="h-item h-169-half">
-          <iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" frameborder="0" allowfullscreen></iframe>
+        <div class="h-item h-916-half">
+          <iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
 
-      <!-- GRUPO 3 -->
-      <!-- 9:16 vertical diseño -->
+      <!-- GRUPO 3: diseño 9:16 + 2x video 16:9 apilados -->
       <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/EXPERIENCIAS-DE-UN-KOLLA.jpg" loading="lazy" alt="">
       </div>
-      <!-- columna: 2x 16:9 apilados -->
       <div class="h-col" data-cat="video">
-        <div class="h-item h-169-half">
-          <iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" frameborder="0" allowfullscreen></iframe>
-        </div>
         <div class="h-item h-169-half">
           <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allowfullscreen></iframe>
         </div>
-      </div>
-
-      <!-- GRUPO 4 -->
-      <!-- 9:16 vertical diseño -->
-      <div class="h-item h-916" data-cat="diseno">
-        <img src="img/diseno/GREENSEEDLES REVISTA.jpg" loading="lazy" alt="">
-      </div>
-      <!-- columna: shorts 9:16 apilados — cada short ocupa mitad de altura -->
-      <div class="h-col" data-cat="video">
-        <div class="h-item h-916-half">
-          <iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="h-item h-916-half">
-          <iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allowfullscreen></iframe>
-        </div>
-      </div>
-
-      <!-- GRUPO 5 -->
-      <!-- 9:16 vertical diseño -->
-      <div class="h-item h-916" data-cat="diseno">
-        <img src="img/diseno/ZATURNO CHNG KAYA 20225.jpg" loading="lazy" alt="">
-      </div>
-      <!-- columna: 2x 16:9 apilados -->
-      <div class="h-col" data-cat="video">
-        <div class="h-item h-169-half">
-          <iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="h-item h-169-half">
-          <iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" frameborder="0" allowfullscreen></iframe>
-        </div>
-      </div>
-
-      <!-- GRUPO 6 -->
-      <!-- 9:16 vertical diseño -->
-      <div class="h-item h-916" data-cat="diseno">
-        <img src="img/diseno/PEÑA BLANCA 2025 FLYER INVITACIÓN.jpg" loading="lazy" alt="">
-      </div>
-      <!-- columna: shorts apilados -->
-      <div class="h-col" data-cat="video">
-        <div class="h-item h-916-half">
-          <iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="h-item h-916-half">
-          <iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" frameborder="0" allowfullscreen></iframe>
-        </div>
-      </div>
-
-      <!-- GRUPO 7 -->
-      <!-- 9:16 vertical diseño -->
-      <div class="h-item h-916" data-cat="diseno">
-        <img src="img/diseno/POSTER FERRARI JDK 3.jpg" loading="lazy" alt="">
-      </div>
-      <!-- columna: 2x 16:9 apilados -->
-      <div class="h-col" data-cat="video">
         <div class="h-item h-169-half">
           <iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" frameborder="0" allowfullscreen></iframe>
         </div>
-        <div class="h-item h-169-half">
-          <iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" frameborder="0" allowfullscreen></iframe>
-        </div>
       </div>
 
-      <!-- GRUPO 8 -->
-      <!-- 9:16 vertical diseño -->
+      <!-- GRUPO 4: diseño 9:16 + 2x short 9:16 apilados -->
       <div class="h-item h-916" data-cat="diseno">
-        <img src="img/diseno/NEW FAUNA ATACAMA DESIGN DUNAS.jpg" loading="lazy" alt="">
+        <img src="img/diseno/GREENSEEDLES REVISTA.jpg" loading="lazy" alt="">
       </div>
-      <!-- columna: shorts -->
       <div class="h-col" data-cat="video">
-        <div class="h-item h-916-half">
-          <iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allowfullscreen></iframe>
-        </div>
         <div class="h-item h-916-half">
           <iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" frameborder="0" allowfullscreen></iframe>
-        </div>
-      </div>
-
-      <!-- GRUPO 9 -->
-      <!-- 9:16 vertical diseño -->
-      <div class="h-item h-916" data-cat="diseno">
-        <img src="img/diseno/APPAREL CHNG HISTORY 4.jpg" loading="lazy" alt="">
-      </div>
-      <!-- columna: 2x 16:9 apilados -->
-      <div class="h-col" data-cat="video">
-        <div class="h-item h-169-half">
-          <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="h-item h-169-half">
-          <iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allowfullscreen></iframe>
-        </div>
-      </div>
-
-      <!-- GRUPO 10 -->
-      <!-- 9:16 vertical diseño -->
-      <div class="h-item h-916" data-cat="diseno">
-        <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2025.jpg" loading="lazy" alt="">
-      </div>
-      <!-- columna: shorts -->
-      <div class="h-col" data-cat="video">
-        <div class="h-item h-916-half">
-          <iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allowfullscreen></iframe>
         </div>
         <div class="h-item h-916-half">
           <iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
 
-    </div><!-- end h-slide-track -->
+      <!-- GRUPO 5: diseño 9:16 + video 16:9 solo (último disponible) -->
+      <div class="h-item h-916" data-cat="diseno">
+        <img src="img/diseno/ZATURNO CHNG KAYA 20225.jpg" loading="lazy" alt="">
+      </div>
+      <div class="h-item h-169" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" frameborder="0" allowfullscreen></iframe>
+      </div>
 
-    <button class="h-arrow" onclick="hScroll(1)">›</button>
+      <!-- GRUPO 6: diseño 9:16 solo -->
+      <div class="h-item h-916" data-cat="diseno">
+        <img src="img/diseno/PEÑA BLANCA 2025 FLYER INVITACIÓN.jpg" loading="lazy" alt="">
+      </div>
+
+      <!-- GRUPO 7: diseño 9:16 solo -->
+      <div class="h-item h-916" data-cat="diseno">
+        <img src="img/diseno/POSTER FERRARI JDK 3.jpg" loading="lazy" alt="">
+      </div>
+
+      <!-- GRUPO 8: diseño 9:16 solo -->
+      <div class="h-item h-916" data-cat="diseno">
+        <img src="img/diseno/NEW FAUNA ATACAMA DESIGN DUNAS.jpg" loading="lazy" alt="">
+      </div>
+
+      <!-- GRUPO 9: diseño 4:3 -->
+      <div class="h-item h-43" data-cat="diseno">
+        <img src="img/diseno/APPAREL CHNG HISTORY 4.jpg" loading="lazy" alt="">
+      </div>
+
+      <!-- GRUPO 10: diseño 9:16 -->
+      <div class="h-item h-916" data-cat="diseno">
+        <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2025.jpg" loading="lazy" alt="">
+      </div>
+
+      <!-- GRUPO 11: diseño 1:1 -->
+      <div class="h-item h-11" data-cat="diseno">
+        <img src="img/diseno/CAUR-DESERTIKA-BEER (1).jpg" loading="lazy" alt="">
+      </div>
+
+    </div>
+
+    <!-- FLECHAS izquierda y derecha -->
+    <button class="h-arrow h-arrow-left" onclick="hScroll(-1)">‹</button>
+    <button class="h-arrow h-arrow-right" onclick="hScroll(1)">›</button>
+
     <div class="h-scrollbar">
       <div class="h-scrollbar-thumb" id="hThumb"></div>
     </div>
-  </div><!-- end h-slide-wrap -->
+  </div>
 
   <!-- CARRUSEL ÁLBUMES (FOTOGRAFÍA) -->
   <div class="albums-wrapper" data-cat="foto">
-    <div class="carousel-title">Álbumes de Fotografía</div>
     <div class="carousel-stage" id="carouselStage"></div>
     <button class="carousel-btn carousel-prev" onclick="carouselMove(-1)">‹</button>
     <button class="carousel-btn carousel-next" onclick="carouselMove(1)">›</button>
