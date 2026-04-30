@@ -377,112 +377,176 @@ nav.scrolled {
   color: var(--light); border-bottom-color: var(--red);
 }
 /* =============================================
-   MESA DE TRABAJO HORIZONTAL
+   PORTFOLIO — DISEÑO EDITORIAL
 ============================================= */
 .portfolio-section {
-  padding: 4rem 5rem 0;
-  min-height: 100vh;
-  display: flex; flex-direction: column;
-}
-.portfolio-header {
-  display: flex; justify-content: space-between; align-items: flex-end;
-  margin-bottom: 2.5rem; flex-shrink: 0;
-}
-.work-table-wrap {
-  position: relative;
-  flex: 1;
-  overflow: hidden;
-}
-.work-table {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-  height: calc(100vh - 220px);
+  height: 100vh;
+  overflow: hidden;
+  background: var(--dark);
+  position: relative;
+}
+
+/* PANEL IZQUIERDO */
+.pf-left {
+  width: 380px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 3rem 0 5rem;
+  position: relative;
+  z-index: 2;
+}
+.pf-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.88;
+  margin-bottom: 3rem;
+}
+.pf-port {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4rem, 7vw, 7.5rem);
+  color: var(--light);
+  letter-spacing: -0.02em;
+  display: block;
+}
+.pf-dash { color: var(--orange); }
+.pf-folio {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4rem, 7vw, 7.5rem);
+  color: var(--light);
+  letter-spacing: -0.02em;
+  display: block;
+}
+.pf-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  align-items: flex-start;
+}
+.pf-btn {
+  background: none; border: none;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.35);
+  cursor: pointer;
+  transition: color 0.25s;
+  padding: 0.1rem 0;
+  text-align: left;
+}
+.pf-btn:hover { color: var(--orange); }
+.pf-btn.active { color: var(--orange); }
+
+/* PANEL DERECHO */
+.pf-right {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* MESA HORIZONTAL */
+.pf-table {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 3px;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
-  padding: 1rem 5rem 1rem 0;
-  /* Hide default scrollbar */
   scrollbar-width: none;
   -ms-overflow-style: none;
   cursor: grab;
+  padding-right: 60px;
 }
-.work-table::-webkit-scrollbar { display: none; }
-.work-table.grabbing { cursor: grabbing; }
+.pf-table:active { cursor: grabbing; }
+.pf-table::-webkit-scrollbar { display: none; }
 
-/* Cada pieza */
-.wt-item {
+/* CADA PIEZA */
+.pf-item {
   flex-shrink: 0;
   width: var(--w);
-  height: var(--h);
+  height: 100%;
   position: relative;
   overflow: hidden;
   background: var(--dark3);
   transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
               box-shadow 0.35s ease;
-  transform-origin: center center;
 }
-.wt-item:hover {
-  transform: scale(1.06);
+.pf-item:hover {
+  transform: scale(1.03);
   z-index: 10;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 0 40px rgba(0,0,0,0.8);
 }
-.wt-item img {
+.pf-item img {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
   pointer-events: none;
 }
-.wt-item.wt-video iframe {
+.pf-item.pf-video iframe {
   width: 100%; height: 100%;
   display: block; border: none;
-  pointer-events: all;
 }
 
-/* FLECHAS */
-.wt-arrow {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  width: 48px; height: 48px; border-radius: 50%;
-  background: rgba(10,10,10,0.85);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: var(--light); font-size: 1.5rem;
-  cursor: pointer; z-index: 50;
+/* FLECHA DERECHA */
+.pf-arrow {
+  position: absolute; right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 52px; height: 52px;
+  background: rgba(10,10,10,0.9);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 50%;
+  color: var(--light); font-size: 1.6rem;
+  cursor: pointer; z-index: 20;
   display: flex; align-items: center; justify-content: center;
   transition: all 0.3s;
+  margin-right: 4px;
 }
-.wt-arrow:hover { border-color: var(--red); color: var(--red); }
-.wt-arrow-left { left: 0.5rem; }
-.wt-arrow-right { right: 0.5rem; }
-.wt-arrow.hidden { opacity: 0; pointer-events: none; }
+.pf-arrow:hover { border-color: var(--orange); color: var(--orange); }
 
-/* BARRA DE SCROLL */
-.wt-scrollbar {
-  padding: 0.8rem 5rem 0;
-}
-.wt-scrollbar-track {
-  width: 100%; height: 2px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 1px;
+/* SCROLLBAR */
+.pf-scrollbar {
+  height: 2px;
+  background: rgba(255,255,255,0.07);
   position: relative;
+  flex-shrink: 0;
 }
-.wt-scrollbar-thumb {
+.pf-scrollbar-thumb {
   position: absolute; top: 0; left: 0;
-  height: 2px; width: 20%;
-  background: var(--red);
-  border-radius: 1px;
+  height: 2px; width: 15%;
+  background: var(--orange);
   transition: left 0.1s linear;
+}
+
+/* ÁLBUM WRAP (fotografía) */
+.pf-album-wrap {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-  .portfolio-section { padding: 3rem 1.5rem 0; }
-  .work-table { height: calc(100vh - 200px); padding-right: 1.5rem; }
-  .wt-scrollbar { padding: 0.8rem 1.5rem 0; }
+  .portfolio-section { flex-direction: column; height: auto; min-height: 100vh; }
+  .pf-left { width: 100%; padding: 3rem 2rem 1.5rem; flex-direction: row; align-items: flex-end; gap: 2rem; }
+  .pf-title { margin-bottom: 0; }
+  .pf-port, .pf-folio { font-size: clamp(3rem, 10vw, 5rem); }
+  .pf-filters { flex-direction: row; flex-wrap: wrap; gap: 0.5rem 1rem; }
+  .pf-btn { font-size: 1rem; }
+  .pf-right { height: 60vh; }
 }
 @media (max-width: 600px) {
-  .portfolio-section { padding: 3rem 1rem 0; }
-  .work-table { height: calc(100vh - 180px); }
-  .wt-arrow { width: 38px; height: 38px; font-size: 1.2rem; }
+  .pf-left { flex-direction: column; align-items: flex-start; padding: 2rem 1.2rem 1rem; }
+  .pf-right { height: 55vh; }
+  .pf-arrow { width: 40px; height: 40px; font-size: 1.3rem; }
 }
 .p-card {
   position: relative; overflow: hidden;
@@ -1221,143 +1285,142 @@ footer {
 <!-- ========== PORTFOLIO ========== -->
 <section class="portfolio-section" id="portfolio">
 
-  <!-- HEADER fijo -->
-  <div class="portfolio-header reveal">
-    <div>
-      <div class="section-eyebrow">Trabajos</div>
-      <h2 class="section-title">Mi Portfolio</h2>
+  <!-- PANEL IZQUIERDO FIJO -->
+  <div class="pf-left">
+    <div class="pf-title">
+      <span class="pf-port">PORT<span class="pf-dash">_</span></span>
+      <span class="pf-folio">FOLIO</span>
     </div>
-    <div class="filters">
-      <button class="filter-btn active" onclick="filterCards(this,'all')">Todo</button>
-      <button class="filter-btn" onclick="filterCards(this,'diseno')">Diseño</button>
-      <button class="filter-btn" onclick="filterCards(this,'foto')">Fotografía</button>
-      <button class="filter-btn" onclick="filterCards(this,'video')">Video</button>
-    </div>
+    <nav class="pf-filters">
+      <button class="pf-btn active" onclick="pfFilter(this,'all')">TODO</button>
+      <button class="pf-btn" onclick="pfFilter(this,'diseno')">DISEÑO</button>
+      <button class="pf-btn" onclick="pfFilter(this,'foto')">FOTOGRAFÍA</button>
+      <button class="pf-btn" onclick="pfFilter(this,'video')">VIDEO</button>
+    </nav>
   </div>
 
-  <!-- MESA DE TRABAJO HORIZONTAL -->
-  <div class="work-table-wrap" id="workTableWrap">
-    <div class="work-table" id="workTable">
+  <!-- PANEL DERECHO — MESA HORIZONTAL -->
+  <div class="pf-right" id="pfRight">
+
+    <!-- MESA DE TRABAJO -->
+    <div class="pf-table" id="pfTable">
 
       <!-- DISEÑO -->
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:180px; --h:320px">
+      <div class="pf-item" data-cat="diseno" style="--w:180px;--h:100%">
         <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2026.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:240px; --h:135px">
-        <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2025.jpg" loading="lazy" alt="">
-      </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:180px; --h:320px">
-        <img src="img/diseno/POSTER-DJBLAXX-JDK.jpg" loading="lazy" alt="">
-      </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:300px; --h:220px">
+      <div class="pf-item" data-cat="diseno" style="--w:300px;--h:100%">
         <img src="img/diseno/EXPERIENCIAS-DE-UN-KOLLA.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:240px; --h:135px">
-        <img src="img/diseno/APPAREL CHNG HISTORY 4.jpg" loading="lazy" alt="">
+      <div class="pf-item" data-cat="diseno" style="--w:180px;--h:100%">
+        <img src="img/diseno/POSTER-DJBLAXX-JDK.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:180px; --h:180px">
-        <img src="img/diseno/CAUR-DESERTIKA-BEER (1).jpg" loading="lazy" alt="">
-      </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:240px; --h:320px">
+      <div class="pf-item" data-cat="diseno" style="--w:260px;--h:100%">
         <img src="img/diseno/GREENSEEDLES REVISTA.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:300px; --h:220px">
-        <img src="img/diseno/NEW FAUNA ATACAMA DESIGN DUNAS.jpg" loading="lazy" alt="">
-      </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:180px; --h:320px">
-        <img src="img/diseno/PEÑA BLANCA 2025 FLYER INVITACIÓN.jpg" loading="lazy" alt="">
-      </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:240px; --h:135px">
-        <img src="img/diseno/POSTER FERRARI JDK 3.jpg" loading="lazy" alt="">
-      </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:180px; --h:320px">
+      <div class="pf-item" data-cat="diseno" style="--w:180px;--h:100%">
         <img src="img/diseno/ZATURNO CHNG KAYA 20225.jpg" loading="lazy" alt="">
       </div>
+      <div class="pf-item" data-cat="diseno" style="--w:280px;--h:100%">
+        <img src="img/diseno/NEW FAUNA ATACAMA DESIGN DUNAS.jpg" loading="lazy" alt="">
+      </div>
+      <div class="pf-item" data-cat="diseno" style="--w:180px;--h:100%">
+        <img src="img/diseno/PEÑA BLANCA 2025 FLYER INVITACIÓN.jpg" loading="lazy" alt="">
+      </div>
+      <div class="pf-item" data-cat="diseno" style="--w:260px;--h:100%">
+        <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2025.jpg" loading="lazy" alt="">
+      </div>
+      <div class="pf-item" data-cat="diseno" style="--w:220px;--h:100%">
+        <img src="img/diseno/APPAREL CHNG HISTORY 4.jpg" loading="lazy" alt="">
+      </div>
+      <div class="pf-item" data-cat="diseno" style="--w:220px;--h:100%">
+        <img src="img/diseno/CAUR-DESERTIKA-BEER (1).jpg" loading="lazy" alt="">
+      </div>
+      <div class="pf-item" data-cat="diseno" style="--w:260px;--h:100%">
+        <img src="img/diseno/POSTER FERRARI JDK 3.jpg" loading="lazy" alt="">
+      </div>
 
-      <!-- FOTOGRAFÍA — 1 representativa por álbum -->
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:240px; --h:320px">
+      <!-- FOTOGRAFÍA -->
+      <div class="pf-item" data-cat="foto" style="--w:220px;--h:100%">
         <img src="img/fotografia/dune/DJI_0993-Mejorado-NR.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:300px; --h:200px">
+      <div class="pf-item" data-cat="foto" style="--w:300px;--h:100%">
         <img src="img/fotografia/glam/GLAM XOXO JDK-01.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:180px; --h:270px">
+      <div class="pf-item" data-cat="foto" style="--w:180px;--h:100%">
         <img src="img/fotografia/nippon-rest/NIPPON PHOTO JDK-01.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:300px; --h:200px">
+      <div class="pf-item" data-cat="foto" style="--w:300px;--h:100%">
         <img src="img/fotografia/bts-tu.bicha/CATALINA VF -16.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:240px; --h:320px">
+      <div class="pf-item" data-cat="foto" style="--w:180px;--h:100%">
         <img src="img/fotografia/veranada-koya/CASCADA JUNCALITO _1.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:300px; --h:200px">
+      <div class="pf-item" data-cat="foto" style="--w:300px;--h:100%">
         <img src="img/fotografia/museo-frafran/STAGE MUSEO V FINAL_2.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:180px; --h:270px">
+      <div class="pf-item" data-cat="foto" style="--w:220px;--h:100%">
         <img src="img/fotografia/kaukari/DJI_0456.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:300px; --h:200px">
+      <div class="pf-item" data-cat="foto" style="--w:300px;--h:100%">
         <img src="img/fotografia/diss.vol2/DISS VOL2 CRISS-02.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:240px; --h:320px">
+      <div class="pf-item" data-cat="foto" style="--w:180px;--h:100%">
         <img src="img/fotografia/bts-4ever/P1010859.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:300px; --h:200px">
+      <div class="pf-item" data-cat="foto" style="--w:300px;--h:100%">
         <img src="img/fotografia/llanos-del-challe/P1050254.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:180px; --h:270px">
+      <div class="pf-item" data-cat="foto" style="--w:220px;--h:100%">
         <img src="img/fotografia/mineria/CAMARAS TRAMPA 1 RIO TINTO-01.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:240px; --h:160px">
+      <div class="pf-item" data-cat="foto" style="--w:180px;--h:100%">
         <img src="img/fotografia/bts-enfocado/LUKY-KODEX_12.jpg" loading="lazy" alt="">
       </div>
 
       <!-- VIDEO -->
-      <div class="wt-item wt-video" data-cat="video" data-mix="true" style="--w:480px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="pf-item pf-video" data-cat="video" style="--w:480px;--h:100%">
+        <iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="wt-item wt-video wt-short" data-cat="video" data-mix="true" style="--w:152px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="pf-item pf-video pf-short" data-cat="video" style="--w:160px;--h:100%">
+        <iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="wt-item wt-video" data-cat="video" data-mix="true" style="--w:480px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="pf-item pf-video" data-cat="video" style="--w:480px;--h:100%">
+        <iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="wt-item wt-video wt-short" data-cat="video" data-mix="true" style="--w:152px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="pf-item pf-video pf-short" data-cat="video" style="--w:160px;--h:100%">
+        <iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="wt-item wt-video" data-cat="video" data-mix="true" style="--w:480px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="pf-item pf-video" data-cat="video" style="--w:480px;--h:100%">
+        <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="wt-item wt-video wt-short" data-cat="video" data-mix="true" style="--w:152px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="pf-item pf-video pf-short" data-cat="video" style="--w:160px;--h:100%">
+        <iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="wt-item wt-video" data-cat="video" data-mix="true" style="--w:480px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="pf-item pf-video" data-cat="video" style="--w:480px;--h:100%">
+        <iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="wt-item wt-video wt-short" data-cat="video" data-mix="true" style="--w:152px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="pf-item pf-video pf-short" data-cat="video" style="--w:160px;--h:100%">
+        <iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="wt-item wt-video" data-cat="video" data-mix="true" style="--w:480px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="pf-item pf-video" data-cat="video" style="--w:480px;--h:100%">
+        <iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" frameborder="0" allowfullscreen></iframe>
       </div>
 
-    </div><!-- end work-table -->
+    </div><!-- end pf-table -->
 
-    <!-- FLECHAS DE NAVEGACIÓN -->
-    <button class="wt-arrow wt-arrow-left" id="wtLeft" onclick="scrollTable(-1)">‹</button>
-    <button class="wt-arrow wt-arrow-right" id="wtRight" onclick="scrollTable(1)">›</button>
+    <!-- FLECHA DERECHA -->
+    <button class="pf-arrow" id="pfArrow" onclick="pfScroll(1)">›</button>
 
-    <!-- BARRA DE SCROLL VISUAL -->
-    <div class="wt-scrollbar">
-      <div class="wt-scrollbar-track">
-        <div class="wt-scrollbar-thumb" id="wtThumb"></div>
-      </div>
+    <!-- SCROLLBAR -->
+    <div class="pf-scrollbar">
+      <div class="pf-scrollbar-thumb" id="pfThumb"></div>
     </div>
-  </div><!-- end work-table-wrap -->
 
-  <!-- CARRUSEL DE ÁLBUMES (vista fotografía) -->
-  <div class="albums-wrapper" data-cat="foto">
-    <div class="carousel-title">Álbumes de Fotografía</div>
+  </div><!-- end pf-right -->
+
+  <!-- CARRUSEL ÁLBUMES (solo en FOTOGRAFÍA) -->
+  <div class="pf-album-wrap" id="pfAlbumWrap" style="display:none">
     <div class="carousel-stage" id="carouselStage"></div>
     <button class="carousel-btn carousel-prev" onclick="carouselMove(-1)">‹</button>
     <button class="carousel-btn carousel-next" onclick="carouselMove(1)">›</button>
@@ -1367,14 +1430,14 @@ footer {
   <!-- LIGHTBOX -->
   <div class="album-lightbox" id="albumLightbox">
     <div class="lightbox-header">
-      <button class="lightbox-back" onclick="closeAlbum()">← Volver a álbumes</button>
+      <button class="lightbox-back" onclick="closeAlbum()">← Volver</button>
       <h3 class="lightbox-title" id="lightboxTitle"></h3>
       <button class="lightbox-close" onclick="closeAlbum()">✕</button>
     </div>
     <div class="lightbox-grid" id="lightboxGrid"></div>
   </div>
 
-  <!-- VISOR INDIVIDUAL -->
+  <!-- VISOR -->
   <div class="photo-viewer" id="photoViewer" onclick="closeViewer()">
     <button class="viewer-prev" onclick="event.stopPropagation();changePhoto(-1)">‹</button>
     <img class="viewer-img" id="viewerImg" src="" alt="">
@@ -1561,55 +1624,48 @@ hoverEls.forEach(el => {
   requestAnimationFrame(animRing);
 })();
 
-/* MESA DE TRABAJO — scroll horizontal */
+/* PORTFOLIO — MESA HORIZONTAL */
 (function(){
-  const table = document.getElementById('workTable');
-  if (!table) return;
+  const table = document.getElementById('pfTable');
+  if(!table) return;
 
   // Drag to scroll
   let isDown = false, startX, scrollLeft;
   table.addEventListener('mousedown', e => {
     if(e.target.closest('iframe')) return;
     isDown = true;
-    table.classList.add('grabbing');
     startX = e.pageX - table.offsetLeft;
     scrollLeft = table.scrollLeft;
   });
-  document.addEventListener('mouseup', () => { isDown = false; table.classList.remove('grabbing'); });
+  document.addEventListener('mouseup', () => { isDown = false; });
   table.addEventListener('mousemove', e => {
     if(!isDown) return;
     e.preventDefault();
     const x = e.pageX - table.offsetLeft;
     table.scrollLeft = scrollLeft - (x - startX) * 1.2;
-    updateScrollUI();
+    updatePfUI();
   });
 
-  // Scroll arrows
-  window.scrollTable = function(dir) {
-    table.scrollLeft += dir * 400;
-    setTimeout(updateScrollUI, 350);
+  // Arrow
+  window.pfScroll = function(dir) {
+    table.scrollLeft += dir * 500;
+    setTimeout(updatePfUI, 350);
   };
 
-  // Scrollbar thumb
-  function updateScrollUI() {
-    const thumb = document.getElementById('wtThumb');
-    const leftBtn = document.getElementById('wtLeft');
-    const rightBtn = document.getElementById('wtRight');
-    if (!thumb) return;
+  function updatePfUI() {
+    const thumb = document.getElementById('pfThumb');
+    if(!thumb) return;
     const max = table.scrollWidth - table.clientWidth;
     const pct = max > 0 ? table.scrollLeft / max : 0;
     const trackW = thumb.parentElement.offsetWidth;
-    const thumbW = Math.max(40, trackW * (table.clientWidth / table.scrollWidth));
+    const thumbW = Math.max(60, trackW * (table.clientWidth / table.scrollWidth));
     thumb.style.width = thumbW + 'px';
     thumb.style.left = (pct * (trackW - thumbW)) + 'px';
-    if(leftBtn) leftBtn.classList.toggle('hidden', table.scrollLeft <= 0);
-    if(rightBtn) rightBtn.classList.toggle('hidden', table.scrollLeft >= max - 2);
   }
 
-  table.addEventListener('scroll', updateScrollUI);
-  setTimeout(updateScrollUI, 300);
+  table.addEventListener('scroll', updatePfUI);
 
-  // Shuffle items randomly on load
+  // Shuffle on load
   function shuffle() {
     const items = [...table.children];
     for(let i = items.length - 1; i > 0; i--) {
@@ -1618,8 +1674,46 @@ hoverEls.forEach(el => {
     }
   }
   shuffle();
-  setTimeout(updateScrollUI, 100);
+  setTimeout(updatePfUI, 200);
+
+  // Touch swipe
+  let tx = 0;
+  table.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  table.addEventListener('touchmove', e => {
+    const diff = tx - e.touches[0].clientX;
+    table.scrollLeft += diff * 1.5;
+    tx = e.touches[0].clientX;
+    updatePfUI();
+  }, {passive:true});
 })();
+
+/* FILTER */
+window.pfFilter = function(btn, cat) {
+  document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const table = document.getElementById('pfTable');
+  const right = document.getElementById('pfRight');
+  const albumWrap = document.getElementById('pfAlbumWrap');
+
+  if(cat === 'foto') {
+    if(right) right.style.display = 'none';
+    if(albumWrap) { albumWrap.style.display = 'flex'; buildCarousel(); }
+  } else {
+    if(right) right.style.display = '';
+    if(albumWrap) albumWrap.style.display = 'none';
+    if(table) {
+      [...table.children].forEach(item => {
+        item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+      });
+      table.scrollLeft = 0;
+      setTimeout(() => {
+        const thumb = document.getElementById('pfThumb');
+        if(thumb) thumb.style.left = '0';
+      }, 100);
+    }
+  }
+};
 
 
 const hamburger = document.getElementById('navHamburger');
@@ -1668,7 +1762,7 @@ function filterCards(btn, cat){
   if(cat === 'foto'){
     // Mostrar carrusel, ocultar mesa
     if(tableWrap) tableWrap.style.display = 'none';
-    if(albumWrapper) { albumWrapper.style.display = 'block'; buildCarousel(); }
+    const pfAlbum = document.getElementById('pfAlbumWrap'); if(pfAlbum) { pfAlbum.style.display='flex'; buildCarousel(); }
   } else {
     // Mostrar mesa, ocultar carrusel
     if(tableWrap) tableWrap.style.display = '';
@@ -1895,8 +1989,8 @@ document.getElementById('contactForm').addEventListener('submit', async function
 
 /* INIT */
 (function(){
-  const albumWrapper = document.querySelector('.albums-wrapper');
-  if(albumWrapper) albumWrapper.style.display = 'none';
+  const albumWrap = document.getElementById('pfAlbumWrap');
+  if(albumWrap) albumWrap.style.display = 'none';
   buildCarousel();
 })();
 </script>
