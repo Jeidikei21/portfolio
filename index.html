@@ -2121,10 +2121,18 @@ function buildCarousel() {
   stage.innerHTML = '';
   dotsEl.innerHTML = '';
 
-  ALBUMS.forEach((album, i) => {
+  const total = ALBUMS.length;
+
+  // Creamos slides con índices extendidos para bucle infinito
+  // Clonamos: [...últimos 3] + [todos] + [...primeros 3]
+  const clonesBefore = 3;
+  const clonesAfter = 3;
+  const extendedTotal = total + clonesBefore + clonesAfter;
+
+  function createSlide(album, virtualIndex) {
     const slide = document.createElement('div');
     slide.className = 'album-slide';
-    slide.dataset.index = i;
+    slide.dataset.virtual = virtualIndex;
     slide.innerHTML = `
       <img src="img/fotografia/${album.folder}/${encodeURIComponent(album.cover)}" alt="${album.title}" loading="lazy">
       <div class="album-slide-info">
@@ -2134,63 +2142,91 @@ function buildCarousel() {
       </div>
     `;
     slide.addEventListener('click', () => {
-      if (i === carouselIndex) {
+      const realIndex = ((virtualIndex % total) + total) % total;
+      if (virtualIndex === carouselIndex) {
         openAlbum(album.folder, album.title, album.photos);
       } else {
-        carouselIndex = i;
+        carouselIndex = virtualIndex;
         updateCarousel();
       }
     });
     stage.appendChild(slide);
+  }
 
+  // Clones al inicio (últimos álbumes)
+  for (let i = total - clonesBefore; i < total; i++) {
+    createSlide(ALBUMS[i], i - total);
+  }
+  // Slides reales
+  for (let i = 0; i < total; i++) {
+    createSlide(ALBUMS[i], i);
+  }
+  // Clones al final (primeros álbumes)
+  for (let i = 0; i < clonesAfter; i++) {
+    createSlide(ALBUMS[i], total + i);
+  }
+
+  // Dots — solo para álbumes reales
+  for (let i = 0; i < total; i++) {
     const dot = document.createElement('div');
     dot.className = 'carousel-dot';
-    dot.addEventListener('click', () => { carouselIndex = i; updateCarousel(); });
+    dot.addEventListener('click', () => { carouselIndex = i; updateCarousel(true); });
     dotsEl.appendChild(dot);
-  });
+  }
 
-  updateCarousel();
+  updateCarousel(false);
 }
 
-function updateCarousel() {
+function updateCarousel(animate = true) {
   const slides = document.querySelectorAll('.album-slide');
   const dots = document.querySelectorAll('.carousel-dot');
+  const total = ALBUMS.length;
 
-  slides.forEach((slide, i) => {
-    const offset = i - carouselIndex;
+  slides.forEach(slide => {
+    const vi = parseInt(slide.dataset.virtual);
+    const offset = vi - carouselIndex;
     const abs = Math.abs(offset);
 
-    const tx = offset * 200;
-    const scale = abs === 0 ? 1 : abs === 1 ? 0.75 : abs === 2 ? 0.58 : 0.46;
-    const tz = abs === 0 ? 0 : abs === 1 ? -100 : -180;
-    const rotY = offset * 10;
+    const scale = abs === 0 ? 1.5 : abs === 1 ? 0.95 : abs === 2 ? 0.75 : 0.6;
+    const tx = offset * 420;
+    const tz = abs === 0 ? 0 : abs === 1 ? -80 : -150;
+    const rotY = offset * 8;
     const opacity = abs > 3 ? 0 : abs === 3 ? 0.25 : 1;
     const brightness = abs === 0 ? 1 : abs === 1 ? 0.55 : 0.35;
 
+    slide.style.transition = animate
+      ? 'all 0.5s cubic-bezier(0.25,0.46,0.45,0.94)'
+      : 'none';
     slide.style.transform = `translate(-50%,-50%) translateX(${tx}px) translateZ(${tz}px) rotateY(${rotY}deg) scale(${scale})`;
     slide.style.opacity = opacity;
     slide.style.zIndex = 10 - abs;
     slide.style.filter = `brightness(${brightness})`;
-    slide.classList.toggle('active', i === carouselIndex);
+    slide.classList.toggle('active', vi === carouselIndex);
   });
 
-  dots.forEach((dot, i) => dot.classList.toggle('active', i === carouselIndex));
+  // Dots — normalizar índice real
+  const realIndex = ((carouselIndex % total) + total) % total;
+  dots.forEach((dot, i) => dot.classList.toggle('active', i === realIndex));
 }
 
 function carouselMove(dir) {
-  carouselIndex = (carouselIndex + dir + ALBUMS.length) % ALBUMS.length;
-  updateCarousel();
+  const total = ALBUMS.length;
+  carouselIndex += dir;
+
+  updateCarousel(true);
+
+  // Bucle infinito: si llegamos a los clones, saltamos al real sin animación
+  setTimeout(() => {
+    if (carouselIndex >= total) {
+      carouselIndex = carouselIndex - total;
+      updateCarousel(false);
+    } else if (carouselIndex < -2) {
+      carouselIndex = carouselIndex + total;
+      updateCarousel(false);
+    }
+  }, 520); // justo después de que termina la transición
 }
 
-// Touch swipe
-let touchStartX = 0;
-document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
-document.addEventListener('touchend', e => {
-  const wrapper = document.querySelector('.albums-wrapper');
-  if (!wrapper || wrapper.style.display === 'none' || wrapper.style.display === '') return;
-  const diff = touchStartX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 40) carouselMove(diff > 0 ? 1 : -1);
-});
 
 /* SISTEMA DE ÁLBUMES */
 let currentAlbumFolder = '';
