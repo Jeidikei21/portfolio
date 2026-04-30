@@ -359,10 +359,19 @@ nav.scrolled {
 /* =============================================
    PORTFOLIO
 ============================================= */
-.portfolio-section { padding: 9rem 5rem; }
+/* =============================================
+   PORTFOLIO — HORIZONTAL SLIDE
+============================================= */
+.portfolio-section {
+  padding: 5rem 5rem 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
 .portfolio-header {
   display: flex; justify-content: space-between; align-items: flex-end;
-  margin-bottom: 4rem;
+  margin-bottom: 1.5rem; flex-shrink: 0;
 }
 .filters { display: flex; gap: 0.5rem; }
 .filter-btn {
@@ -375,6 +384,104 @@ nav.scrolled {
 }
 .filter-btn.active, .filter-btn:hover {
   color: var(--light); border-bottom-color: var(--red);
+}
+
+/* HORIZONTAL SLIDE CONTAINER */
+.h-slide-wrap {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+.h-slide-track {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 4px;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  padding-right: 60px;
+}
+.h-slide-track:active { cursor: grabbing; }
+.h-slide-track::-webkit-scrollbar { display: none; }
+
+/* ITEM BASE */
+.h-item {
+  flex-shrink: 0;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: var(--dark3);
+  transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.3s;
+}
+.h-item:hover {
+  transform: scale(1.03);
+  z-index: 10;
+  box-shadow: 0 0 40px rgba(0,0,0,0.8);
+}
+.h-item img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  pointer-events: none;
+}
+.h-item iframe {
+  width: 100%; height: 100%;
+  display: block; border: none;
+  pointer-events: all;
+}
+
+/* PROPORCIONES — cada una calcula el ancho basado en el alto disponible */
+/* 9:16 vertical  → ancho = altura * 9/16 */
+.h-916  { aspect-ratio: 9/16;  height: 100%; width: auto; }
+/* 16:9 horizontal → ancho = altura * 16/9 */
+.h-169  { aspect-ratio: 16/9; height: 100%; width: auto; }
+/* 3:4 vertical   → ancho = altura * 3/4 */
+.h-34   { aspect-ratio: 3/4;  height: 100%; width: auto; }
+/* 4:3 horizontal → ancho = altura * 4/3 */
+.h-43   { aspect-ratio: 4/3;  height: 100%; width: auto; }
+/* 1:1 cuadrado */
+.h-11   { aspect-ratio: 1/1;  height: 100%; width: auto; }
+
+/* FLECHA */
+.h-arrow {
+  position: absolute; right: 6px; top: 50%;
+  transform: translateY(-50%);
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(10,10,10,0.9);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--light); font-size: 1.5rem;
+  cursor: pointer; z-index: 20;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+}
+.h-arrow:hover { border-color: var(--red); color: var(--red); }
+
+/* SCROLLBAR */
+.h-scrollbar {
+  height: 2px; background: rgba(255,255,255,0.07);
+  flex-shrink: 0; position: relative; margin-top: 4px;
+}
+.h-scrollbar-thumb {
+  position: absolute; top: 0; left: 0;
+  height: 2px; background: var(--red);
+  transition: left 0.08s linear;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .portfolio-section { padding: 3rem 2rem 0; height: auto; min-height: 60vh; }
+  .h-slide-wrap { height: 55vw; min-height: 220px; }
+  .h-916 { flex-shrink: 0; width: auto; }
+  .h-169, .h-43 { flex-shrink: 0; }
+}
+@media (max-width: 600px) {
+  .portfolio-section { padding: 2rem 1rem 0; }
+  .h-slide-wrap { height: 50vw; min-height: 180px; }
+  .h-arrow { width: 36px; height: 36px; font-size: 1.2rem; }
 }
 /* =============================================
    MESA DE TRABAJO HORIZONTAL
@@ -1221,7 +1328,6 @@ footer {
 <!-- ========== PORTFOLIO ========== -->
 <section class="portfolio-section" id="portfolio">
 
-  <!-- HEADER fijo -->
   <div class="portfolio-header reveal">
     <div>
       <div class="section-eyebrow">Trabajos</div>
@@ -1235,127 +1341,103 @@ footer {
     </div>
   </div>
 
-  <!-- MESA DE TRABAJO HORIZONTAL -->
-  <div class="work-table-wrap" id="workTableWrap">
-    <div class="work-table" id="workTable">
+  <!-- CONTENEDOR HORIZONTAL -->
+  <div class="h-slide-wrap" id="hSlideWrap">
+    <div class="h-slide-track" id="hTrack">
 
-      <!-- DISEÑO -->
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:180px; --h:320px">
+      <!-- ===== TODO + DISEÑO + VIDEO: items con proporciones reales ===== -->
+
+      <!-- 9:16 diseño -->
+      <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2026.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:240px; --h:135px">
-        <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2025.jpg" loading="lazy" alt="">
+      <!-- 16:9 video -->
+      <div class="h-item h-169" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:180px; --h:320px">
+      <!-- 9:16 diseño -->
+      <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/POSTER-DJBLAXX-JDK.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:300px; --h:220px">
+      <!-- 9:16 short -->
+      <div class="h-item h-916" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <!-- 9:16 diseño -->
+      <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/EXPERIENCIAS-DE-UN-KOLLA.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:240px; --h:135px">
-        <img src="img/diseno/APPAREL CHNG HISTORY 4.jpg" loading="lazy" alt="">
+      <!-- 16:9 video -->
+      <div class="h-item h-169" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:180px; --h:180px">
-        <img src="img/diseno/CAUR-DESERTIKA-BEER (1).jpg" loading="lazy" alt="">
-      </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:240px; --h:320px">
+      <!-- 9:16 diseño -->
+      <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/GREENSEEDLES REVISTA.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:300px; --h:220px">
+      <!-- 9:16 short -->
+      <div class="h-item h-916" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <!-- 4:3 diseño -->
+      <div class="h-item h-43" data-cat="diseno">
         <img src="img/diseno/NEW FAUNA ATACAMA DESIGN DUNAS.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:180px; --h:320px">
-        <img src="img/diseno/PEÑA BLANCA 2025 FLYER INVITACIÓN.jpg" loading="lazy" alt="">
+      <!-- 16:9 video -->
+      <div class="h-item h-169" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:240px; --h:135px">
-        <img src="img/diseno/POSTER FERRARI JDK 3.jpg" loading="lazy" alt="">
-      </div>
-      <div class="wt-item" data-cat="diseno" data-mix="true" style="--w:180px; --h:320px">
+      <!-- 9:16 diseño -->
+      <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/ZATURNO CHNG KAYA 20225.jpg" loading="lazy" alt="">
       </div>
-
-      <!-- FOTOGRAFÍA — 1 representativa por álbum -->
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:240px; --h:320px">
-        <img src="img/fotografia/dune/DJI_0993-Mejorado-NR.jpg" loading="lazy" alt="">
+      <!-- 9:16 short -->
+      <div class="h-item h-916" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:300px; --h:200px">
-        <img src="img/fotografia/glam/GLAM XOXO JDK-01.jpg" loading="lazy" alt="">
+      <!-- 9:16 diseño -->
+      <div class="h-item h-916" data-cat="diseno">
+        <img src="img/diseno/PEÑA BLANCA 2025 FLYER INVITACIÓN.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:180px; --h:270px">
-        <img src="img/fotografia/nippon-rest/NIPPON PHOTO JDK-01.jpg" loading="lazy" alt="">
+      <!-- 16:9 video -->
+      <div class="h-item h-169" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:300px; --h:200px">
-        <img src="img/fotografia/bts-tu.bicha/CATALINA VF -16.jpg" loading="lazy" alt="">
+      <!-- 4:3 diseño -->
+      <div class="h-item h-43" data-cat="diseno">
+        <img src="img/diseno/APPAREL CHNG HISTORY 4.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:240px; --h:320px">
-        <img src="img/fotografia/veranada-koya/CASCADA JUNCALITO _1.jpg" loading="lazy" alt="">
+      <!-- 9:16 short -->
+      <div class="h-item h-916" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:300px; --h:200px">
-        <img src="img/fotografia/museo-frafran/STAGE MUSEO V FINAL_2.jpg" loading="lazy" alt="">
+      <!-- 9:16 diseño -->
+      <div class="h-item h-916" data-cat="diseno">
+        <img src="img/diseno/POSTER FERRARI JDK 3.jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:180px; --h:270px">
-        <img src="img/fotografia/kaukari/DJI_0456.jpg" loading="lazy" alt="">
+      <!-- 16:9 video -->
+      <div class="h-item h-169" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:300px; --h:200px">
-        <img src="img/fotografia/diss.vol2/DISS VOL2 CRISS-02.jpg" loading="lazy" alt="">
+      <!-- 1:1 diseño -->
+      <div class="h-item h-11" data-cat="diseno">
+        <img src="img/diseno/CAUR-DESERTIKA-BEER (1).jpg" loading="lazy" alt="">
       </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:240px; --h:320px">
-        <img src="img/fotografia/bts-4ever/P1010859.jpg" loading="lazy" alt="">
-      </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:300px; --h:200px">
-        <img src="img/fotografia/llanos-del-challe/P1050254.jpg" loading="lazy" alt="">
-      </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:180px; --h:270px">
-        <img src="img/fotografia/mineria/CAMARAS TRAMPA 1 RIO TINTO-01.jpg" loading="lazy" alt="">
-      </div>
-      <div class="wt-item" data-cat="foto" data-mix="true" style="--w:240px; --h:160px">
-        <img src="img/fotografia/bts-enfocado/LUKY-KODEX_12.jpg" loading="lazy" alt="">
+      <!-- 4:3 diseño -->
+      <div class="h-item h-43" data-cat="diseno">
+        <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2025.jpg" loading="lazy" alt="">
       </div>
 
-      <!-- VIDEO -->
-      <div class="wt-item wt-video" data-cat="video" data-mix="true" style="--w:480px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div class="wt-item wt-video wt-short" data-cat="video" data-mix="true" style="--w:152px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div class="wt-item wt-video" data-cat="video" data-mix="true" style="--w:480px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div class="wt-item wt-video wt-short" data-cat="video" data-mix="true" style="--w:152px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div class="wt-item wt-video" data-cat="video" data-mix="true" style="--w:480px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div class="wt-item wt-video wt-short" data-cat="video" data-mix="true" style="--w:152px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div class="wt-item wt-video" data-cat="video" data-mix="true" style="--w:480px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div class="wt-item wt-video wt-short" data-cat="video" data-mix="true" style="--w:152px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div class="wt-item wt-video" data-cat="video" data-mix="true" style="--w:480px; --h:270px">
-        <iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
+    </div><!-- end h-slide-track -->
 
-    </div><!-- end work-table -->
+    <button class="h-arrow" onclick="hScroll(1)">›</button>
 
-    <!-- FLECHAS DE NAVEGACIÓN -->
-    <button class="wt-arrow wt-arrow-left" id="wtLeft" onclick="scrollTable(-1)">‹</button>
-    <button class="wt-arrow wt-arrow-right" id="wtRight" onclick="scrollTable(1)">›</button>
-
-    <!-- BARRA DE SCROLL VISUAL -->
-    <div class="wt-scrollbar">
-      <div class="wt-scrollbar-track">
-        <div class="wt-scrollbar-thumb" id="wtThumb"></div>
-      </div>
+    <div class="h-scrollbar">
+      <div class="h-scrollbar-thumb" id="hThumb"></div>
     </div>
-  </div><!-- end work-table-wrap -->
+  </div><!-- end h-slide-wrap -->
 
-  <!-- CARRUSEL DE ÁLBUMES (vista fotografía) -->
+  <!-- CARRUSEL ÁLBUMES (FOTOGRAFÍA) -->
   <div class="albums-wrapper" data-cat="foto">
     <div class="carousel-title">Álbumes de Fotografía</div>
     <div class="carousel-stage" id="carouselStage"></div>
@@ -1374,7 +1456,7 @@ footer {
     <div class="lightbox-grid" id="lightboxGrid"></div>
   </div>
 
-  <!-- VISOR INDIVIDUAL -->
+  <!-- VISOR -->
   <div class="photo-viewer" id="photoViewer" onclick="closeViewer()">
     <button class="viewer-prev" onclick="event.stopPropagation();changePhoto(-1)">‹</button>
     <img class="viewer-img" id="viewerImg" src="" alt="">
@@ -1656,37 +1738,86 @@ function updateDots(){
   dots.forEach((d,i) => d.classList.toggle('active', i===active));
 }
 
+/* HORIZONTAL SLIDE — scroll JS */
+(function(){
+  const track = document.getElementById('hTrack');
+  if(!track) return;
+
+  // Drag to scroll
+  let isDown = false, startX, scrollLeft;
+  track.addEventListener('mousedown', e => {
+    if(e.target.closest('iframe')) return;
+    isDown = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+  document.addEventListener('mouseup', () => { isDown = false; });
+  track.addEventListener('mousemove', e => {
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    track.scrollLeft = scrollLeft - (x - startX) * 1.2;
+    updateHUI();
+  });
+
+  // Arrow
+  window.hScroll = function(dir) {
+    track.scrollLeft += dir * 500;
+    setTimeout(updateHUI, 350);
+  };
+
+  // Scrollbar
+  function updateHUI() {
+    const thumb = document.getElementById('hThumb');
+    if(!thumb) return;
+    const max = track.scrollWidth - track.clientWidth;
+    const pct = max > 0 ? track.scrollLeft / max : 0;
+    const trackW = thumb.parentElement.offsetWidth;
+    const thumbW = Math.max(60, trackW * (track.clientWidth / track.scrollWidth));
+    thumb.style.width = thumbW + 'px';
+    thumb.style.left = (pct * (trackW - thumbW)) + 'px';
+  }
+
+  track.addEventListener('scroll', updateHUI);
+  setTimeout(updateHUI, 300);
+
+  // Touch swipe
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchmove', e => {
+    const diff = tx - e.touches[0].clientX;
+    track.scrollLeft += diff * 1.5;
+    tx = e.touches[0].clientX;
+    updateHUI();
+  }, {passive:true});
+})();
+
 /* FILTER */
 function filterCards(btn, cat){
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 
-  const table = document.getElementById('workTable');
-  const tableWrap = document.getElementById('workTableWrap');
+  const track = document.getElementById('hTrack');
+  const slideWrap = document.getElementById('hSlideWrap');
   const albumWrapper = document.querySelector('.albums-wrapper');
 
   if(cat === 'foto'){
-    // Mostrar carrusel, ocultar mesa
-    if(tableWrap) tableWrap.style.display = 'none';
+    if(slideWrap) slideWrap.style.display = 'none';
     if(albumWrapper) { albumWrapper.style.display = 'block'; buildCarousel(); }
   } else {
-    // Mostrar mesa, ocultar carrusel
-    if(tableWrap) tableWrap.style.display = '';
+    if(slideWrap) slideWrap.style.display = '';
     if(albumWrapper) albumWrapper.style.display = 'none';
-    // Filtrar items en la mesa
-    if(table) {
-      [...table.children].forEach(item => {
+    if(track) {
+      [...track.children].forEach(item => {
         item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
       });
+      track.scrollLeft = 0;
+      setTimeout(() => {
+        const thumb = document.getElementById('hThumb');
+        if(thumb) thumb.style.left = '0';
+      }, 100);
     }
   }
-
-  // Reset scroll
-  if(table) table.scrollLeft = 0;
-  setTimeout(() => {
-    const thumb = document.getElementById('wtThumb');
-    if(thumb) { thumb.style.left = '0'; }
-  }, 100);
 }
 
 /* REVEAL ON SCROLL */
@@ -1898,6 +2029,17 @@ document.getElementById('contactForm').addEventListener('submit', async function
   const albumWrapper = document.querySelector('.albums-wrapper');
   if(albumWrapper) albumWrapper.style.display = 'none';
   buildCarousel();
+
+  // Add Delight font
+  const style = document.createElement('style');
+  style.textContent = `
+    @font-face { font-family: "Delight"; src: url("font/delight-font/delight-black.otf") format("opentype"); font-weight: 900; }
+    @font-face { font-family: "Delight"; src: url("font/delight-font/delight-bold.otf") format("opentype"); font-weight: 700; }
+    @font-face { font-family: "Delight"; src: url("font/delight-font/delight-medium.otf") format("opentype"); font-weight: 500; }
+    @font-face { font-family: "Delight"; src: url("font/delight-font/delight-regular.otf") format("opentype"); font-weight: 400; }
+    @font-face { font-family: "Delight"; src: url("font/delight-font/delight-light.otf") format("opentype"); font-weight: 300; }
+  `;
+  document.head.appendChild(style);
 })();
 </script>
 
