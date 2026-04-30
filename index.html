@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+/* DELIGHT — textos, información, navegación */
 @font-face { font-family: 'Delight'; src: url('font/delight-font/delight-black.otf') format('opentype'); font-weight: 900; font-display: swap; }
 @font-face { font-family: 'Delight'; src: url('font/delight-font/delight-extrabold.otf') format('opentype'); font-weight: 800; font-display: swap; }
 @font-face { font-family: 'Delight'; src: url('font/delight-font/delight-bold.otf') format('opentype'); font-weight: 700; font-display: swap; }
@@ -23,6 +24,22 @@
 @font-face { font-family: 'Delight'; src: url('font/delight-font/delight-light.otf') format('opentype'); font-weight: 300; font-display: swap; }
 @font-face { font-family: 'Delight'; src: url('font/delight-font/delight-extralight.otf') format('opentype'); font-weight: 200; font-display: swap; }
 @font-face { font-family: 'Delight'; src: url('font/delight-font/delight-thin.otf') format('opentype'); font-weight: 100; font-display: swap; }
+
+/* GLANCYR — títulos grandes e impactantes */
+@font-face { font-family: 'Glancyr'; src: url('font/glancyr-font/Glancyr-Bold.otf') format('opentype'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Glancyr'; src: url('font/glancyr-font/Glancyr-BoldItalic.otf') format('opentype'); font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Glancyr'; src: url('font/glancyr-font/Glancyr-SemiBold.otf') format('opentype'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Glancyr'; src: url('font/glancyr-font/Glancyr-SemiBoldItalic.otf') format('opentype'); font-weight: 600; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Glancyr'; src: url('font/glancyr-font/Glancyr-Medium.otf') format('opentype'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Glancyr'; src: url('font/glancyr-font/Glancyr-MediumItalic.otf') format('opentype'); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Glancyr'; src: url('font/glancyr-font/Glancyr-Regular.otf') format('opentype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Glancyr'; src: url('font/glancyr-font/Glancyr-Italic.otf') format('opentype'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Glancyr'; src: url('font/glancyr-font/Glancyr-Light.otf') format('opentype'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Glancyr'; src: url('font/glancyr-font/Glancyr-LightItalic.otf') format('opentype'); font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Glancyr'; src: url('font/glancyr-font/Glancyr-ExtraLight.otf') format('opentype'); font-weight: 200; font-display: swap; }
+@font-face { font-family: 'Glancyr'; src: url('font/glancyr-font/Glancyr-ExtraLightItalic.otf') format('opentype'); font-weight: 200; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Glancyr'; src: url('font/glancyr-font/Glancyr-Thin.otf') format('opentype'); font-weight: 100; font-display: swap; }
+@font-face { font-family: 'Glancyr'; src: url('font/glancyr-font/Glancyr-ThinItalic.otf') format('opentype'); font-weight: 100; font-style: italic; font-display: swap; }
 </style>
 <style>
 /* =============================================
@@ -1037,62 +1054,103 @@ footer {
 .footer-back:hover { color: var(--red); }
 
 /* =============================================
-   DELIGHT FONT — aplicada globalmente
+   TIPOGRAFÍAS — Glancyr + Delight
 ============================================= */
-/* Títulos principales */
-.hero-name, .section-title, .contact-title,
-.pf-port, .pf-folio, .lightbox-title,
-.album-slide-title, .service-title, .form-title {
-  font-family: 'Delight', 'Cormorant Garamond', serif;
-}
-/* Navegación y botones */
-.nav-links a, .nav-cta, .filter-btn, .pf-btn,
-.mining-cta, .btn-primary, .btn-ghost,
-.mobile-links a, .footer-back, .form-submit {
-  font-family: 'Delight', 'Inter', sans-serif;
-  font-weight: 300;
-}
-/* Labels y eyebrows */
-.section-eyebrow, .hero-eyebrow, .card-cat,
-.album-cat, .album-slide-cat, .badge-label,
-.social-platform, .form-label, .companies-label,
-.mining-tag, .footer-copy {
-  font-family: 'Delight', 'Inter', sans-serif;
-  font-weight: 200;
-  letter-spacing: 0.3em;
-}
-/* Textos descriptivos */
-.about-desc, .mining-desc, .contact-sub,
-.service-desc, .hero-tagline {
-  font-family: 'Delight', 'Inter', sans-serif;
-  font-weight: 300;
-}
-/* Hero name — negro/black */
-.hero-name {
-  font-weight: 900;
-}
-/* Section titles — semibold */
-.section-title, .contact-title {
+
+/* GLANCYR — Títulos grandes e impactantes */
+.hero-name,
+.section-title,
+.contact-title,
+.album-slide-title,
+.lightbox-title,
+.about-section .section-title {
+  font-family: 'Glancyr', serif;
   font-weight: 700;
 }
-/* About badges — bold */
-.badge-num {
-  font-family: 'Delight', sans-serif;
-  font-weight: 900;
+.hero-name .italic { font-style: italic; }
+.hero-name .outline { font-weight: 200; }
+
+/* Sección minería — título impactante */
+.mining-section .section-title {
+  font-family: 'Glancyr', serif;
+  font-weight: 600;
 }
-/* Social handles */
-.social-handle {
+
+/* DELIGHT — Navegación, botones, info */
+body {
+  font-family: 'Delight', 'Inter', sans-serif;
+  font-weight: 300;
+}
+.nav-links a {
   font-family: 'Delight', sans-serif;
   font-weight: 300;
 }
+.nav-cta {
+  font-family: 'Delight', sans-serif;
+  font-weight: 400;
+}
+.filter-btn, .pf-btn, .mobile-links a {
+  font-family: 'Delight', sans-serif;
+  font-weight: 300;
+}
+.btn-primary, .btn-ghost, .mining-cta, .form-submit {
+  font-family: 'Delight', sans-serif;
+  font-weight: 500;
+}
+/* Eyebrows y labels — Delight ExtraLight */
+.section-eyebrow, .hero-eyebrow,
+.social-platform, .form-label,
+.companies-label, .mining-tag,
+.album-slide-cat, .card-cat,
+.footer-copy, .badge-label {
+  font-family: 'Delight', sans-serif;
+  font-weight: 200;
+}
+/* Textos descriptivos — Delight Light */
+.about-desc, .mining-desc, .contact-sub,
+.service-desc, .hero-tagline,
+.social-handle, .album-slide-count {
+  font-family: 'Delight', sans-serif;
+  font-weight: 300;
+}
+/* Service titles — Delight Medium */
+.service-title {
+  font-family: 'Delight', sans-serif;
+  font-weight: 500;
+}
+/* Form */
+.form-title {
+  font-family: 'Glancyr', serif;
+  font-weight: 600;
+}
+.form-control {
+  font-family: 'Delight', sans-serif;
+  font-weight: 300;
+}
+/* Footer logo */
+.footer-logo img { opacity: 0.25; }
+.footer-back {
+  font-family: 'Delight', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.2em;
+}
+/* Hero stat nums */
+.hero-stat-num {
+  font-family: 'Glancyr', serif;
+  font-weight: 700;
+}
+.hero-stat-label {
+  font-family: 'Delight', sans-serif;
+  font-weight: 200;
+}
+/* Badge num */
+.badge-num {
+  font-family: 'Glancyr', serif;
+  font-weight: 700;
+}
 /* Carrusel más grande */
-.carousel-stage {
-  height: 680px;
-}
-.album-slide {
-  width: 320px;
-  height: 427px; /* 3:4 ratio */
-}
+.carousel-stage { height: 680px; }
+.album-slide { width: 320px; height: 427px; }
 @media (max-width: 900px) {
   .carousel-stage { height: 520px; }
   .album-slide { width: 240px; height: 320px; }
@@ -1101,6 +1159,7 @@ footer {
   .carousel-stage { height: 400px; }
   .album-slide { width: 190px; height: 253px; }
 }
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(28px); }
   to { opacity: 1; transform: translateY(0); }
