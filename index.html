@@ -401,7 +401,7 @@ nav.scrolled {
 
 /* ---- PANEL IZQUIERDO ---- */
 .pf-left {
-  width: 340px;
+  width: 320px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -410,15 +410,12 @@ nav.scrolled {
   background: #000;
   z-index: 5;
 }
-.pf-logo-wrap {
-  margin-bottom: 2.5rem;
-}
+.pf-logo-wrap { margin-bottom: 2rem; }
 .pf-logo-img {
   width: 100%;
-  max-width: 280px;
+  max-width: 260px;
   height: auto;
   display: block;
-  filter: brightness(1);
 }
 .pf-filters {
   display: flex;
@@ -428,16 +425,16 @@ nav.scrolled {
 }
 .pf-btn {
   background: none; border: none;
-  font-family: 'Delight', 'Bebas Neue', sans-serif;
-  font-weight: 700;
-  font-size: clamp(1.2rem, 2.2vw, 2rem);
-  letter-spacing: 0.05em;
-  color: rgba(255,255,255,0.55);
+  font-family: 'Delight', sans-serif;
+  font-weight: 300;
+  font-size: clamp(1rem, 1.8vw, 1.5rem);
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.45);
   cursor: pointer;
   transition: color 0.2s;
-  padding: 0.05rem 0;
+  padding: 0.08rem 0;
   text-align: left;
-  line-height: 1.15;
+  line-height: 1.3;
 }
 .pf-btn:hover,
 .pf-btn.active { color: var(--orange); }
@@ -465,61 +462,44 @@ nav.scrolled {
   -ms-overflow-style: none;
   cursor: grab;
   background: #000;
+  padding-right: 55px;
 }
 .pf-table:active { cursor: grabbing; }
 .pf-table::-webkit-scrollbar { display: none; }
 
-/* ---- CELDAS ---- */
-/* Columna base — contiene 1 o 2 celdas apiladas */
-.pf-col {
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  height: 100%;
-}
-
+/* ---- CELDAS BASE ---- */
 .pf-cell {
   flex-shrink: 0;
   position: relative;
   overflow: hidden;
   background: #111;
-  transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
-              box-shadow 0.35s ease;
+  transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.35s;
 }
 .pf-cell:hover {
   transform: scale(1.04);
   z-index: 10;
   box-shadow: 0 0 50px rgba(0,0,0,0.9);
 }
-.pf-cell img, .pf-cell iframe {
+.pf-cell img {
   width: 100%; height: 100%;
-  object-fit: cover; display: block;
-  pointer-events: none;
-  border: none;
+  object-fit: cover; display: block; pointer-events: none;
 }
-.pf-cell.pf-iframe iframe { pointer-events: all; }
+.pf-cell iframe {
+  width: 100%; height: 100%;
+  display: block; border: none; pointer-events: all;
+}
 
-/* Proporciones */
-/* 9:16 — vertical, ocupa toda la altura */
+/* ---- FORMATOS DE CELDA ---- */
+/* 9:16 vertical — ocupa toda la altura */
 .pf-v916 {
-  width: 180px;
+  width: 175px;
   height: 100%;
 }
-/* 16:9 — horizontal, ocupa toda la altura pero ancho mayor */
-.pf-h169 {
-  width: 340px;
-  height: 100%;
-}
-/* 3:4 — vertical mediano */
-.pf-v34 {
-  width: 220px;
-  height: 100%;
-}
-/* Apiladas: dos 9:16 una sobre otra = mismo alto que una grande */
+
+/* Stack: 2 celdas apiladas — mismo ancho que 9:16, cada una 50% alto */
 .pf-stack {
   flex-shrink: 0;
-  width: 180px;
+  width: 175px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -528,18 +508,41 @@ nav.scrolled {
 .pf-stack .pf-cell {
   flex: 1;
   width: 100%;
-  height: 50%;
+}
+
+/* Col mixta: 16:9 arriba + 2 pequeñas abajo */
+.pf-col-mix {
+  flex-shrink: 0;
+  width: 360px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.pf-top169 {
+  width: 100%;
+  flex: 0 0 56%;  /* 16:9 ocupa 56% del alto */
+}
+.pf-row-bot {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+}
+.pf-row-bot .pf-cell {
+  flex: 1;
+  height: 100%;
 }
 
 /* ---- FLECHA ---- */
 .pf-arrow {
   position: absolute; right: 6px; top: 50%;
   transform: translateY(-50%);
-  width: 48px; height: 48px;
+  width: 44px; height: 44px;
   background: rgba(0,0,0,0.9);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 50%;
-  color: #fff; font-size: 1.6rem;
+  color: #fff; font-size: 1.5rem;
   cursor: pointer; z-index: 20;
   display: flex; align-items: center; justify-content: center;
   transition: all 0.3s;
@@ -550,8 +553,8 @@ nav.scrolled {
 .pf-scrollbar {
   height: 2px;
   background: rgba(255,255,255,0.07);
-  position: relative;
   flex-shrink: 0;
+  position: relative;
 }
 .pf-scrollbar-thumb {
   position: absolute; top: 0; left: 0;
@@ -570,37 +573,27 @@ nav.scrolled {
   justify-content: center;
 }
 
-/* Carousel cards 3:4 */
-.album-slide {
-  width: 240px;
-  height: 320px;
-}
+/* Carousel 3:4 */
+.album-slide { width: 240px; height: 320px; }
 
 /* ---- RESPONSIVE ---- */
 @media (max-width: 900px) {
   .portfolio-section { flex-direction: column; height: auto; min-height: 100svh; }
-  .pf-left {
-    width: 100%; padding: 2.5rem 2rem 1.5rem;
-    flex-direction: row; align-items: flex-end; gap: 2rem;
-  }
+  .pf-left { width: 100%; padding: 2.5rem 2rem 1.5rem; flex-direction: row; align-items: flex-end; gap: 2rem; }
   .pf-logo-wrap { margin-bottom: 0; flex-shrink: 0; }
-  .pf-logo-img { max-width: 160px; }
-  .pf-filters { flex-direction: row; flex-wrap: wrap; gap: 0.2rem 1rem; }
-  .pf-btn { font-size: 1rem; }
-  .pf-right { height: 65vw; min-height: 300px; }
-  .pf-v916 { width: 120px; }
-  .pf-h169 { width: 220px; }
-  .pf-v34  { width: 150px; }
-  .pf-stack { width: 120px; }
+  .pf-logo-img { max-width: 150px; }
+  .pf-filters { flex-direction: row; flex-wrap: wrap; gap: 0.2rem 1.2rem; }
+  .pf-btn { font-size: 0.95rem; }
+  .pf-right { height: 60vw; min-height: 280px; }
+  .pf-v916, .pf-stack { width: 120px; }
+  .pf-col-mix { width: 250px; }
 }
 @media (max-width: 600px) {
-  .pf-left { flex-direction: column; align-items: flex-start; padding: 2rem 1.2rem 1rem; }
-  .pf-right { height: 55vh; min-height: 260px; }
-  .pf-v916 { width: 100px; }
-  .pf-h169 { width: 180px; }
-  .pf-v34  { width: 130px; }
-  .pf-stack { width: 100px; }
-  .pf-arrow { width: 38px; height: 38px; font-size: 1.2rem; }
+  .pf-left { flex-direction: column; align-items: flex-start; padding: 1.5rem 1.2rem 1rem; }
+  .pf-right { height: 55vh; }
+  .pf-v916, .pf-stack { width: 95px; }
+  .pf-col-mix { width: 200px; }
+  .pf-arrow { width: 36px; height: 36px; font-size: 1.1rem; }
 }
 
 /* =============================================
@@ -1293,7 +1286,7 @@ footer {
 <!-- ========== PORTFOLIO ========== -->
 <section class="portfolio-section" id="portfolio">
 
-  <!-- PANEL IZQUIERDO FIJO -->
+  <!-- PANEL IZQUIERDO -->
   <div class="pf-left">
     <div class="pf-logo-wrap">
       <img src="img/recursos/portfolio-design.png" alt="PORT_FOLIO" class="pf-logo-img">
@@ -1306,188 +1299,116 @@ footer {
     </nav>
   </div>
 
-  <!-- PANEL DERECHO -->
+  <!-- PANEL DERECHO: collage horizontal infinito -->
   <div class="pf-right" id="pfRight">
-
-    <!-- MESA TODO: collage mixto 9:16 + 16:9 + 3:4 aleatorio -->
     <div class="pf-table" id="pfTableAll">
 
-      <!-- ===== TODO: collage mixto aleatorio ===== -->
-      <!-- Se muestra en "todo" — mezcla de todos los tipos -->
-
-      <!-- 9:16 vertical -->
+      <!-- GRUPO 1: 1 vertical grande + stack 2x arriba/abajo -->
       <div class="pf-cell pf-v916" data-cat="diseno">
         <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2026.jpg" loading="lazy" alt="">
       </div>
-
-      <!-- Stack: 2 × 9:16 apiladas -->
       <div class="pf-stack" data-cat="foto">
-        <div class="pf-cell">
-          <img src="img/fotografia/glam/GLAM XOXO JDK-01.jpg" loading="lazy" alt="">
-        </div>
-        <div class="pf-cell">
-          <img src="img/fotografia/nippon-rest/NIPPON PHOTO JDK-01.jpg" loading="lazy" alt="">
+        <div class="pf-cell"><img src="img/fotografia/glam/GLAM XOXO JDK-01.jpg" loading="lazy" alt=""></div>
+        <div class="pf-cell"><img src="img/fotografia/nippon-rest/NIPPON PHOTO JDK-01.jpg" loading="lazy" alt=""></div>
+      </div>
+
+      <!-- GRUPO 2: 16:9 horizontal arriba + 2 pequeñas abajo -->
+      <div class="pf-col-mix" data-cat="video">
+        <div class="pf-cell pf-top169 pf-iframe"><iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" frameborder="0" allowfullscreen></iframe></div>
+        <div class="pf-row-bot">
+          <div class="pf-cell"><img src="img/fotografia/dune/DJI_0993-Mejorado-NR.jpg" loading="lazy" alt=""></div>
+          <div class="pf-cell pf-iframe"><iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allowfullscreen></iframe></div>
         </div>
       </div>
 
-      <!-- 16:9 video -->
-      <div class="pf-cell pf-h169 pf-iframe" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" frameborder="0" allowfullscreen></iframe>
-      </div>
-
-      <!-- 9:16 vertical -->
+      <!-- GRUPO 3: vertical + stack -->
       <div class="pf-cell pf-v916" data-cat="diseno">
         <img src="img/diseno/POSTER-DJBLAXX-JDK.jpg" loading="lazy" alt="">
       </div>
-
-      <!-- 3:4 -->
-      <div class="pf-cell pf-v34" data-cat="foto">
-        <img src="img/fotografia/dune/DJI_0993-Mejorado-NR.jpg" loading="lazy" alt="">
+      <div class="pf-stack" data-cat="foto">
+        <div class="pf-cell"><img src="img/fotografia/bts-tu.bicha/CATALINA VF -16.jpg" loading="lazy" alt=""></div>
+        <div class="pf-cell"><img src="img/fotografia/kaukari/DJI_0456.jpg" loading="lazy" alt=""></div>
       </div>
 
-      <!-- short 9:16 -->
-      <div class="pf-cell pf-v916 pf-iframe" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allowfullscreen></iframe>
+      <!-- GRUPO 4: mix col -->
+      <div class="pf-col-mix" data-cat="video">
+        <div class="pf-cell pf-top169 pf-iframe"><iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allowfullscreen></iframe></div>
+        <div class="pf-row-bot">
+          <div class="pf-cell"><img src="img/fotografia/veranada-koya/CASCADA JUNCALITO _1.jpg" loading="lazy" alt=""></div>
+          <div class="pf-cell"><img src="img/diseno/GREENSEEDLES REVISTA.jpg" loading="lazy" alt=""></div>
+        </div>
       </div>
 
-      <!-- 9:16 -->
+      <!-- GRUPO 5: vertical + stack -->
       <div class="pf-cell pf-v916" data-cat="diseno">
         <img src="img/diseno/EXPERIENCIAS-DE-UN-KOLLA.jpg" loading="lazy" alt="">
       </div>
-
-      <!-- Stack apilado foto -->
       <div class="pf-stack" data-cat="foto">
-        <div class="pf-cell">
-          <img src="img/fotografia/bts-tu.bicha/CATALINA VF -16.jpg" loading="lazy" alt="">
-        </div>
-        <div class="pf-cell">
-          <img src="img/fotografia/kaukari/DJI_0456.jpg" loading="lazy" alt="">
-        </div>
+        <div class="pf-cell"><img src="img/fotografia/museo-frafran/STAGE MUSEO V FINAL_2.jpg" loading="lazy" alt=""></div>
+        <div class="pf-cell"><img src="img/fotografia/llanos-del-challe/P1050254.jpg" loading="lazy" alt=""></div>
       </div>
 
-      <!-- 16:9 video -->
-      <div class="pf-cell pf-h169 pf-iframe" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allowfullscreen></iframe>
-      </div>
-
-      <!-- 9:16 -->
-      <div class="pf-cell pf-v916" data-cat="diseno">
-        <img src="img/diseno/GREENSEEDLES REVISTA.jpg" loading="lazy" alt="">
-      </div>
-
-      <!-- 3:4 -->
-      <div class="pf-cell pf-v34" data-cat="foto">
-        <img src="img/fotografia/veranada-koya/CASCADA JUNCALITO _1.jpg" loading="lazy" alt="">
-      </div>
-
-      <!-- short -->
-      <div class="pf-cell pf-v916 pf-iframe" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allowfullscreen></iframe>
-      </div>
-
-      <!-- 9:16 -->
-      <div class="pf-cell pf-v916" data-cat="diseno">
-        <img src="img/diseno/ZATURNO CHNG KAYA 20225.jpg" loading="lazy" alt="">
-      </div>
-
-      <!-- Stack apilado foto -->
-      <div class="pf-stack" data-cat="foto">
-        <div class="pf-cell">
-          <img src="img/fotografia/museo-frafran/STAGE MUSEO V FINAL_2.jpg" loading="lazy" alt="">
-        </div>
-        <div class="pf-cell">
-          <img src="img/fotografia/llanos-del-challe/P1050254.jpg" loading="lazy" alt="">
+      <!-- GRUPO 6: mix -->
+      <div class="pf-col-mix" data-cat="video">
+        <div class="pf-cell pf-top169 pf-iframe"><iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allowfullscreen></iframe></div>
+        <div class="pf-row-bot">
+          <div class="pf-cell pf-iframe"><iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allowfullscreen></iframe></div>
+          <div class="pf-cell"><img src="img/diseno/ZATURNO CHNG KAYA 20225.jpg" loading="lazy" alt=""></div>
         </div>
       </div>
 
-      <!-- 16:9 video -->
-      <div class="pf-cell pf-h169 pf-iframe" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allowfullscreen></iframe>
-      </div>
-
-      <!-- 9:16 -->
+      <!-- GRUPO 7: vertical + stack -->
       <div class="pf-cell pf-v916" data-cat="diseno">
         <img src="img/diseno/NEW FAUNA ATACAMA DESIGN DUNAS.jpg" loading="lazy" alt="">
       </div>
-
-      <!-- 3:4 -->
-      <div class="pf-cell pf-v34" data-cat="foto">
-        <img src="img/fotografia/mineria/CAMARAS TRAMPA 1 RIO TINTO-01.jpg" loading="lazy" alt="">
-      </div>
-
-      <!-- short -->
-      <div class="pf-cell pf-v916 pf-iframe" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" frameborder="0" allowfullscreen></iframe>
-      </div>
-
-      <!-- 9:16 -->
-      <div class="pf-cell pf-v916" data-cat="diseno">
-        <img src="img/diseno/PEÑA BLANCA 2025 FLYER INVITACIÓN.jpg" loading="lazy" alt="">
-      </div>
-
-      <!-- Stack -->
       <div class="pf-stack" data-cat="foto">
-        <div class="pf-cell">
-          <img src="img/fotografia/bts-4ever/P1010859.jpg" loading="lazy" alt="">
-        </div>
-        <div class="pf-cell">
-          <img src="img/fotografia/diss.vol2/DISS VOL2 CRISS-02.jpg" loading="lazy" alt="">
+        <div class="pf-cell"><img src="img/fotografia/mineria/CAMARAS TRAMPA 1 RIO TINTO-01.jpg" loading="lazy" alt=""></div>
+        <div class="pf-cell"><img src="img/fotografia/bts-4ever/P1010859.jpg" loading="lazy" alt=""></div>
+      </div>
+
+      <!-- GRUPO 8: mix -->
+      <div class="pf-col-mix" data-cat="video">
+        <div class="pf-cell pf-top169 pf-iframe"><iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" frameborder="0" allowfullscreen></iframe></div>
+        <div class="pf-row-bot">
+          <div class="pf-cell"><img src="img/diseno/PEÑA BLANCA 2025 FLYER INVITACIÓN.jpg" loading="lazy" alt=""></div>
+          <div class="pf-cell pf-iframe"><iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" frameborder="0" allowfullscreen></iframe></div>
         </div>
       </div>
 
-      <!-- 16:9 video -->
-      <div class="pf-cell pf-h169 pf-iframe" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" frameborder="0" allowfullscreen></iframe>
-      </div>
-
-      <!-- 9:16 -->
+      <!-- GRUPO 9: vertical + stack -->
       <div class="pf-cell pf-v916" data-cat="diseno">
         <img src="img/diseno/POSTER FERRARI JDK 3.jpg" loading="lazy" alt="">
       </div>
-
-      <!-- 3:4 -->
-      <div class="pf-cell pf-v34" data-cat="foto">
-        <img src="img/fotografia/bts-enfocado/LUKY-KODEX_12.jpg" loading="lazy" alt="">
+      <div class="pf-stack" data-cat="foto">
+        <div class="pf-cell"><img src="img/fotografia/diss.vol2/DISS VOL2 CRISS-02.jpg" loading="lazy" alt=""></div>
+        <div class="pf-cell"><img src="img/fotografia/bts-enfocado/LUKY-KODEX_12.jpg" loading="lazy" alt=""></div>
       </div>
 
-      <!-- short -->
-      <div class="pf-cell pf-v916 pf-iframe" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" frameborder="0" allowfullscreen></iframe>
+      <!-- GRUPO 10: mix -->
+      <div class="pf-col-mix" data-cat="video">
+        <div class="pf-cell pf-top169 pf-iframe"><iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" frameborder="0" allowfullscreen></iframe></div>
+        <div class="pf-row-bot">
+          <div class="pf-cell"><img src="img/diseno/APPAREL CHNG HISTORY 4.jpg" loading="lazy" alt=""></div>
+          <div class="pf-cell pf-iframe"><iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" frameborder="0" allowfullscreen></iframe></div>
+        </div>
       </div>
 
-      <!-- 9:16 -->
+      <!-- GRUPO 11: vertical + stack -->
       <div class="pf-cell pf-v916" data-cat="diseno">
-        <img src="img/diseno/APPAREL CHNG HISTORY 4.jpg" loading="lazy" alt="">
+        <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2025.jpg" loading="lazy" alt="">
       </div>
-
-      <!-- Stack -->
       <div class="pf-stack" data-cat="diseno">
-        <div class="pf-cell">
-          <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2025.jpg" loading="lazy" alt="">
-        </div>
-        <div class="pf-cell">
-          <img src="img/diseno/CAUR-DESERTIKA-BEER (1).jpg" loading="lazy" alt="">
-        </div>
+        <div class="pf-cell"><img src="img/diseno/CAUR-DESERTIKA-BEER (1).jpg" loading="lazy" alt=""></div>
+        <div class="pf-cell"><img src="img/fotografia/glam/HALLOWEEN GLAM PROMO-1.jpg" loading="lazy" alt=""></div>
       </div>
 
-      <!-- 16:9 video -->
-      <div class="pf-cell pf-h169 pf-iframe" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" frameborder="0" allowfullscreen></iframe>
-      </div>
+    </div><!-- end pf-table -->
 
-    </div><!-- end pfTableAll -->
-
-    <!-- FLECHA -->
     <button class="pf-arrow" onclick="pfScroll(1)">›</button>
+    <div class="pf-scrollbar"><div class="pf-scrollbar-thumb" id="pfThumb"></div></div>
+  </div>
 
-    <!-- SCROLLBAR -->
-    <div class="pf-scrollbar">
-      <div class="pf-scrollbar-thumb" id="pfThumb"></div>
-    </div>
-
-  </div><!-- end pf-right -->
-
-  <!-- CARRUSEL ÁLBUMES (FOTOGRAFÍA) -->
+  <!-- ÁLBUMES FOTOGRAFÍA -->
   <div class="pf-album-wrap" id="pfAlbumWrap" style="display:none">
     <div class="carousel-stage" id="carouselStage"></div>
     <button class="carousel-btn carousel-prev" onclick="carouselMove(-1)">‹</button>
