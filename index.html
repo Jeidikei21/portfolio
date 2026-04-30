@@ -2134,11 +2134,11 @@ function buildCarousel() {
       </div>
     `;
     slide.addEventListener('click', () => {
-      if (i === ((carouselIndex % ALBUMS.length + ALBUMS.length) % ALBUMS.length)) {
+      const current = ((carouselIndex % ALBUMS.length) + ALBUMS.length) % ALBUMS.length;
+      if (i === current) {
         openAlbum(album.folder, album.title, album.photos);
       } else {
-        const diff = i - ((carouselIndex % ALBUMS.length + ALBUMS.length) % ALBUMS.length);
-        carouselIndex += diff;
+        carouselIndex = i;
         updateCarousel();
       }
     });
@@ -2150,6 +2150,9 @@ function buildCarousel() {
     dotsEl.appendChild(dot);
   });
 
+  // Empezar en índice 1 para que el album 0 quede a la izquierda
+  // y el album 2 a la derecha, mostrando 3 desde el inicio
+  carouselIndex = 0;
   updateCarousel();
 }
 
@@ -2157,32 +2160,34 @@ function updateCarousel() {
   const slides = document.querySelectorAll('.album-slide');
   const dots = document.querySelectorAll('.carousel-dot');
   const total = ALBUMS.length;
-  // Índice real siempre entre 0 y total-1
   const current = ((carouselIndex % total) + total) % total;
 
   slides.forEach((slide, i) => {
-    // Calcular offset circular más corto
+    // Offset circular más corto
     let offset = i - current;
     if (offset > total / 2) offset -= total;
     if (offset < -total / 2) offset += total;
 
     const abs = Math.abs(offset);
-    const scale  = abs === 0 ? 1.5 : abs === 1 ? 0.85 : abs === 2 ? 0.68 : 0.55;
-    const tx     = offset * 400;
-    const tz     = abs === 0 ? 0 : -80 * abs;
-    const rotY   = offset * 8;
-    const opacity= abs > 3 ? 0 : abs === 3 ? 0.2 : 1;
-    const bright = abs === 0 ? 1 : abs === 1 ? 0.55 : 0.35;
 
-    slide.style.transform = `translate(-50%,-50%) translateX(${tx}px) translateZ(${tz}px) rotateY(${rotY}deg) scale(${scale})`;
+    // Todos del mismo tamaño 1.5, solo los que están fuera de vista (abs > 1) se ocultan
+    const scale   = 1.5;
+    const tx      = offset * 420;  // espaciado entre slides
+    const tz      = 0;             // sin profundidad 3D
+    const rotY    = 0;             // sin rotación
+    const opacity = abs > 1 ? 0 : 1;   // solo 3 visibles: -1, 0, +1
+    const bright  = 1;             // todos igual de brillantes
+
+    slide.style.transition = 'all 0.5s cubic-bezier(0.25,0.46,0.45,0.94)';
+    slide.style.transform  = `translate(-50%,-50%) translateX(${tx}px) translateZ(${tz}px) scale(${scale})`;
     slide.style.opacity    = opacity;
-    slide.style.zIndex     = 10 - abs;
+    slide.style.zIndex     = abs === 0 ? 10 : 5;
     slide.style.filter     = `brightness(${bright})`;
     slide.classList.toggle('active', i === current);
   });
 
   dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
-  carouselIndex = current; // reset para no acumular
+  carouselIndex = current;
 }
 
 function carouselMove(dir) {
