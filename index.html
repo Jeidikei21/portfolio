@@ -12,7 +12,18 @@
 <link rel="icon" type="image/png" href="img/logo/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-black.otf') format('opentype'); font-weight: 900; }
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-extrabold.otf') format('opentype'); font-weight: 800; }
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-bold.otf') format('opentype'); font-weight: 700; }
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-semibold.otf') format('opentype'); font-weight: 600; }
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-medium.otf') format('opentype'); font-weight: 500; }
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-regular.otf') format('opentype'); font-weight: 400; }
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-light.otf') format('opentype'); font-weight: 300; }
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-extralight.otf') format('opentype'); font-weight: 200; }
+@font-face { font-family: 'Delight'; src: url('font/delight-font/delight-thin.otf') format('opentype'); font-weight: 100; }
+</style>
 <style>
 /* =============================================
    RESET & VARIABLES
@@ -384,63 +395,54 @@ nav.scrolled {
   flex-direction: row;
   height: 100vh;
   overflow: hidden;
-  background: var(--dark);
+  background: #000;
   position: relative;
 }
 
-/* PANEL IZQUIERDO */
+/* ---- PANEL IZQUIERDO ---- */
 .pf-left {
-  width: 380px;
+  width: 340px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 3rem 0 5rem;
-  position: relative;
-  z-index: 2;
+  padding: 0 2rem 0 4rem;
+  background: #000;
+  z-index: 5;
 }
-.pf-title {
-  display: flex;
-  flex-direction: column;
-  line-height: 0.88;
-  margin-bottom: 3rem;
+.pf-logo-wrap {
+  margin-bottom: 2.5rem;
 }
-.pf-port {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(4rem, 7vw, 7.5rem);
-  color: var(--light);
-  letter-spacing: -0.02em;
+.pf-logo-img {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
   display: block;
-}
-.pf-dash { color: var(--orange); }
-.pf-folio {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(4rem, 7vw, 7.5rem);
-  color: var(--light);
-  letter-spacing: -0.02em;
-  display: block;
+  filter: brightness(1);
 }
 .pf-filters {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0;
   align-items: flex-start;
 }
 .pf-btn {
   background: none; border: none;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(1.1rem, 2vw, 1.6rem);
-  letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.35);
+  font-family: 'Delight', 'Bebas Neue', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.2rem, 2.2vw, 2rem);
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.55);
   cursor: pointer;
-  transition: color 0.25s;
-  padding: 0.1rem 0;
+  transition: color 0.2s;
+  padding: 0.05rem 0;
   text-align: left;
+  line-height: 1.15;
 }
-.pf-btn:hover { color: var(--orange); }
+.pf-btn:hover,
 .pf-btn.active { color: var(--orange); }
 
-/* PANEL DERECHO */
+/* ---- PANEL DERECHO ---- */
 .pf-right {
   flex: 1;
   position: relative;
@@ -449,7 +451,7 @@ nav.scrolled {
   flex-direction: column;
 }
 
-/* MESA HORIZONTAL */
+/* ---- MESA HORIZONTAL ---- */
 .pf-table {
   flex: 1;
   display: flex;
@@ -462,54 +464,89 @@ nav.scrolled {
   scrollbar-width: none;
   -ms-overflow-style: none;
   cursor: grab;
-  padding-right: 60px;
+  background: #000;
 }
 .pf-table:active { cursor: grabbing; }
 .pf-table::-webkit-scrollbar { display: none; }
 
-/* CADA PIEZA */
-.pf-item {
+/* ---- CELDAS ---- */
+/* Columna base — contiene 1 o 2 celdas apiladas */
+.pf-col {
   flex-shrink: 0;
-  width: var(--w);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
   height: 100%;
+}
+
+.pf-cell {
+  flex-shrink: 0;
   position: relative;
   overflow: hidden;
-  background: var(--dark3);
+  background: #111;
   transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
               box-shadow 0.35s ease;
 }
-.pf-item:hover {
-  transform: scale(1.03);
+.pf-cell:hover {
+  transform: scale(1.04);
   z-index: 10;
-  box-shadow: 0 0 40px rgba(0,0,0,0.8);
+  box-shadow: 0 0 50px rgba(0,0,0,0.9);
 }
-.pf-item img {
+.pf-cell img, .pf-cell iframe {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
   pointer-events: none;
+  border: none;
 }
-.pf-item.pf-video iframe {
-  width: 100%; height: 100%;
-  display: block; border: none;
+.pf-cell.pf-iframe iframe { pointer-events: all; }
+
+/* Proporciones */
+/* 9:16 — vertical, ocupa toda la altura */
+.pf-v916 {
+  width: 180px;
+  height: 100%;
+}
+/* 16:9 — horizontal, ocupa toda la altura pero ancho mayor */
+.pf-h169 {
+  width: 340px;
+  height: 100%;
+}
+/* 3:4 — vertical mediano */
+.pf-v34 {
+  width: 220px;
+  height: 100%;
+}
+/* Apiladas: dos 9:16 una sobre otra = mismo alto que una grande */
+.pf-stack {
+  flex-shrink: 0;
+  width: 180px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.pf-stack .pf-cell {
+  flex: 1;
+  width: 100%;
+  height: 50%;
 }
 
-/* FLECHA DERECHA */
+/* ---- FLECHA ---- */
 .pf-arrow {
-  position: absolute; right: 0; top: 50%;
+  position: absolute; right: 6px; top: 50%;
   transform: translateY(-50%);
-  width: 52px; height: 52px;
-  background: rgba(10,10,10,0.9);
-  border: 1px solid rgba(255,255,255,0.12);
+  width: 48px; height: 48px;
+  background: rgba(0,0,0,0.9);
+  border: 1px solid rgba(255,255,255,0.15);
   border-radius: 50%;
-  color: var(--light); font-size: 1.6rem;
+  color: #fff; font-size: 1.6rem;
   cursor: pointer; z-index: 20;
   display: flex; align-items: center; justify-content: center;
   transition: all 0.3s;
-  margin-right: 4px;
 }
 .pf-arrow:hover { border-color: var(--orange); color: var(--orange); }
 
-/* SCROLLBAR */
+/* ---- SCROLLBAR ---- */
 .pf-scrollbar {
   height: 2px;
   background: rgba(255,255,255,0.07);
@@ -520,10 +557,10 @@ nav.scrolled {
   position: absolute; top: 0; left: 0;
   height: 2px; width: 15%;
   background: var(--orange);
-  transition: left 0.1s linear;
+  transition: left 0.08s linear;
 }
 
-/* ÁLBUM WRAP (fotografía) */
+/* ---- ÁLBUM WRAP ---- */
 .pf-album-wrap {
   flex: 1;
   position: relative;
@@ -533,66 +570,37 @@ nav.scrolled {
   justify-content: center;
 }
 
-/* RESPONSIVE */
+/* Carousel cards 3:4 */
+.album-slide {
+  width: 240px;
+  height: 320px;
+}
+
+/* ---- RESPONSIVE ---- */
 @media (max-width: 900px) {
-  .portfolio-section { flex-direction: column; height: auto; min-height: 100vh; }
-  .pf-left { width: 100%; padding: 3rem 2rem 1.5rem; flex-direction: row; align-items: flex-end; gap: 2rem; }
-  .pf-title { margin-bottom: 0; }
-  .pf-port, .pf-folio { font-size: clamp(3rem, 10vw, 5rem); }
-  .pf-filters { flex-direction: row; flex-wrap: wrap; gap: 0.5rem 1rem; }
+  .portfolio-section { flex-direction: column; height: auto; min-height: 100svh; }
+  .pf-left {
+    width: 100%; padding: 2.5rem 2rem 1.5rem;
+    flex-direction: row; align-items: flex-end; gap: 2rem;
+  }
+  .pf-logo-wrap { margin-bottom: 0; flex-shrink: 0; }
+  .pf-logo-img { max-width: 160px; }
+  .pf-filters { flex-direction: row; flex-wrap: wrap; gap: 0.2rem 1rem; }
   .pf-btn { font-size: 1rem; }
-  .pf-right { height: 60vh; }
+  .pf-right { height: 65vw; min-height: 300px; }
+  .pf-v916 { width: 120px; }
+  .pf-h169 { width: 220px; }
+  .pf-v34  { width: 150px; }
+  .pf-stack { width: 120px; }
 }
 @media (max-width: 600px) {
   .pf-left { flex-direction: column; align-items: flex-start; padding: 2rem 1.2rem 1rem; }
-  .pf-right { height: 55vh; }
-  .pf-arrow { width: 40px; height: 40px; font-size: 1.3rem; }
-}
-.p-card {
-  position: relative; overflow: hidden;
-  background: var(--dark3); cursor: pointer;
-  break-inside: avoid;
-  margin-bottom: 0.5rem;
-  display: block;
-  transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
-}
-.p-card:hover { transform: scale(0.99); }
-
-/* Imagen respeta su proporción natural */
-.card-img {
-  width: 100%; height: auto;
-  display: block;
-  transition: transform 0.6s ease;
-}
-.p-card:hover .card-img { transform: scale(1.04); }
-
-/* Videos con proporción fija */
-.video-wrap {
-  position: relative; width: 100%; aspect-ratio: 16/9;
-}
-.video-wrap.video-vertical { aspect-ratio: 9/16; }
-.video-wrap iframe {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%; border: none;
-}
-
-.card-ph {
-  width: 100%; aspect-ratio: 4/3;
-  display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, var(--dark3) 0%, var(--dark2) 100%);
-}
-.card-ph-label {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2rem; color: rgba(255,255,255,0.04); letter-spacing: 0.1em;
-}
-.card-overlay { display: none; }
-.card-num { display: none; }
-.card-content { display: none; }
-}
-.add-card:hover .add-icon-wrap { border-color: var(--red); color: var(--red); }
-.add-text {
-  font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--muted2);
+  .pf-right { height: 55vh; min-height: 260px; }
+  .pf-v916 { width: 100px; }
+  .pf-h169 { width: 180px; }
+  .pf-v34  { width: 130px; }
+  .pf-stack { width: 100px; }
+  .pf-arrow { width: 38px; height: 38px; font-size: 1.2rem; }
 }
 
 /* =============================================
@@ -1287,9 +1295,8 @@ footer {
 
   <!-- PANEL IZQUIERDO FIJO -->
   <div class="pf-left">
-    <div class="pf-title">
-      <span class="pf-port">PORT<span class="pf-dash">_</span></span>
-      <span class="pf-folio">FOLIO</span>
+    <div class="pf-logo-wrap">
+      <img src="img/recursos/portfolio-design.png" alt="PORT_FOLIO" class="pf-logo-img">
     </div>
     <nav class="pf-filters">
       <button class="pf-btn active" onclick="pfFilter(this,'all')">TODO</button>
@@ -1299,118 +1306,179 @@ footer {
     </nav>
   </div>
 
-  <!-- PANEL DERECHO — MESA HORIZONTAL -->
+  <!-- PANEL DERECHO -->
   <div class="pf-right" id="pfRight">
 
-    <!-- MESA DE TRABAJO -->
-    <div class="pf-table" id="pfTable">
+    <!-- MESA TODO: collage mixto 9:16 + 16:9 + 3:4 aleatorio -->
+    <div class="pf-table" id="pfTableAll">
 
-      <!-- DISEÑO -->
-      <div class="pf-item" data-cat="diseno" style="--w:180px;--h:100%">
+      <!-- ===== TODO: collage mixto aleatorio ===== -->
+      <!-- Se muestra en "todo" — mezcla de todos los tipos -->
+
+      <!-- 9:16 vertical -->
+      <div class="pf-cell pf-v916" data-cat="diseno">
         <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2026.jpg" loading="lazy" alt="">
       </div>
-      <div class="pf-item" data-cat="diseno" style="--w:300px;--h:100%">
-        <img src="img/diseno/EXPERIENCIAS-DE-UN-KOLLA.jpg" loading="lazy" alt="">
+
+      <!-- Stack: 2 × 9:16 apiladas -->
+      <div class="pf-stack" data-cat="foto">
+        <div class="pf-cell">
+          <img src="img/fotografia/glam/GLAM XOXO JDK-01.jpg" loading="lazy" alt="">
+        </div>
+        <div class="pf-cell">
+          <img src="img/fotografia/nippon-rest/NIPPON PHOTO JDK-01.jpg" loading="lazy" alt="">
+        </div>
       </div>
-      <div class="pf-item" data-cat="diseno" style="--w:180px;--h:100%">
+
+      <!-- 16:9 video -->
+      <div class="pf-cell pf-h169 pf-iframe" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <!-- 9:16 vertical -->
+      <div class="pf-cell pf-v916" data-cat="diseno">
         <img src="img/diseno/POSTER-DJBLAXX-JDK.jpg" loading="lazy" alt="">
       </div>
-      <div class="pf-item" data-cat="diseno" style="--w:260px;--h:100%">
+
+      <!-- 3:4 -->
+      <div class="pf-cell pf-v34" data-cat="foto">
+        <img src="img/fotografia/dune/DJI_0993-Mejorado-NR.jpg" loading="lazy" alt="">
+      </div>
+
+      <!-- short 9:16 -->
+      <div class="pf-cell pf-v916 pf-iframe" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <!-- 9:16 -->
+      <div class="pf-cell pf-v916" data-cat="diseno">
+        <img src="img/diseno/EXPERIENCIAS-DE-UN-KOLLA.jpg" loading="lazy" alt="">
+      </div>
+
+      <!-- Stack apilado foto -->
+      <div class="pf-stack" data-cat="foto">
+        <div class="pf-cell">
+          <img src="img/fotografia/bts-tu.bicha/CATALINA VF -16.jpg" loading="lazy" alt="">
+        </div>
+        <div class="pf-cell">
+          <img src="img/fotografia/kaukari/DJI_0456.jpg" loading="lazy" alt="">
+        </div>
+      </div>
+
+      <!-- 16:9 video -->
+      <div class="pf-cell pf-h169 pf-iframe" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <!-- 9:16 -->
+      <div class="pf-cell pf-v916" data-cat="diseno">
         <img src="img/diseno/GREENSEEDLES REVISTA.jpg" loading="lazy" alt="">
       </div>
-      <div class="pf-item" data-cat="diseno" style="--w:180px;--h:100%">
+
+      <!-- 3:4 -->
+      <div class="pf-cell pf-v34" data-cat="foto">
+        <img src="img/fotografia/veranada-koya/CASCADA JUNCALITO _1.jpg" loading="lazy" alt="">
+      </div>
+
+      <!-- short -->
+      <div class="pf-cell pf-v916 pf-iframe" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <!-- 9:16 -->
+      <div class="pf-cell pf-v916" data-cat="diseno">
         <img src="img/diseno/ZATURNO CHNG KAYA 20225.jpg" loading="lazy" alt="">
       </div>
-      <div class="pf-item" data-cat="diseno" style="--w:280px;--h:100%">
+
+      <!-- Stack apilado foto -->
+      <div class="pf-stack" data-cat="foto">
+        <div class="pf-cell">
+          <img src="img/fotografia/museo-frafran/STAGE MUSEO V FINAL_2.jpg" loading="lazy" alt="">
+        </div>
+        <div class="pf-cell">
+          <img src="img/fotografia/llanos-del-challe/P1050254.jpg" loading="lazy" alt="">
+        </div>
+      </div>
+
+      <!-- 16:9 video -->
+      <div class="pf-cell pf-h169 pf-iframe" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <!-- 9:16 -->
+      <div class="pf-cell pf-v916" data-cat="diseno">
         <img src="img/diseno/NEW FAUNA ATACAMA DESIGN DUNAS.jpg" loading="lazy" alt="">
       </div>
-      <div class="pf-item" data-cat="diseno" style="--w:180px;--h:100%">
+
+      <!-- 3:4 -->
+      <div class="pf-cell pf-v34" data-cat="foto">
+        <img src="img/fotografia/mineria/CAMARAS TRAMPA 1 RIO TINTO-01.jpg" loading="lazy" alt="">
+      </div>
+
+      <!-- short -->
+      <div class="pf-cell pf-v916 pf-iframe" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <!-- 9:16 -->
+      <div class="pf-cell pf-v916" data-cat="diseno">
         <img src="img/diseno/PEÑA BLANCA 2025 FLYER INVITACIÓN.jpg" loading="lazy" alt="">
       </div>
-      <div class="pf-item" data-cat="diseno" style="--w:260px;--h:100%">
-        <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2025.jpg" loading="lazy" alt="">
+
+      <!-- Stack -->
+      <div class="pf-stack" data-cat="foto">
+        <div class="pf-cell">
+          <img src="img/fotografia/bts-4ever/P1010859.jpg" loading="lazy" alt="">
+        </div>
+        <div class="pf-cell">
+          <img src="img/fotografia/diss.vol2/DISS VOL2 CRISS-02.jpg" loading="lazy" alt="">
+        </div>
       </div>
-      <div class="pf-item" data-cat="diseno" style="--w:220px;--h:100%">
-        <img src="img/diseno/APPAREL CHNG HISTORY 4.jpg" loading="lazy" alt="">
+
+      <!-- 16:9 video -->
+      <div class="pf-cell pf-h169 pf-iframe" data-cat="video">
+        <iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="pf-item" data-cat="diseno" style="--w:220px;--h:100%">
-        <img src="img/diseno/CAUR-DESERTIKA-BEER (1).jpg" loading="lazy" alt="">
-      </div>
-      <div class="pf-item" data-cat="diseno" style="--w:260px;--h:100%">
+
+      <!-- 9:16 -->
+      <div class="pf-cell pf-v916" data-cat="diseno">
         <img src="img/diseno/POSTER FERRARI JDK 3.jpg" loading="lazy" alt="">
       </div>
 
-      <!-- FOTOGRAFÍA -->
-      <div class="pf-item" data-cat="foto" style="--w:220px;--h:100%">
-        <img src="img/fotografia/dune/DJI_0993-Mejorado-NR.jpg" loading="lazy" alt="">
-      </div>
-      <div class="pf-item" data-cat="foto" style="--w:300px;--h:100%">
-        <img src="img/fotografia/glam/GLAM XOXO JDK-01.jpg" loading="lazy" alt="">
-      </div>
-      <div class="pf-item" data-cat="foto" style="--w:180px;--h:100%">
-        <img src="img/fotografia/nippon-rest/NIPPON PHOTO JDK-01.jpg" loading="lazy" alt="">
-      </div>
-      <div class="pf-item" data-cat="foto" style="--w:300px;--h:100%">
-        <img src="img/fotografia/bts-tu.bicha/CATALINA VF -16.jpg" loading="lazy" alt="">
-      </div>
-      <div class="pf-item" data-cat="foto" style="--w:180px;--h:100%">
-        <img src="img/fotografia/veranada-koya/CASCADA JUNCALITO _1.jpg" loading="lazy" alt="">
-      </div>
-      <div class="pf-item" data-cat="foto" style="--w:300px;--h:100%">
-        <img src="img/fotografia/museo-frafran/STAGE MUSEO V FINAL_2.jpg" loading="lazy" alt="">
-      </div>
-      <div class="pf-item" data-cat="foto" style="--w:220px;--h:100%">
-        <img src="img/fotografia/kaukari/DJI_0456.jpg" loading="lazy" alt="">
-      </div>
-      <div class="pf-item" data-cat="foto" style="--w:300px;--h:100%">
-        <img src="img/fotografia/diss.vol2/DISS VOL2 CRISS-02.jpg" loading="lazy" alt="">
-      </div>
-      <div class="pf-item" data-cat="foto" style="--w:180px;--h:100%">
-        <img src="img/fotografia/bts-4ever/P1010859.jpg" loading="lazy" alt="">
-      </div>
-      <div class="pf-item" data-cat="foto" style="--w:300px;--h:100%">
-        <img src="img/fotografia/llanos-del-challe/P1050254.jpg" loading="lazy" alt="">
-      </div>
-      <div class="pf-item" data-cat="foto" style="--w:220px;--h:100%">
-        <img src="img/fotografia/mineria/CAMARAS TRAMPA 1 RIO TINTO-01.jpg" loading="lazy" alt="">
-      </div>
-      <div class="pf-item" data-cat="foto" style="--w:180px;--h:100%">
+      <!-- 3:4 -->
+      <div class="pf-cell pf-v34" data-cat="foto">
         <img src="img/fotografia/bts-enfocado/LUKY-KODEX_12.jpg" loading="lazy" alt="">
       </div>
 
-      <!-- VIDEO -->
-      <div class="pf-item pf-video" data-cat="video" style="--w:480px;--h:100%">
-        <iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="pf-item pf-video pf-short" data-cat="video" style="--w:160px;--h:100%">
-        <iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="pf-item pf-video" data-cat="video" style="--w:480px;--h:100%">
-        <iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="pf-item pf-video pf-short" data-cat="video" style="--w:160px;--h:100%">
-        <iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="pf-item pf-video" data-cat="video" style="--w:480px;--h:100%">
-        <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="pf-item pf-video pf-short" data-cat="video" style="--w:160px;--h:100%">
-        <iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="pf-item pf-video" data-cat="video" style="--w:480px;--h:100%">
-        <iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="pf-item pf-video pf-short" data-cat="video" style="--w:160px;--h:100%">
+      <!-- short -->
+      <div class="pf-cell pf-v916 pf-iframe" data-cat="video">
         <iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="pf-item pf-video" data-cat="video" style="--w:480px;--h:100%">
+
+      <!-- 9:16 -->
+      <div class="pf-cell pf-v916" data-cat="diseno">
+        <img src="img/diseno/APPAREL CHNG HISTORY 4.jpg" loading="lazy" alt="">
+      </div>
+
+      <!-- Stack -->
+      <div class="pf-stack" data-cat="diseno">
+        <div class="pf-cell">
+          <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2025.jpg" loading="lazy" alt="">
+        </div>
+        <div class="pf-cell">
+          <img src="img/diseno/CAUR-DESERTIKA-BEER (1).jpg" loading="lazy" alt="">
+        </div>
+      </div>
+
+      <!-- 16:9 video -->
+      <div class="pf-cell pf-h169 pf-iframe" data-cat="video">
         <iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" frameborder="0" allowfullscreen></iframe>
       </div>
 
-    </div><!-- end pf-table -->
+    </div><!-- end pfTableAll -->
 
-    <!-- FLECHA DERECHA -->
-    <button class="pf-arrow" id="pfArrow" onclick="pfScroll(1)">›</button>
+    <!-- FLECHA -->
+    <button class="pf-arrow" onclick="pfScroll(1)">›</button>
 
     <!-- SCROLLBAR -->
     <div class="pf-scrollbar">
@@ -1419,7 +1487,7 @@ footer {
 
   </div><!-- end pf-right -->
 
-  <!-- CARRUSEL ÁLBUMES (solo en FOTOGRAFÍA) -->
+  <!-- CARRUSEL ÁLBUMES (FOTOGRAFÍA) -->
   <div class="pf-album-wrap" id="pfAlbumWrap" style="display:none">
     <div class="carousel-stage" id="carouselStage"></div>
     <button class="carousel-btn carousel-prev" onclick="carouselMove(-1)">‹</button>
@@ -1626,10 +1694,9 @@ hoverEls.forEach(el => {
 
 /* PORTFOLIO — MESA HORIZONTAL */
 (function(){
-  const table = document.getElementById('pfTable');
+  const table = document.getElementById('pfTableAll');
   if(!table) return;
 
-  // Drag to scroll
   let isDown = false, startX, scrollLeft;
   table.addEventListener('mousedown', e => {
     if(e.target.closest('iframe')) return;
@@ -1646,7 +1713,6 @@ hoverEls.forEach(el => {
     updatePfUI();
   });
 
-  // Arrow
   window.pfScroll = function(dir) {
     table.scrollLeft += dir * 500;
     setTimeout(updatePfUI, 350);
@@ -1665,7 +1731,7 @@ hoverEls.forEach(el => {
 
   table.addEventListener('scroll', updatePfUI);
 
-  // Shuffle on load
+  // Shuffle on load — mezcla SOLO las celdas directas (no stacks)
   function shuffle() {
     const items = [...table.children];
     for(let i = items.length - 1; i > 0; i--) {
@@ -1676,7 +1742,7 @@ hoverEls.forEach(el => {
   shuffle();
   setTimeout(updatePfUI, 200);
 
-  // Touch swipe
+  // Touch
   let tx = 0;
   table.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
   table.addEventListener('touchmove', e => {
@@ -1692,9 +1758,9 @@ window.pfFilter = function(btn, cat) {
   document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 
-  const table = document.getElementById('pfTable');
   const right = document.getElementById('pfRight');
   const albumWrap = document.getElementById('pfAlbumWrap');
+  const table = document.getElementById('pfTableAll');
 
   if(cat === 'foto') {
     if(right) right.style.display = 'none';
@@ -1704,7 +1770,12 @@ window.pfFilter = function(btn, cat) {
     if(albumWrap) albumWrap.style.display = 'none';
     if(table) {
       [...table.children].forEach(item => {
-        item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+        if(cat === 'all') {
+          item.style.display = '';
+        } else {
+          const itemCat = item.dataset.cat;
+          item.style.display = (itemCat === cat) ? '' : 'none';
+        }
       });
       table.scrollLeft = 0;
       setTimeout(() => {
