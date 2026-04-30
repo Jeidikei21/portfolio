@@ -2121,18 +2121,10 @@ function buildCarousel() {
   stage.innerHTML = '';
   dotsEl.innerHTML = '';
 
-  const total = ALBUMS.length;
-
-  // Creamos slides con índices extendidos para bucle infinito
-  // Clonamos: [...últimos 3] + [todos] + [...primeros 3]
-  const clonesBefore = 3;
-  const clonesAfter = 3;
-  const extendedTotal = total + clonesBefore + clonesAfter;
-
-  function createSlide(album, virtualIndex) {
+  ALBUMS.forEach((album, i) => {
     const slide = document.createElement('div');
     slide.className = 'album-slide';
-    slide.dataset.virtual = virtualIndex;
+    slide.dataset.index = i;
     slide.innerHTML = `
       <img src="img/fotografia/${album.folder}/${encodeURIComponent(album.cover)}" alt="${album.title}" loading="lazy">
       <div class="album-slide-info">
@@ -2142,89 +2134,61 @@ function buildCarousel() {
       </div>
     `;
     slide.addEventListener('click', () => {
-      const realIndex = ((virtualIndex % total) + total) % total;
-      if (virtualIndex === carouselIndex) {
+      if (i === ((carouselIndex % ALBUMS.length + ALBUMS.length) % ALBUMS.length)) {
         openAlbum(album.folder, album.title, album.photos);
       } else {
-        carouselIndex = virtualIndex;
+        const diff = i - ((carouselIndex % ALBUMS.length + ALBUMS.length) % ALBUMS.length);
+        carouselIndex += diff;
         updateCarousel();
       }
     });
     stage.appendChild(slide);
-  }
 
-  // Clones al inicio (últimos álbumes)
-  for (let i = total - clonesBefore; i < total; i++) {
-    createSlide(ALBUMS[i], i - total);
-  }
-  // Slides reales
-  for (let i = 0; i < total; i++) {
-    createSlide(ALBUMS[i], i);
-  }
-  // Clones al final (primeros álbumes)
-  for (let i = 0; i < clonesAfter; i++) {
-    createSlide(ALBUMS[i], total + i);
-  }
-
-  // Dots — solo para álbumes reales
-  for (let i = 0; i < total; i++) {
     const dot = document.createElement('div');
     dot.className = 'carousel-dot';
-    dot.addEventListener('click', () => { carouselIndex = i; updateCarousel(true); });
+    dot.addEventListener('click', () => { carouselIndex = i; updateCarousel(); });
     dotsEl.appendChild(dot);
-  }
+  });
 
-  updateCarousel(false);
+  updateCarousel();
 }
 
-function updateCarousel(animate = true) {
+function updateCarousel() {
   const slides = document.querySelectorAll('.album-slide');
   const dots = document.querySelectorAll('.carousel-dot');
   const total = ALBUMS.length;
+  // Índice real siempre entre 0 y total-1
+  const current = ((carouselIndex % total) + total) % total;
 
-  slides.forEach(slide => {
-    const vi = parseInt(slide.dataset.virtual);
-    const offset = vi - carouselIndex;
+  slides.forEach((slide, i) => {
+    // Calcular offset circular más corto
+    let offset = i - current;
+    if (offset > total / 2) offset -= total;
+    if (offset < -total / 2) offset += total;
+
     const abs = Math.abs(offset);
+    const scale  = abs === 0 ? 1.5 : abs === 1 ? 0.85 : abs === 2 ? 0.68 : 0.55;
+    const tx     = offset * 400;
+    const tz     = abs === 0 ? 0 : -80 * abs;
+    const rotY   = offset * 8;
+    const opacity= abs > 3 ? 0 : abs === 3 ? 0.2 : 1;
+    const bright = abs === 0 ? 1 : abs === 1 ? 0.55 : 0.35;
 
-    const scale = abs === 0 ? 1.5 : abs === 1 ? 0.95 : abs === 2 ? 0.75 : 0.6;
-    const tx = offset * 420;
-    const tz = abs === 0 ? 0 : abs === 1 ? -80 : -150;
-    const rotY = offset * 8;
-    const opacity = abs > 3 ? 0 : abs === 3 ? 0.25 : 1;
-    const brightness = abs === 0 ? 1 : abs === 1 ? 0.55 : 0.35;
-
-    slide.style.transition = animate
-      ? 'all 0.5s cubic-bezier(0.25,0.46,0.45,0.94)'
-      : 'none';
     slide.style.transform = `translate(-50%,-50%) translateX(${tx}px) translateZ(${tz}px) rotateY(${rotY}deg) scale(${scale})`;
-    slide.style.opacity = opacity;
-    slide.style.zIndex = 10 - abs;
-    slide.style.filter = `brightness(${brightness})`;
-    slide.classList.toggle('active', vi === carouselIndex);
+    slide.style.opacity    = opacity;
+    slide.style.zIndex     = 10 - abs;
+    slide.style.filter     = `brightness(${bright})`;
+    slide.classList.toggle('active', i === current);
   });
 
-  // Dots — normalizar índice real
-  const realIndex = ((carouselIndex % total) + total) % total;
-  dots.forEach((dot, i) => dot.classList.toggle('active', i === realIndex));
+  dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+  carouselIndex = current; // reset para no acumular
 }
 
 function carouselMove(dir) {
   const total = ALBUMS.length;
-  carouselIndex += dir;
-
-  updateCarousel(true);
-
-  // Bucle infinito: si llegamos a los clones, saltamos al real sin animación
-  setTimeout(() => {
-    if (carouselIndex >= total) {
-      carouselIndex = carouselIndex - total;
-      updateCarousel(false);
-    } else if (carouselIndex < -2) {
-      carouselIndex = carouselIndex + total;
-      updateCarousel(false);
-    }
-  }, 520); // justo después de que termina la transición
+  carouselIndex = ((carouselIndex + dir) % total + total) % total;
+  updateCarousel();
 }
 
 
