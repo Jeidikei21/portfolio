@@ -434,17 +434,47 @@ nav.scrolled {
   pointer-events: all;
 }
 
-/* PROPORCIONES — cada una calcula el ancho basado en el alto disponible */
-/* 9:16 vertical  → ancho = altura * 9/16 */
-.h-916  { aspect-ratio: 9/16;  height: 100%; width: auto; }
-/* 16:9 horizontal → ancho = altura * 16/9 */
-.h-169  { aspect-ratio: 16/9; height: 100%; width: auto; }
-/* 3:4 vertical   → ancho = altura * 3/4 */
-.h-34   { aspect-ratio: 3/4;  height: 100%; width: auto; }
-/* 4:3 horizontal → ancho = altura * 4/3 */
-.h-43   { aspect-ratio: 4/3;  height: 100%; width: auto; }
+/* COLUMNA: 2 items apilados verticalmente */
+.h-col {
+  flex-shrink: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* 16:9 que ocupa MITAD del alto de la columna */
+/* ancho = (altura/2) * 16/9 */
+.h-169-half {
+  flex: 1;
+  /* aspect-ratio basado en mitad de altura: 16:9 → ancho relativo */
+  aspect-ratio: 16/9;
+  height: 50%;
+  width: auto;
+  flex-shrink: 0;
+}
+
+/* 9:16 short que ocupa MITAD del alto */
+/* ancho = (altura/2) * 9/16 */
+.h-916-half {
+  flex: 1;
+  aspect-ratio: 9/16;
+  height: 50%;
+  width: auto;
+  flex-shrink: 0;
+}
+
+/* PROPORCIONES completas — altura 100% */
+/* 9:16 vertical  */
+.h-916  { aspect-ratio: 9/16;  height: 100%; width: auto; flex-shrink: 0; }
+/* 16:9 horizontal */
+.h-169  { aspect-ratio: 16/9; height: 100%; width: auto; flex-shrink: 0; }
+/* 3:4 vertical   */
+.h-34   { aspect-ratio: 3/4;  height: 100%; width: auto; flex-shrink: 0; }
+/* 4:3 horizontal */
+.h-43   { aspect-ratio: 4/3;  height: 100%; width: auto; flex-shrink: 0; }
 /* 1:1 cuadrado */
-.h-11   { aspect-ratio: 1/1;  height: 100%; width: auto; }
+.h-11   { aspect-ratio: 1/1;  height: 100%; width: auto; flex-shrink: 0; }
 
 /* FLECHA */
 .h-arrow {
@@ -1345,93 +1375,165 @@ footer {
   <div class="h-slide-wrap" id="hSlideWrap">
     <div class="h-slide-track" id="hTrack">
 
-      <!-- ===== TODO + DISEÑO + VIDEO: items con proporciones reales ===== -->
+      <!-- =====================================================
+           PATRÓN: [9:16 vertical] + [columna: 16:9 / 16:9]
+           Los diseños 9:16 son SIEMPRE verticales
+           Los videos 16:9 son SIEMPRE horizontales apilados
+      ===================================================== -->
 
-      <!-- 9:16 diseño -->
+      <!-- GRUPO 1 -->
+      <!-- 9:16 vertical diseño -->
       <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2026.jpg" loading="lazy" alt="">
       </div>
-      <!-- 16:9 video -->
-      <div class="h-item h-169" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" frameborder="0" allowfullscreen></iframe>
+      <!-- columna: 2x 16:9 apilados -->
+      <div class="h-col" data-cat="video">
+        <div class="h-item h-169-half">
+          <iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="h-item h-169-half">
+          <iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allowfullscreen></iframe>
+        </div>
       </div>
-      <!-- 9:16 diseño -->
+
+      <!-- GRUPO 2 -->
+      <!-- 9:16 vertical diseño -->
       <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/POSTER-DJBLAXX-JDK.jpg" loading="lazy" alt="">
       </div>
-      <!-- 9:16 short -->
-      <div class="h-item h-916" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allowfullscreen></iframe>
+      <!-- columna: 2x 16:9 apilados -->
+      <div class="h-col" data-cat="video">
+        <div class="h-item h-169-half">
+          <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="h-item h-169-half">
+          <iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" frameborder="0" allowfullscreen></iframe>
+        </div>
       </div>
-      <!-- 9:16 diseño -->
+
+      <!-- GRUPO 3 -->
+      <!-- 9:16 vertical diseño -->
       <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/EXPERIENCIAS-DE-UN-KOLLA.jpg" loading="lazy" alt="">
       </div>
-      <!-- 16:9 video -->
-      <div class="h-item h-169" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allowfullscreen></iframe>
+      <!-- columna: 2x 16:9 apilados -->
+      <div class="h-col" data-cat="video">
+        <div class="h-item h-169-half">
+          <iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="h-item h-169-half">
+          <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allowfullscreen></iframe>
+        </div>
       </div>
-      <!-- 9:16 diseño -->
+
+      <!-- GRUPO 4 -->
+      <!-- 9:16 vertical diseño -->
       <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/GREENSEEDLES REVISTA.jpg" loading="lazy" alt="">
       </div>
-      <!-- 9:16 short -->
-      <div class="h-item h-916" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allowfullscreen></iframe>
+      <!-- columna: shorts 9:16 apilados — cada short ocupa mitad de altura -->
+      <div class="h-col" data-cat="video">
+        <div class="h-item h-916-half">
+          <iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="h-item h-916-half">
+          <iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allowfullscreen></iframe>
+        </div>
       </div>
-      <!-- 4:3 diseño -->
-      <div class="h-item h-43" data-cat="diseno">
-        <img src="img/diseno/NEW FAUNA ATACAMA DESIGN DUNAS.jpg" loading="lazy" alt="">
-      </div>
-      <!-- 16:9 video -->
-      <div class="h-item h-169" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <!-- 9:16 diseño -->
+
+      <!-- GRUPO 5 -->
+      <!-- 9:16 vertical diseño -->
       <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/ZATURNO CHNG KAYA 20225.jpg" loading="lazy" alt="">
       </div>
-      <!-- 9:16 short -->
-      <div class="h-item h-916" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" frameborder="0" allowfullscreen></iframe>
+      <!-- columna: 2x 16:9 apilados -->
+      <div class="h-col" data-cat="video">
+        <div class="h-item h-169-half">
+          <iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="h-item h-169-half">
+          <iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" frameborder="0" allowfullscreen></iframe>
+        </div>
       </div>
-      <!-- 9:16 diseño -->
+
+      <!-- GRUPO 6 -->
+      <!-- 9:16 vertical diseño -->
       <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/PEÑA BLANCA 2025 FLYER INVITACIÓN.jpg" loading="lazy" alt="">
       </div>
-      <!-- 16:9 video -->
-      <div class="h-item h-169" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" frameborder="0" allowfullscreen></iframe>
+      <!-- columna: shorts apilados -->
+      <div class="h-col" data-cat="video">
+        <div class="h-item h-916-half">
+          <iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="h-item h-916-half">
+          <iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" frameborder="0" allowfullscreen></iframe>
+        </div>
       </div>
-      <!-- 4:3 diseño -->
-      <div class="h-item h-43" data-cat="diseno">
-        <img src="img/diseno/APPAREL CHNG HISTORY 4.jpg" loading="lazy" alt="">
-      </div>
-      <!-- 9:16 short -->
-      <div class="h-item h-916" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <!-- 9:16 diseño -->
+
+      <!-- GRUPO 7 -->
+      <!-- 9:16 vertical diseño -->
       <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/POSTER FERRARI JDK 3.jpg" loading="lazy" alt="">
       </div>
-      <!-- 16:9 video -->
-      <div class="h-item h-169" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" frameborder="0" allowfullscreen></iframe>
+      <!-- columna: 2x 16:9 apilados -->
+      <div class="h-col" data-cat="video">
+        <div class="h-item h-169-half">
+          <iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="h-item h-169-half">
+          <iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" frameborder="0" allowfullscreen></iframe>
+        </div>
       </div>
-      <!-- 1:1 diseño -->
-      <div class="h-item h-11" data-cat="diseno">
-        <img src="img/diseno/CAUR-DESERTIKA-BEER (1).jpg" loading="lazy" alt="">
+
+      <!-- GRUPO 8 -->
+      <!-- 9:16 vertical diseño -->
+      <div class="h-item h-916" data-cat="diseno">
+        <img src="img/diseno/NEW FAUNA ATACAMA DESIGN DUNAS.jpg" loading="lazy" alt="">
       </div>
-      <!-- 4:3 diseño -->
-      <div class="h-item h-43" data-cat="diseno">
+      <!-- columna: shorts -->
+      <div class="h-col" data-cat="video">
+        <div class="h-item h-916-half">
+          <iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="h-item h-916-half">
+          <iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <!-- GRUPO 9 -->
+      <!-- 9:16 vertical diseño -->
+      <div class="h-item h-916" data-cat="diseno">
+        <img src="img/diseno/APPAREL CHNG HISTORY 4.jpg" loading="lazy" alt="">
+      </div>
+      <!-- columna: 2x 16:9 apilados -->
+      <div class="h-col" data-cat="video">
+        <div class="h-item h-169-half">
+          <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="h-item h-169-half">
+          <iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <!-- GRUPO 10 -->
+      <!-- 9:16 vertical diseño -->
+      <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2025.jpg" loading="lazy" alt="">
+      </div>
+      <!-- columna: shorts -->
+      <div class="h-col" data-cat="video">
+        <div class="h-item h-916-half">
+          <iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="h-item h-916-half">
+          <iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" frameborder="0" allowfullscreen></iframe>
+        </div>
       </div>
 
     </div><!-- end h-slide-track -->
 
     <button class="h-arrow" onclick="hScroll(1)">›</button>
-
     <div class="h-scrollbar">
       <div class="h-scrollbar-thumb" id="hThumb"></div>
     </div>
