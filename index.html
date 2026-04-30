@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
+<html lang="es"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="JeiDiKei — Diseñador Gráfico, Fotógrafo y Creador Audiovisual en la Región de Atacama, Chile.">
@@ -11,8 +9,8 @@
 <title>JeiDiKei — Portfolio</title>
 <link rel="icon" type="image/png" href="img/logo/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&amp;family=Bebas+Neue&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet">
 <style>
 /* DELIGHT — textos, información, navegación */
 @font-face { font-family: 'Delight'; src: url('font/delight-font/delight-black.otf') format('opentype'); font-weight: 900; font-display: swap; }
@@ -1360,15 +1358,21 @@ body {
   .contact-title { font-size: 2.2rem; }
 }
 </style>
-</head>
+<style>
+    @font-face { font-family: "Delight"; src: url("font/delight-font/delight-black.otf") format("opentype"); font-weight: 900; }
+    @font-face { font-family: "Delight"; src: url("font/delight-font/delight-bold.otf") format("opentype"); font-weight: 700; }
+    @font-face { font-family: "Delight"; src: url("font/delight-font/delight-medium.otf") format("opentype"); font-weight: 500; }
+    @font-face { font-family: "Delight"; src: url("font/delight-font/delight-regular.otf") format("opentype"); font-weight: 400; }
+    @font-face { font-family: "Delight"; src: url("font/delight-font/delight-light.otf") format("opentype"); font-weight: 300; }
+  </style></head>
 <body>
 
 <!-- CURSOR -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor" id="cursor" style="left: 1094px; top: 371px;"></div>
+<div class="cursor-ring" id="cursorRing" style="left: 1094px; top: 371px;"></div>
 
 <!-- NAV -->
-<nav id="navbar">
+<nav id="navbar" class="scrolled">
   <a href="#inicio" class="nav-logo">
     <img src="img/logo/JDK_LOGO_PNG.png" alt="JeiDiKei Logo">
   </a>
@@ -1398,8 +1402,8 @@ body {
 
 <!-- SIDE DOTS -->
 <nav class="side-nav" aria-label="Secciones">
-  <div class="side-dot active" data-section="inicio" data-label="Inicio" onclick="scrollTo('#inicio')"></div>
-  <div class="side-dot" data-section="portfolio" data-label="Portfolio" onclick="scrollTo('#portfolio')"></div>
+  <div class="side-dot" data-section="inicio" data-label="Inicio" onclick="scrollTo('#inicio')"></div>
+  <div class="side-dot active" data-section="portfolio" data-label="Portfolio" onclick="scrollTo('#portfolio')"></div>
   <div class="side-dot" data-section="mineria" data-label="Minería" onclick="scrollTo('#mineria')"></div>
   <div class="side-dot" data-section="contacto" data-label="Contacto" onclick="scrollTo('#contacto')"></div>
 </nav>
@@ -1409,8 +1413,7 @@ body {
 
   <!-- IMAGEN DE FONDO -->
   <div class="hero-video-bg">
-    <img src="img/portada/PORTADA-WEB-1.jpg" alt="Portada JeiDiKei"
-      style="width:100%;height:100%;object-fit:cover;opacity:0.8;display:block;">
+    <img src="img/portada/PORTADA-WEB-1.jpg" alt="Portada JeiDiKei" style="width:100%;height:100%;object-fit:cover;opacity:0.8;display:block;">
   </div>
   <div class="hero-video-overlay"></div>
 
@@ -1456,10 +1459,9 @@ body {
 
 <!-- ========== ABOUT ========== -->
 <section class="about-section" id="sobre-mi">
-  <div class="about-img-wrap reveal">
+  <div class="about-img-wrap reveal visible">
     <div class="about-img-frame">
-      <video autoplay muted loop playsinline
-        style="width:100%;height:100%;object-fit:cover;display:block;">
+      <video autoplay="" muted="" loop="" playsinline="" style="width:100%;height:100%;object-fit:cover;display:block;">
         <source src="img/biografia/PORTADA ANIMADAD BIO.mp4" type="video/mp4">
       </video>
     </div>
@@ -1470,7 +1472,7 @@ body {
     </div>
   </div>
 
-  <div class="about-content reveal">
+  <div class="about-content reveal visible">
     <div class="section-eyebrow">Sobre mí</div>
     <h2 class="section-title">DARIKSON<br>ARAYA NEYRA</h2>
     <p class="about-desc">
@@ -1503,32 +1505,32 @@ body {
 <!-- ========== PORTFOLIO ========== -->
 <section class="portfolio-section" id="portfolio">
 
-  <div class="portfolio-header reveal">
+  <div class="portfolio-header reveal visible">
     <div>
       <div class="section-eyebrow">Trabajos</div>
       <h2 class="section-title">MI PORTFOLIO</h2>
     </div>
     <div class="filters">
-      <button class="filter-btn active" onclick="filterCards(this,'all')">Todo</button>
+      <button class="filter-btn" onclick="filterCards(this,'all')">Todo</button>
       <button class="filter-btn" onclick="filterCards(this,'diseno')">Diseño</button>
-      <button class="filter-btn" onclick="filterCards(this,'foto')">Fotografía</button>
+      <button class="filter-btn active" onclick="filterCards(this,'foto')">Fotografía</button>
       <button class="filter-btn" onclick="filterCards(this,'video')">Video</button>
     </div>
   </div>
 
-  <div class="h-slide-wrap" id="hSlideWrap">
+  <div class="h-slide-wrap" id="hSlideWrap" style="display: none;">
     <div class="h-slide-track" id="hTrack">
 
       <!-- GRUPO 1: diseño 9:16 + 2x video 16:9 apilados -->
       <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/FLYER-SANDBOARD-CHAMPIONSHIP2026.jpg" loading="lazy" alt="">
       </div>
-      <div class="h-col" data-cat="video">
+      <div class="h-col" data-cat="video" style="">
         <div class="h-item h-169-half">
-          <iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" frameborder="0" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/v4Mi8kr1Qb8" frameborder="0" allowfullscreen=""></iframe>
         </div>
         <div class="h-item h-169-half">
-          <iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/C5nzjZlDJCs" frameborder="0" allowfullscreen=""></iframe>
         </div>
       </div>
 
@@ -1536,12 +1538,12 @@ body {
       <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/POSTER-DJBLAXX-JDK.jpg" loading="lazy" alt="">
       </div>
-      <div class="h-col" data-cat="video">
+      <div class="h-col" data-cat="video" style="">
         <div class="h-item h-916-half">
-          <iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/pUfppQMQ17E" frameborder="0" allowfullscreen=""></iframe>
         </div>
         <div class="h-item h-916-half">
-          <iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/4TvHmI-NEwc" frameborder="0" allowfullscreen=""></iframe>
         </div>
       </div>
 
@@ -1549,12 +1551,12 @@ body {
       <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/EXPERIENCIAS-DE-UN-KOLLA.jpg" loading="lazy" alt="">
       </div>
-      <div class="h-col" data-cat="video">
+      <div class="h-col" data-cat="video" style="">
         <div class="h-item h-169-half">
-          <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/LsNpwRzKikc" frameborder="0" allowfullscreen=""></iframe>
         </div>
         <div class="h-item h-169-half">
-          <iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" frameborder="0" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/LqJnQNXxFxU" frameborder="0" allowfullscreen=""></iframe>
         </div>
       </div>
 
@@ -1562,12 +1564,12 @@ body {
       <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/GREENSEEDLES REVISTA.jpg" loading="lazy" alt="">
       </div>
-      <div class="h-col" data-cat="video">
+      <div class="h-col" data-cat="video" style="">
         <div class="h-item h-916-half">
-          <iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" frameborder="0" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/lluUiorJ8Wk" frameborder="0" allowfullscreen=""></iframe>
         </div>
         <div class="h-item h-916-half">
-          <iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" frameborder="0" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/5eNAaEmAOH4" frameborder="0" allowfullscreen=""></iframe>
         </div>
       </div>
 
@@ -1575,8 +1577,8 @@ body {
       <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/ZATURNO CHNG KAYA 20225.jpg" loading="lazy" alt="">
       </div>
-      <div class="h-item h-169" data-cat="video">
-        <iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" frameborder="0" allowfullscreen></iframe>
+      <div class="h-item h-169" data-cat="video" style="">
+        <iframe src="https://www.youtube.com/embed/Tpo2uM8oLDg" frameborder="0" allowfullscreen=""></iframe>
       </div>
 
       <!-- GRUPO 6: diseño 9:16 solo -->
@@ -1594,8 +1596,8 @@ body {
         <img src="img/diseno/NEW FAUNA ATACAMA DESIGN DUNAS.jpg" loading="lazy" alt="">
       </div>
 
-      <!-- GRUPO 9: diseño 4:3 -->
-      <div class="h-item h-43" data-cat="diseno">
+      <!-- GRUPO 9: diseño 16:9 -->
+      <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/APPAREL CHNG HISTORY 4.jpg" loading="lazy" alt="">
       </div>
 
@@ -1605,7 +1607,7 @@ body {
       </div>
 
       <!-- GRUPO 11: diseño 1:1 -->
-      <div class="h-item h-11" data-cat="diseno">
+      <div class="h-item h-916" data-cat="diseno">
         <img src="img/diseno/CAUR-DESERTIKA-BEER (1).jpg" loading="lazy" alt="">
       </div>
 
@@ -1616,16 +1618,100 @@ body {
     <button class="h-arrow h-arrow-right" onclick="hScroll(1)">›</button>
 
     <div class="h-scrollbar">
-      <div class="h-scrollbar-thumb" id="hThumb"></div>
+      <div class="h-scrollbar-thumb" id="hThumb" style="width: 180.11px; left: 1621.91px;"></div>
     </div>
   </div>
 
   <!-- CARRUSEL ÁLBUMES (FOTOGRAFÍA) -->
-  <div class="albums-wrapper" data-cat="foto">
-    <div class="carousel-stage" id="carouselStage"></div>
+  <div class="albums-wrapper" data-cat="foto" style="display: block;">
+    <div class="carousel-stage" id="carouselStage"><div class="album-slide active" data-index="0" style="transform: translate(-50%, -50%) translateX(0px) translateZ(0px) rotateY(0deg) scale(1.5); opacity: 1; z-index: 10; filter: brightness(1);">
+      <img src="img/fotografia/bts-4ever/P1010859.jpg" alt="BTS 4Ever" loading="lazy">
+      <div class="album-slide-info">
+        <div class="album-slide-cat">Fotografía · BTS</div>
+        <div class="album-slide-title">BTS 4Ever</div>
+        <div class="album-slide-count">11 fotos</div>
+      </div>
+    </div><div class="album-slide" data-index="1" style="transform: translate(-50%, -50%) translateX(200px) translateZ(-100px) rotateY(10deg) scale(1.5); opacity: 1; z-index: 9; filter: brightness(0.55);">
+      <img src="img/fotografia/bts-enfocado/LUKY-KODEX_12.jpg" alt="BTS Enfocado" loading="lazy">
+      <div class="album-slide-info">
+        <div class="album-slide-cat">Fotografía · BTS</div>
+        <div class="album-slide-title">BTS Enfocado</div>
+        <div class="album-slide-count">5 fotos</div>
+      </div>
+    </div><div class="album-slide" data-index="2" style="transform: translate(-50%, -50%) translateX(400px) translateZ(-180px) rotateY(20deg) scale(1.5); opacity: 1; z-index: 8; filter: brightness(0.35);">
+      <img src="img/fotografia/bts-tu.bicha/CATALINA%20VF%20-16.jpg" alt="BTS Tu Bicha" loading="lazy">
+      <div class="album-slide-info">
+        <div class="album-slide-cat">Fotografía · BTS</div>
+        <div class="album-slide-title">BTS Tu Bicha</div>
+        <div class="album-slide-count">18 fotos</div>
+      </div>
+    </div><div class="album-slide" data-index="3" style="transform: translate(-50%, -50%) translateX(600px) translateZ(-180px) rotateY(30deg) scale(1.5); opacity: 0.25; z-index: 7; filter: brightness(0.35);">
+      <img src="img/fotografia/diss.vol2/DISS%20VOL2%20CRISS-02.jpg" alt="Diss Vol 2" loading="lazy">
+      <div class="album-slide-info">
+        <div class="album-slide-cat">Fotografía · Evento</div>
+        <div class="album-slide-title">Diss Vol 2</div>
+        <div class="album-slide-count">8 fotos</div>
+      </div>
+    </div><div class="album-slide" data-index="4" style="transform: translate(-50%, -50%) translateX(800px) translateZ(-180px) rotateY(40deg) scale(1.5); opacity: 0; z-index: 6; filter: brightness(0.35);">
+      <img src="img/fotografia/dune/DJI_0993-Mejorado-NR.jpg" alt="Dune" loading="lazy">
+      <div class="album-slide-info">
+        <div class="album-slide-cat">Fotografía · Naturaleza</div>
+        <div class="album-slide-title">Dune</div>
+        <div class="album-slide-count">9 fotos</div>
+      </div>
+    </div><div class="album-slide" data-index="5" style="transform: translate(-50%, -50%) translateX(1000px) translateZ(-180px) rotateY(50deg) scale(1.5); opacity: 0; z-index: 5; filter: brightness(0.35);">
+      <img src="img/fotografia/glam/GLAM%20XOXO%20JDK-01.jpg" alt="Glam" loading="lazy">
+      <div class="album-slide-info">
+        <div class="album-slide-cat">Fotografía · Glam</div>
+        <div class="album-slide-title">Glam</div>
+        <div class="album-slide-count">11 fotos</div>
+      </div>
+    </div><div class="album-slide" data-index="6" style="transform: translate(-50%, -50%) translateX(1200px) translateZ(-180px) rotateY(60deg) scale(1.5); opacity: 0; z-index: 4; filter: brightness(0.35);">
+      <img src="img/fotografia/kaukari/DJI_0456.jpg" alt="Kaukari" loading="lazy">
+      <div class="album-slide-info">
+        <div class="album-slide-cat">Fotografía · Drone</div>
+        <div class="album-slide-title">Kaukari</div>
+        <div class="album-slide-count">11 fotos</div>
+      </div>
+    </div><div class="album-slide" data-index="7" style="transform: translate(-50%, -50%) translateX(1400px) translateZ(-180px) rotateY(70deg) scale(1.5); opacity: 0; z-index: 3; filter: brightness(0.35);">
+      <img src="img/fotografia/llanos-del-challe/P1050254.jpg" alt="Llanos del Challe" loading="lazy">
+      <div class="album-slide-info">
+        <div class="album-slide-cat">Fotografía · Naturaleza</div>
+        <div class="album-slide-title">Llanos del Challe</div>
+        <div class="album-slide-count">9 fotos</div>
+      </div>
+    </div><div class="album-slide" data-index="8" style="transform: translate(-50%, -50%) translateX(1600px) translateZ(-180px) rotateY(80deg) scale(1.5); opacity: 0; z-index: 2; filter: brightness(0.35);">
+      <img src="img/fotografia/mineria/CAMARAS%20TRAMPA%201%20RIO%20TINTO-01.jpg" alt="Minería" loading="lazy">
+      <div class="album-slide-info">
+        <div class="album-slide-cat">Fotografía · Industrial</div>
+        <div class="album-slide-title">Minería</div>
+        <div class="album-slide-count">18 fotos</div>
+      </div>
+    </div><div class="album-slide" data-index="9" style="transform: translate(-50%, -50%) translateX(1800px) translateZ(-180px) rotateY(90deg) scale(1.5); opacity: 0; z-index: 1; filter: brightness(0.35);">
+      <img src="img/fotografia/museo-frafran/STAGE%20MUSEO%20V%20FINAL_2.jpg" alt="Museo Frafran" loading="lazy">
+      <div class="album-slide-info">
+        <div class="album-slide-cat">Fotografía · Evento</div>
+        <div class="album-slide-title">Museo Frafran</div>
+        <div class="album-slide-count">15 fotos</div>
+      </div>
+    </div><div class="album-slide" data-index="10" style="transform: translate(-50%, -50%) translateX(2000px) translateZ(-180px) rotateY(100deg) scale(1.5); opacity: 0; z-index: 0; filter: brightness(0.35);">
+      <img src="img/fotografia/nippon-rest/NIPPON%20PHOTO%20JDK-01.jpg" alt="Nippon Rest" loading="lazy">
+      <div class="album-slide-info">
+        <div class="album-slide-cat">Fotografía · Evento</div>
+        <div class="album-slide-title">Nippon Rest</div>
+        <div class="album-slide-count">12 fotos</div>
+      </div>
+    </div><div class="album-slide" data-index="11" style="transform: translate(-50%, -50%) translateX(2200px) translateZ(-180px) rotateY(110deg) scale(1.5); opacity: 0; z-index: -1; filter: brightness(0.35);">
+      <img src="img/fotografia/veranada-koya/CASCADA%20JUNCALITO%20_1.jpg" alt="Veranada Koya" loading="lazy">
+      <div class="album-slide-info">
+        <div class="album-slide-cat">Fotografía · Naturaleza</div>
+        <div class="album-slide-title">Veranada Koya</div>
+        <div class="album-slide-count">13 fotos</div>
+      </div>
+    </div></div>
     <button class="carousel-btn carousel-prev" onclick="carouselMove(-1)">‹</button>
     <button class="carousel-btn carousel-next" onclick="carouselMove(1)">›</button>
-    <div class="carousel-dots" id="carouselDots"></div>
+    
   </div>
 
   <!-- LIGHTBOX -->
@@ -1653,7 +1739,7 @@ body {
   <div class="mining-bg-glow"></div>
   <div class="mining-inner">
 
-    <div class="reveal">
+    <div class="reveal visible">
       <span class="mining-tag">Sector Minero · Atacama</span>
       <div class="section-eyebrow orange">Producción en Faena</div>
       <h2 class="section-title">SERVICIOS PARA<br>LA MINERÍA</h2>
@@ -1681,7 +1767,7 @@ body {
       </div>
     </div>
 
-    <div class="services-grid reveal">
+    <div class="services-grid reveal visible">
       <div class="service-card">
         <span class="service-icon">🎬</span>
         <div class="service-title">Video Corporativo</div>
@@ -1711,7 +1797,7 @@ body {
 
 <!-- ========== CONTACT ========== -->
 <section class="contact-section" id="contacto">
-  <div class="reveal">
+  <div class="reveal visible">
     <div class="section-eyebrow">Contacto</div>
     <h2 class="contact-title">TRABAJEMOS<br>JUNTOS</h2>
     <p class="contact-sub">
@@ -1742,7 +1828,7 @@ body {
     </div>
   </div>
 
-  <div class="contact-form-wrap reveal">
+  <div class="contact-form-wrap reveal visible">
     <p class="form-title">Envíame un mensaje</p>
 
     <!-- Formulario real con Web3Forms -->
@@ -1759,11 +1845,11 @@ body {
 
       <div class="form-row">
         <label class="form-label" for="fname">Nombre</label>
-        <input type="text" id="fname" name="name" class="form-control" placeholder="Tu nombre completo" required>
+        <input type="text" id="fname" name="name" class="form-control" placeholder="Tu nombre completo" required="">
       </div>
       <div class="form-row">
         <label class="form-label" for="femail">Email</label>
-        <input type="email" id="femail" name="email" class="form-control" placeholder="tu@email.com" required>
+        <input type="email" id="femail" name="email" class="form-control" placeholder="tu@email.com" required="">
       </div>
       <div class="form-row">
         <label class="form-label" for="fphone">WhatsApp / Teléfono</label>
@@ -1771,8 +1857,8 @@ body {
       </div>
       <div class="form-row">
         <label class="form-label" for="fservice">Servicio de interés</label>
-        <select id="fservice" name="servicio" class="form-control" style="appearance:none; cursor:pointer" required>
-          <option value="" disabled selected>Selecciona un servicio</option>
+        <select id="fservice" name="servicio" class="form-control" style="appearance:none; cursor:pointer" required="">
+          <option value="" disabled="" selected="">Selecciona un servicio</option>
           <option>Diseño Gráfico</option>
           <option>Fotografía</option>
           <option>Producción de Video</option>
@@ -1783,7 +1869,7 @@ body {
       </div>
       <div class="form-row">
         <label class="form-label" for="fmsg">Mensaje</label>
-        <textarea id="fmsg" name="message" class="form-control" placeholder="Cuéntame sobre tu proyecto..." required></textarea>
+        <textarea id="fmsg" name="message" class="form-control" placeholder="Cuéntame sobre tu proyecto..." required=""></textarea>
       </div>
 
       <button type="submit" class="form-submit" id="submitBtn">Enviar mensaje</button>
@@ -1797,7 +1883,7 @@ body {
   <div class="footer-logo">
     <img src="img/logo/JDK_LOGO_PNG.png" alt="JeiDiKei" style="height:28px; width:auto; opacity:0.3;">
   </div>
-  <div class="footer-copy">© 2025 JeiDiKei · Diseño & Audiovisual · Atacama, Chile</div>
+  <div class="footer-copy">© 2026 JeiDiKei · Diseño &amp; Audiovisual · Atacama, Chile</div>
   <a href="#inicio" class="footer-back">↑ Volver arriba</a>
 </footer>
 
@@ -2222,5 +2308,6 @@ document.getElementById('contactForm').addEventListener('submit', async function
 })();
 </script>
 
-</body>
-</html>
+
+
+</body></html>
