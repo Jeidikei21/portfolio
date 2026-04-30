@@ -1058,22 +1058,35 @@ footer {
 ============================================= */
 
 /* GLANCYR — Títulos grandes e impactantes */
-.hero-name,
+.hero-name {
+  font-family: 'Glancyr', serif;
+  font-weight: 700;
+  color: var(--light);
+  text-transform: uppercase;
+  -webkit-text-stroke: 0;
+  letter-spacing: -0.02em;
+}
 .section-title,
-.contact-title,
+.contact-title {
+  font-family: 'Glancyr', serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--light);
+  font-style: normal;
+}
 .album-slide-title,
-.lightbox-title,
+.lightbox-title {
+  font-family: 'Glancyr', serif;
+  font-weight: 600;
+}
 .about-section .section-title {
   font-family: 'Glancyr', serif;
   font-weight: 700;
 }
-.hero-name .italic { font-style: italic; }
-.hero-name .outline { font-weight: 200; }
-
-/* Sección minería — título impactante */
+/* Sección minería */
 .mining-section .section-title {
   font-family: 'Glancyr', serif;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* DELIGHT — Navegación, botones, info */
@@ -1407,9 +1420,7 @@ body {
 
   <div class="hero-eyebrow">Diseñador · Fotógrafo · Audiovisual</div>
 
-  <h1 class="hero-name">
-    JEI<span class="italic">DI</span><span class="outline">KEI</span>
-  </h1>
+  <h1 class="hero-name">JEIDIKEI</h1>
 
   <p class="hero-tagline">
     Visión creativa que transforma momentos<br>en narrativas visuales que perduran.
@@ -1461,7 +1472,7 @@ body {
 
   <div class="about-content reveal">
     <div class="section-eyebrow">Sobre mí</div>
-    <h2 class="section-title">Darikson<br><em style="font-style:italic; color:var(--red)">Araya Neyra</em></h2>
+    <h2 class="section-title">DARIKSON<br>ARAYA NEYRA</h2>
     <p class="about-desc">
       Nacido en Copiapó, Chile, descubrí el diseño gráfico a los 15 años — no como una obligación, sino como una forma de no perder el tiempo y encontrar un lenguaje propio. Lo que comenzó como un hobby se convirtió rápidamente en una vocación.
     </p>
@@ -1495,7 +1506,7 @@ body {
   <div class="portfolio-header reveal">
     <div>
       <div class="section-eyebrow">Trabajos</div>
-      <h2 class="section-title">Mi Portfolio</h2>
+      <h2 class="section-title">MI PORTFOLIO</h2>
     </div>
     <div class="filters">
       <button class="filter-btn active" onclick="filterCards(this,'all')">Todo</button>
@@ -1645,7 +1656,7 @@ body {
     <div class="reveal">
       <span class="mining-tag">Sector Minero · Atacama</span>
       <div class="section-eyebrow orange">Producción en Faena</div>
-      <h2 class="section-title">Servicios para<br><em style="font-style:italic; color:var(--orange)">la Minería</em></h2>
+      <h2 class="section-title">SERVICIOS PARA<br>LA MINERÍA</h2>
       <p class="mining-desc">
         Producción audiovisual y fotográfica profesional para el sector minero de la Región de Atacama. Documentación de procesos, material de seguridad y comunicación corporativa con estándares de la industria.
       </p>
@@ -1702,10 +1713,7 @@ body {
 <section class="contact-section" id="contacto">
   <div class="reveal">
     <div class="section-eyebrow">Contacto</div>
-    <h2 class="contact-title">
-      Traba<span class="italic red">jemos</span><br>
-      <span class="outline" style="-webkit-text-stroke: 1px rgba(240,237,232,0.2); color:transparent">juntos</span>
-    </h2>
+    <h2 class="contact-title">TRABAJEMOS<br>JUNTOS</h2>
     <p class="contact-sub">
       ¿Tienes un proyecto en mente? Conversemos. Estoy disponible para proyectos creativos y del sector minero en toda la Región de Atacama y más allá.
     </p>
